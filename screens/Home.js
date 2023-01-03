@@ -28,14 +28,14 @@ const Home = ({ navigation }) => {
 
     const bookOtherWordsForHome = {
         id: 1,
-        bookName: "Other Words For Home",
+        bookName: "Free Fire",
         bookCover: images.otherWordsForHome,
         rating: 4.5,
         language: "Eng",
         pageNo: 341,
-        author: "Jasmine Warga",
+        author: "111dots Studio",
         genre: [
-            "Romance", "Adventure", "Drama"
+            "Aventura", "Shooter"
         ],
         readed: "12k",
         description: "Jude never thought she’d be leaving her beloved older brother and father behind, all the way across the ocean in Syria. But when things in her hometown start becoming volatile, Jude and her mother are sent to live in Cincinnati with relatives. At first, everything in America seems too fast and too loud. The American movies that Jude has always loved haven’t quite prepared her for starting school in the US—and her new label of 'Middle Eastern,' an identity she’s never known before. But this life also brings unexpected surprises—there are new friends, a whole new family, and a school musical that Jude might just try out for. Maybe America, too, is a place where Jude can be seen as she really is.",
@@ -45,14 +45,14 @@ const Home = ({ navigation }) => {
 
     const bookTheMetropolis = {
         id: 2,
-        bookName: "The Metropolis",
+        bookName: "UNO",
         bookCover: images.theMetropolist,
         rating: 4.1,
         language: "Eng",
         pageNo: 272,
-        author: "Seith Fried",
+        author: "Medrick",
         genre: [
-            "Adventure", "Drama"
+            "Cartas"
         ],
         readed: "13k",
         description: "In Metropolis, the gleaming city of tomorrow, the dream of the great American city has been achieved. But all that is about to change, unless a neurotic, rule-following bureaucrat and an irreverent, freewheeling artificial intelligence can save the city from a mysterious terrorist plot that threatens its very existence. Henry Thompson has dedicated his life to improving America's infrastructure as a proud employee of the United States Municipal Survey. So when the agency comes under attack, he dutifully accepts his unexpected mission to visit Metropolis looking for answers. But his plans to investigate quietly, quickly, and carefully are interrupted by his new partner: a day-drinking know-it-all named OWEN, who also turns out to be the projected embodiment of the agency's supercomputer. Soon, Henry and OWEN are fighting to save not only their own lives and those of the city's millions of inhabitants, but also the soul of Metropolis. The Municipalists is a thrilling, funny, and touching adventure story, a tour-de-force of imagination that trenchantly explores our relationships to the cities around us and the technologies guiding us into the future.",
@@ -62,14 +62,14 @@ const Home = ({ navigation }) => {
 
     const bookTheTinyDragon = {
         id: 3,
-        bookName: "The Tiny Dragon",
+        bookName: "Clash Royale",
         bookCover: images.theTinyDragon,
         rating: 3.5,
         language: "Eng",
         pageNo: 110,
-        author: "Ana C Bouvier",
+        author: "Supercell",
         genre: [
-            "Drama", "Adventure", "Romance"
+            "Aventura"
         ],
         readed: "13k",
         description: "This sketchbook for kids is the perfect tool to improve your drawing skills! Designed to encourage kids around the world to express their uniqueness through drawing, sketching or doodling, this sketch book is filled with 110 high quality blank pages for creations. Add some fun markers, crayons, and art supplies and you have the perfect, easy gift for kids!",
@@ -101,21 +101,21 @@ const Home = ({ navigation }) => {
     const categoriesData = [
         {
             id: 1,
-            categoryName: "Best Seller",
+            categoryName: "Mas jugados",
             books: [
                 bookOtherWordsForHome, bookTheMetropolis, bookTheTinyDragon
             ]
         },
         {
             id: 2,
-            categoryName: "The Latest",
+            categoryName: "Nuevos",
             books: [
                 bookTheMetropolis
             ]
         },
         {
             id: 3,
-            categoryName: "Coming Soon",
+            categoryName: "Próximamente",
             books: [
                 bookTheTinyDragon
             ]
@@ -133,7 +133,7 @@ const Home = ({ navigation }) => {
                 {/* Greetings */}
                 <View style={{ flex: 1 }}>
                     <View style={{ marginRight: SIZES.padding }}>
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>Good Morning</Text>
+                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>Buenos dias</Text>
                         <Text style={{ ...FONTS.h2, color: COLORS.white }}>{profile.name}</Text>
                     </View>
                 </View>
@@ -161,7 +161,7 @@ const Home = ({ navigation }) => {
                             />
                         </View>
 
-                        <Text style={{ marginLeft: SIZES.base, color: COLORS.white, ...FONTS.body3 }}>{profile.point} point</Text>
+                        <Text style={{ marginLeft: SIZES.base, color: COLORS.white, ...FONTS.body3 }}>{profile.point} BUSD</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -186,14 +186,14 @@ const Home = ({ navigation }) => {
                                     height: 30
                                 }}
                             />
-                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Claim</Text>
+                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Reclamar</Text>
                         </View>
                     </TouchableOpacity>
 
                     {/* Divider */}
                     <LineDivider />
 
-                    {/* Get Point */}
+                    {/* Get Point 
                     <TouchableOpacity
                         style={{ flex: 1 }}
                         onPress={() => console.log("Get Point")}
@@ -214,12 +214,12 @@ const Home = ({ navigation }) => {
                                     height: 30
                                 }}
                             />
-                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Get Point</Text>
+                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Comprar BUSD</Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
 
-                    {/* Divider */}
-                    <LineDivider />
+                    {/* Divider 
+                    <LineDivider />*/}
 
                     {/* My Card */}
                     <TouchableOpacity
@@ -242,7 +242,7 @@ const Home = ({ navigation }) => {
                                     height: 30
                                 }}
                             />
-                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>My Card</Text>
+                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Mi perfil</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -260,9 +260,9 @@ const Home = ({ navigation }) => {
                         marginLeft: index == 0 ? SIZES.padding : 0,
                         marginRight: SIZES.radius
                     }}
-                    onPress={() => navigation.navigate("BookDetail", {
+                    /*onPress={() => navigation.navigate("BookDetail", {
                         book: item
-                    })}
+                    })}*/
                 >
                     {/* Book Cover */}
                     <Image
@@ -275,7 +275,7 @@ const Home = ({ navigation }) => {
                         }}
                     />
 
-                    {/* Book Info */}
+                    {/* Book Info 
                     <View style={{ marginTop: SIZES.radius, flexDirection: 'row', alignItems: 'center' }}>
                         <Image
                             source={icons.clock_icon}
@@ -297,7 +297,7 @@ const Home = ({ navigation }) => {
                             }}
                         />
                         <Text style={{ marginLeft: 5, ...FONTS.body3, color: COLORS.lightGray }}>{item.completion}</Text>
-                    </View>
+                    </View>*/}
                 </TouchableOpacity>
             )
         }
@@ -306,12 +306,12 @@ const Home = ({ navigation }) => {
             <View style={{ flex: 1 }}>
                 {/* Header */}
                 <View style={{ paddingHorizontal: SIZES.padding, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ ...FONTS.h2, color: COLORS.white }}>My Book</Text>
+                    <Text style={{ ...FONTS.h2, color: COLORS.white }}>Mis Juegos</Text>
 
                     <TouchableOpacity
                         onPress={() => console.log("See More")}
                     >
-                        <Text style={{ ...FONTS.body3, color: COLORS.lightGray, alignSelf: 'flex-start', textDecorationLine: 'underline' }}>see more</Text>
+                        <Text style={{ ...FONTS.body3, color: COLORS.lightGray, alignSelf: 'flex-start', textDecorationLine: 'underline' }}>Ver más</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -376,9 +376,9 @@ const Home = ({ navigation }) => {
                 <View style={{ marginVertical: SIZES.base }}>
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
-                        onPress={() => navigation.navigate("BookDetail", {
+                        /*onPress={() => navigation.navigate("BookDetail", {
                             book: item
-                        })}
+                        })}*/
                     >
                         {/* Book Cover */}
                         <Image
@@ -422,21 +422,21 @@ const Home = ({ navigation }) => {
                             {/* Genre */}
                             <View style={{ flexDirection: 'row', marginTop: SIZES.base }}>
                                 {
-                                    item.genre.includes("Adventure") &&
+                                    item.genre.includes("Aventura") &&
                                     <View style={{ justifyContent: 'center', alignItems: 'center', padding: SIZES.base, marginRight: SIZES.base, backgroundColor: COLORS.darkGreen, height: 40, borderRadius: SIZES.radius }}>
-                                        <Text style={{ ...FONTS.body3, color: COLORS.lightGreen }}>Adventure</Text>
+                                        <Text style={{ ...FONTS.body3, color: COLORS.lightGreen }}>Aventura</Text>
                                     </View>
                                 }
                                 {
-                                    item.genre.includes("Romance") &&
+                                    item.genre.includes("Shooter") &&
                                     <View style={{ justifyContent: 'center', alignItems: 'center', padding: SIZES.base, marginRight: SIZES.base, backgroundColor: COLORS.darkRed, height: 40, borderRadius: SIZES.radius }}>
-                                        <Text style={{ ...FONTS.body3, color: COLORS.lightRed }}>Romance</Text>
+                                        <Text style={{ ...FONTS.body3, color: COLORS.lightRed }}>Shooter</Text>
                                     </View>
                                 }
                                 {
-                                    item.genre.includes("Drama") &&
+                                    item.genre.includes("Cartas") &&
                                     <View style={{ justifyContent: 'center', alignItems: 'center', padding: SIZES.base, marginRight: SIZES.base, backgroundColor: COLORS.darkBlue, height: 40, borderRadius: SIZES.radius }}>
-                                        <Text style={{ ...FONTS.body3, color: COLORS.lightBlue }}>Drama</Text>
+                                        <Text style={{ ...FONTS.body3, color: COLORS.lightBlue }}>Cartas</Text>
                                     </View>
                                 }
                             </View>
@@ -475,7 +475,7 @@ const Home = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black , paddingTop: 50}}>
             {/* Header Section */}
             <View style={{ height: 200 }}>
                 {renderHeader(profile)}
