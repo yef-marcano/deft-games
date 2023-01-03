@@ -6,11 +6,15 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    FlatList
+    FlatList,
+    TextInput 
 } from 'react-native';
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 
+import {
+    styles
+  } from './styles';
 const LineDivider = () => {
     return (
         <View style={{ width: 1, paddingVertical: 18 }}>
@@ -27,6 +31,9 @@ const Login = ({ navigation }) => {
     }
 
     const [profile, setProfile] = React.useState(profileData);
+
+    const [text, onChangeText] = React.useState("");
+    const [number, onChangeNumber] = React.useState(null);
 
     function renderHeader(profile) {
         return (
@@ -154,16 +161,39 @@ const Login = ({ navigation }) => {
 
     function renderForm() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
-                <Text>Deft Games</Text>
+            <View>
+            
+                <Text style={{textAlign:'center', ...FONTS.body1, color: COLORS.white }}>Deft Games</Text>
+
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeText}
+                    placeholder="Usuario"
+                    placeholderTextColor={COLORS.white} 
+                    value={text}
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholderTextColor={COLORS.white} 
+                    placeholder="Password"
+                    keyboardType="numeric"
+                />
+                <View style={{alignItems:'center', margin: 20}}>
+                <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{backgroundColor:COLORS.white, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
+                        <Text>Iniciar sesion</Text>
+                </TouchableOpacity>
+
+                </View>
             </View>
         )
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, padding: SIZES.padding}}>
             {/* Header Section */}
-            <View style={{ height: 200 }}>
+            <View style={{ justifyContent: 'center', flex:1 }} >
                 {/*renderHeader(profile)*/}
                 {renderForm()}
             </View>
