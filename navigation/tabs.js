@@ -3,7 +3,7 @@ import {
     Image
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home } from "../screens/";
+import { Home, Profile } from "../screens/";
 import { icons, COLORS } from "../constants";
 
 const Tab = createBottomTabNavigator();
@@ -41,7 +41,7 @@ const Tabs = () => {
                         case "Search":
                             return (
                                 <Image
-                                    source={icons.search_icon}
+                                    source={icons.bookmark_icon}
                                     resizeMode="contain"
                                     style={{
                                         tintColor: tintColor,
@@ -94,7 +94,7 @@ const Tabs = () => {
             />
             <Tab.Screen
                 name="Setting"
-                component={Home}
+                component={Profile}
             />
         </Tab.Navigator>
     )
