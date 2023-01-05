@@ -78,7 +78,7 @@ const BookDetail = ({ route, navigation }) => {
                     </TouchableOpacity>
 
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ ...FONTS.h3, color: book.navTintColor }}>Book Detail</Text>
+                        <Text style={{ ...FONTS.h3, color: book.navTintColor }}>Game</Text>
                     </View>
 
                     <TouchableOpacity
@@ -130,7 +130,7 @@ const BookDetail = ({ route, navigation }) => {
                     {/* Rating */}
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={{ ...FONTS.h3, color: COLORS.white }}>{book.rating}</Text>
-                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>Rating</Text>
+                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>#</Text>
                     </View>
 
                     <LineDivider />
@@ -138,7 +138,7 @@ const BookDetail = ({ route, navigation }) => {
                     {/* Pages */}
                     <View style={{ flex: 1, paddingHorizontal: SIZES.radius, alignItems: 'center' }}>
                         <Text style={{ ...FONTS.h3, color: COLORS.white }}>{book.pageNo}</Text>
-                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>Number of Page</Text>
+                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>#</Text>
                     </View>
 
                     <LineDivider />
@@ -146,7 +146,7 @@ const BookDetail = ({ route, navigation }) => {
                     {/* Language */}
                     <View style={{ flex: 1, alignItems: 'center' }}>
                         <Text style={{ ...FONTS.h3, color: COLORS.white }}>{book.language}</Text>
-                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>Language</Text>
+                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>#</Text>
                     </View>
                 </View>
             </View>
@@ -258,12 +258,12 @@ const BookDetail = ({ route, navigation }) => {
 
                 {/* Description */}
                 <View style={{ flex: 2 }}>
-                    {renderBookDescription()}
+                    {/*renderBookDescription()*/}
                 </View>
 
                 {/* Buttons */}
                 <View style={{ height: 70, marginBottom: 30 }}>
-                    {renderBottomButton()}
+                    {/*renderBottomButton()*/}
                 </View>
             </View>
         )
