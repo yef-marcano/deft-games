@@ -3,10 +3,10 @@
 class Conexion{
     static public function conectar(){
 
-        $host = 'localhost';
-        $db   = 'api-rest';
-        $user = 'root';
-        $pass = '';
+        $host = 'db5011482015.hosting-data.io';
+        $db   = 'dbs9687018';
+        $user = 'dbu5479830';
+        $pass = 'Joseph26282364';
         $port = "3306";
         $charset = 'utf8mb4';
         
