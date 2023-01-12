@@ -15,6 +15,8 @@ import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 import {
     styles
   } from './styles';
+
+
 const LineDivider = () => {
     return (
         <View style={{ width: 1, paddingVertical: 18 }}>
@@ -23,7 +25,7 @@ const LineDivider = () => {
     )
 }
 
-const Login = ({ navigation }) => {
+const Register = ({ navigation }) => {
 
     const profileData = {
         name: 'Username',
@@ -163,12 +165,12 @@ const Login = ({ navigation }) => {
         return (
             <View>
             
-                <Text style={{textAlign:'center', ...FONTS.body1, color: COLORS.white }}>Deft Games</Text>
+                <Text style={{textAlign:'center', ...FONTS.body1, color: COLORS.white }}>Registrarte</Text>
 
                 <TextInput
                     style={styles.input}
                     onChangeText={onChangeText}
-                    placeholder="Usuario"
+                    placeholder="Correo electonico"
                     placeholderTextColor={COLORS.white} 
                     value={text}
                 />
@@ -178,19 +180,43 @@ const Login = ({ navigation }) => {
                     value={number}
                     placeholderTextColor={COLORS.white} 
                     placeholder="Password"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholderTextColor={COLORS.white} 
+                    placeholder="Nombre"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholderTextColor={COLORS.white} 
+                    placeholder="Apellido"
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={onChangeNumber}
+                    value={number}
+                    placeholderTextColor={COLORS.white} 
+                    placeholder="Celular"
                     keyboardType="numeric"
                 />
-                <View style={{alignItems:'center', margin: 20}}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{backgroundColor:COLORS.white, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
-                        <Text>Iniciar sesion</Text>
-                </TouchableOpacity>
-                <View style={{paddingTop: 20}}>
-                    <TouchableOpacity onPress={()=> navigation.navigate('Register')} style={{backgroundColor:COLORS.primary, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
-                            <Text style={{color: COLORS.white}}>Registro</Text>
-                    </TouchableOpacity>
-                </View>
 
+                <View style={{alignItems:'center', margin: 20}}>
+                    
+                    <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{backgroundColor:COLORS.primary, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
+                            <Text style={{color: COLORS.white}}>Registrarme</Text>
+                    </TouchableOpacity>
+
+                    <View style={{marginTop: 20}}>
+                        <TouchableOpacity onPress={()=> navigation.navigate('Login')} style={{backgroundColor:COLORS.white, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
+                                <Text>Volver</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
+                
             </View>
         )
     }
@@ -207,4 +233,4 @@ const Login = ({ navigation }) => {
     )
 }
 
-export default Login;
+export default Register;
