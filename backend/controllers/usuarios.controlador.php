@@ -128,7 +128,7 @@ class ControladorUsuarios
         /*=============== 
         Defino la tabla de la base de datos a usar pasandole el nombre al nodelo de create
         ===============*/
-
+        //print_r($datos);
 
         $data = array(
             "correo" => $datos["correo"],
@@ -142,12 +142,13 @@ class ControladorUsuarios
             "celular" => $datos["celular"]
         );
 
-        
+        //echo $data;
+        //echo "llego";
 
-        echo $data;
-        echo "llego";
+        //return;
 
-        return;
+
+
         $usuarios = ModelosUsuarios::index("usuarios", $data["correo"]);
 
         if (count($usuarios) === 0) {

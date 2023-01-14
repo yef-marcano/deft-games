@@ -108,7 +108,8 @@ Esto es para las peticiones simples
                         $datosenviados = array();
                         // realizo un parse para obtener datos de file get content y pasarlos al array
                         parse_str(file_get_contents('php://input'), $datosenviados);
-
+                        //print_r($datosenviados);
+                        //return
                         $usuarios = new ControladorUsuarios();
                         $usuarios->create($datosenviados);
                     }
@@ -170,10 +171,7 @@ Esto es para las peticiones simples
 
 
         /* peticiones dede clientes*/
-        if (array_filter($arrayRutas)[1] == "registro") {
-            /*=============== 
-            Tipo POST
-            ===============*/
+        /*if (array_filter($arrayRutas)[1] == "registro") {
             if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $datos= array("nombre" => $_POST["nombre"],
@@ -183,7 +181,7 @@ Esto es para las peticiones simples
                 $clientes = new ControladorClientes();
                 $clientes->create($datos);
             }
-        }
+        }*/
 
 
     } else {
@@ -198,13 +196,13 @@ Esto es para las peticiones simples
             Cursos
             =============== #########*/
 
-        if(array_filter($arrayRutas)[2] == "cursos" && is_numeric(array_filter($arrayRutas)[3]) ) {
+        if(array_filter($arrayRutas)[1] == "cursos" && is_numeric(array_filter($arrayRutas)[2]) ) {
             /*=============== 
             Tipo GET
             ===============*/
             if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
                 $cursos = new ControladorCursos();
-                $cursos->show(array_filter($arrayRutas)[3]);
+                $cursos->show(array_filter($arrayRutas)[2]);
             }
             /*=============== 
             Tipo PUT, subir cosas a la base

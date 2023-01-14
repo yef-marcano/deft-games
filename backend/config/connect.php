@@ -3,7 +3,7 @@
 class Conexion{
     static public function conectar(){
 
-        $host = '52.54.227.142';
+        $host = 'localhost';
         $db   = 'deft-game';
         $user = 'root';
         $pass = '123456';
