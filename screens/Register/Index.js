@@ -7,8 +7,11 @@ import {
     Image,
     ScrollView,
     FlatList,
-    TextInput 
+    TextInput,
+    Alert,
 } from 'react-native';
+import axios from "axios";
+import qs from "qs";
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 
@@ -34,7 +37,13 @@ const Register = ({ navigation }) => {
 
     const [profile, setProfile] = React.useState(profileData);
 
-    const [text, onChangeText] = React.useState("");
+    const [correo, setCorreo] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [nombre, setNombre] = React.useState("");
+    const [apellido, setApellido] = React.useState("");
+    const [celular, setCelular] = React.useState("");
+
+
     const [number, onChangeNumber] = React.useState(null);
 
     function renderHeader(profile) {
@@ -169,36 +178,36 @@ const Register = ({ navigation }) => {
 
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeText}
+                    onChangeText={setCorreo}
                     placeholder="Correo electonico"
                     placeholderTextColor={COLORS.white} 
-                    value={text}
+                    value={correo}
                 />
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNumber}
-                    value={number}
+                    onChangeText={setPassword}
+                    value={password}
                     placeholderTextColor={COLORS.white} 
                     placeholder="Password"
                 />
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNumber}
-                    value={number}
+                    onChangeText={setNombre}
+                    value={nombre}
                     placeholderTextColor={COLORS.white} 
                     placeholder="Nombre"
                 />
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNumber}
-                    value={number}
+                    onChangeText={setApellido}
+                    value={apellido}
                     placeholderTextColor={COLORS.white} 
                     placeholder="Apellido"
                 />
                 <TextInput
                     style={styles.input}
-                    onChangeText={onChangeNumber}
-                    value={number}
+                    onChangeText={setCelular}
+                    value={celular}
                     placeholderTextColor={COLORS.white} 
                     placeholder="Celular"
                     keyboardType="numeric"
@@ -206,7 +215,7 @@ const Register = ({ navigation }) => {
 
                 <View style={{alignItems:'center', margin: 20}}>
                     
-                    <TouchableOpacity onPress={()=> navigation.navigate('Home')} style={{backgroundColor:COLORS.primary, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
+                    <TouchableOpacity onPress={() => registro()} style={{backgroundColor:COLORS.primary, width: 200, borderRadius: 10, alignItems:'center', padding:10}}>
                             <Text style={{color: COLORS.white}}>Registrarme</Text>
                     </TouchableOpacity>
 
@@ -231,6 +240,49 @@ const Register = ({ navigation }) => {
 
         </SafeAreaView>
     )
+
+    async function registro(params) {
+     //   console.log("rreee");
+    try {
+      let requestOptions = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      };
+
+      let body = {
+        correo: correo,
+        pass: password,
+        nombre: nombre,
+        apellidos: apellido,
+        celular: celular,
+      };
+      //console.log(body);
+
+      return axios
+        .post(
+          "http://52.54.227.142/registro",
+          qs.stringify(body),
+          requestOptions
+        )
+        .then((response) => {
+        console.log(response);
+          let result = response.data.status;
+
+          if (result == 200) {
+            Alert.alert('Registro exitoso');
+            navigation.navigate("Login");
+          } else {
+            console.log(response.data.detalle);
+            Alert.alert(response.data.detalle);
+          }
+          return;
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } catch (error) {}
+  }
 }
 
 export default Register;
