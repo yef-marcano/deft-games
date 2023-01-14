@@ -1,8 +1,8 @@
 <?php
-  $host_name = 'db5011482015.hosting-data.io';
-  $database = 'dbs9687018';
-  $user_name = 'dbu5479830';
-  $password = '<Enter your password here.>';
+  $host_name = 'localhost';
+  $database = 'deft-game';
+  $user_name = 'root';
+  $password = '123456';
 
   $link = new mysqli($host_name, $user_name, $password, $database);
 
