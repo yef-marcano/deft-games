@@ -1,10 +1,24 @@
-import React from 'react';
+import React from "react";
+import Appnavigator from "./navigation/navigation";
+import { Root } from 'react-native-alert-notification';
+
+export default function App(props) {
+
+  return (
+      <Root>
+        <Appnavigator />
+      </Root>
+  );
+}
+
+/*import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 import { BookDetail, Login, Register } from "./screens/";
 import Tabs from "./navigation/tabs";
 import { useFonts } from 'expo-font';
+import { Root } from 'react-native-alert-notification';
 
 const theme = {
     ...DefaultTheme,
@@ -27,6 +41,7 @@ const App = () => {
         return null;
     }
     return (
+        <Root>
         <NavigationContainer theme={theme}>
             <Stack.Navigator
                 screenOptions={{
@@ -34,21 +49,18 @@ const App = () => {
                 }}
                 initialRouteName={'Login'}
             >
-                {/* Tabs */}
                 <Stack.Screen name="Home" component={Tabs} />
 
-                {/* Screens */}
                 <Stack.Screen name="BookDetail" component={BookDetail} options={{ headerShown: false }} />
 
-                {/* Login */}
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 
-                {/* Register */}
                 <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
 
             </Stack.Navigator>
         </NavigationContainer>
+            </Root>
     )
 }
 
-export default App;
+export default App;*/
