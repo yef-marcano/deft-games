@@ -8,6 +8,9 @@ import {
     ScrollView,
     FlatList
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import FullLoading from 'react-native-full-loading'
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 
@@ -25,6 +28,29 @@ const LineDivider = () => {
 }
 
 const Profile = ({ navigation }) => {
+
+    const [userdata, setUserdata] = React.useState({});
+    const [visible, setVisible] = React.useState(false);
+
+
+    React.useEffect(() => {
+        usuario()
+    }, [])
+
+    async function usuario() {
+        let user = await AsyncStorage.getItem('@user_data');
+        const obj = JSON.parse(user);
+        setUserdata(obj)
+        console.log(userdata);
+    }
+
+    async function logout() {
+        setVisible(true)
+        await AsyncStorage.removeItem('@user_data');
+        navigation.navigate('Login')
+        setVisible(false)
+    }
+
 
     const profileData = {
         name: 'Username',
@@ -139,7 +165,7 @@ const Profile = ({ navigation }) => {
                 <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: 'center' }}>
                        {/*<Text style={{ ...FONTS.h3, color: COLORS.white }}>Buenos dias</Text>*/}
-                        <Text style={{ ...FONTS.h2, color: COLORS.white }}>{profile.name}</Text>
+                        <Text style={{ ...FONTS.h2, color: COLORS.white }}>{userdata.nombre}</Text>
                     </View>
                 </View>
 
@@ -152,7 +178,7 @@ const Profile = ({ navigation }) => {
                         paddingRight: SIZES.radius,
                         borderRadius: 20
                     }}
-                    onPress={() => navigation.navigate('Login')}
+                    onPress={() => logout()}
                 >
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ marginLeft: SIZES.base, color: COLORS.white, ...FONTS.body3 }}>CERRAR SESION</Text>
@@ -469,7 +495,10 @@ const Profile = ({ navigation }) => {
     }
 
     return (
+        <>
+        <FullLoading visible={visible} text={'Cerrando sesión'} />
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black , paddingTop: 50}}>
+        
             {/* Header Section */}
             <View style={{ height: 80 }}>
                 {renderHeader(profile)}
@@ -494,6 +523,7 @@ const Profile = ({ navigation }) => {
                 </View>
             </ScrollView>
         </SafeAreaView>
+        </>
     )
 }
 
