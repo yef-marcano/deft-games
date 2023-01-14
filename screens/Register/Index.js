@@ -10,8 +10,13 @@ import {
     TextInput,
     Alert,
 } from 'react-native';
-import axios from "axios";
+/*import axios from "axios";
 import qs from "qs";
+*/
+import { mainApi } from "../../services";
+import FullLoading from 'react-native-full-loading'
+import { AlertBug } from "../../helper/Alert";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 
@@ -42,6 +47,7 @@ const Register = ({ navigation }) => {
     const [nombre, setNombre] = React.useState("");
     const [apellido, setApellido] = React.useState("");
     const [celular, setCelular] = React.useState("");
+    const [visible, setVisible] = React.useState(false);
 
 
     const [number, onChangeNumber] = React.useState(null);
@@ -188,7 +194,9 @@ const Register = ({ navigation }) => {
                     onChangeText={setPassword}
                     value={password}
                     placeholderTextColor={COLORS.white} 
-                    placeholder="Password"
+                    placeholder="Contraseña"
+                    autoCorrect={false}
+                    secureTextEntry={true}
                 />
                 <TextInput
                     style={styles.input}
@@ -231,56 +239,33 @@ const Register = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, padding: SIZES.padding}}>
-            {/* Header Section */}
-            <View style={{ justifyContent: 'center', flex:1 }} >
-                {/*renderHeader(profile)*/}
-                {renderForm()}
-            </View>
+        <>
+        <FullLoading visible={visible} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, padding: SIZES.padding}}>
+                {/* Header Section */}
+                <View style={{ justifyContent: 'center', flex:1 }} >
+                    {/*renderHeader(profile)*/}
+                    {renderForm()}
+                </View>
 
-        </SafeAreaView>
+            </SafeAreaView>
+            </>
     )
 
     async function registro(params) {
-     //   console.log("rreee");
     try {
-      let requestOptions = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      };
-
-      let body = {
-        correo: correo,
-        pass: password,
-        nombre: nombre,
-        apellidos: apellido,
-        celular: celular,
-      };
-      //console.log(body);
-
-      return axios
-        .post(
-          "http://52.54.227.142/registro",
-          qs.stringify(body),
-          requestOptions
-        )
-        .then((response) => {
-        console.log(response);
-          let result = response.data.status;
-
-          if (result == 200) {
-            Alert.alert('Registro exitoso');
-            navigation.navigate("Login");
+        setVisible(true);
+        let datos = { correo: correo, pass: password, nombre: nombre, apellidos: apellido, celular: celular}
+        await mainApi(datos, 'registro', 'POST')
+        .then(res => {
+          setVisible(false);
+          if (res.data.status === 200) {
+            AlertSuccess('Registro exitoso', 'Login',navigation)
+            return
           } else {
-            console.log(response.data.detalle);
-            Alert.alert(response.data.detalle);
+            AlertBug(res.data.detalle)
           }
-          return;
         })
-        .catch((err) => {
-          throw err;
-        });
     } catch (error) {}
   }
 }
