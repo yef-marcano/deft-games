@@ -10,9 +10,11 @@ import {
   TextInput,
   Alert,
 } from "react-native";
-import axios from "axios";
-import qs from "qs";
 //var qs = require('qs');
+import { mainApi } from "../../services";
+import FullLoading from 'react-native-full-loading'
+import { AlertBug } from "../../helper/Alert";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS, FONTS, SIZES, icons, images } from "../../constants";
 
@@ -41,6 +43,8 @@ const Login = ({ navigation }) => {
 
   const [usuario, setUsuario] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [visible, setVisible] = React.useState(false);
+
 
   function renderHeader(profile) {
     return (
@@ -52,6 +56,7 @@ const Login = ({ navigation }) => {
           alignItems: "center",
         }}
       >
+        
         {/* Greetings */}
         <View style={{ flex: 1 }}>
           <View style={{ marginRight: SIZES.padding }}>
@@ -263,8 +268,9 @@ const Login = ({ navigation }) => {
           onChangeText={setPassword}
           value={password}
           placeholderTextColor={COLORS.white}
-          placeholder="Password"
-          keyboardType="numeric"
+          placeholder="Contraseña"
+          autoCorrect={false}
+          secureTextEntry={true}
         />
         <View style={{ alignItems: "center", margin: 20 }}>
           <TouchableOpacity
@@ -299,6 +305,8 @@ const Login = ({ navigation }) => {
   }
 
   return (
+    <>
+    <FullLoading visible={visible} />
     <SafeAreaView
       style={{ flex: 1, backgroundColor: COLORS.black, padding: SIZES.padding }}
     >
@@ -308,11 +316,33 @@ const Login = ({ navigation }) => {
         {renderForm()}
       </View>
     </SafeAreaView>
+    </>
   );
 
-  async function login(params) {
+  async function login() {
     try {
-      let requestOptions = {
+      setVisible(true);
+      let datos = { correo: usuario,password: password,}
+      await mainApi(datos, 'usuario', 'POST')
+      .then(res => {
+        setVisible(false);
+        console.log(res.data);
+        if (res.data.status === 200) {
+          //console.log(res.data.detalle[0].id);
+          let jsonValue = JSON.stringify(res.data.detalle[0])
+          AsyncStorage.setItem('@user_data', jsonValue)
+          navigation.navigate("Home");
+          return
+          /*const jsonValue = JSON.stringify(token)
+          
+          await AsyncStorage.setItem('@token_key', jsonValue)
+          navigation.navigate("Home");*/
+        } else {
+          AlertBug(res.data.detalle)
+          console.log(res.data.detalle);
+        }
+      })
+      /*let requestOptions = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -342,7 +372,7 @@ const Login = ({ navigation }) => {
         })
         .catch((err) => {
           throw err;
-        });
+        });*/
     } catch (error) {}
   }
 };
