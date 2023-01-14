@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     SafeAreaView,
     View,
@@ -8,6 +8,7 @@ import {
     ScrollView,
     FlatList
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS, FONTS, SIZES, icons, images, dummyData } from '../constants';
 
@@ -25,6 +26,21 @@ const Home = ({ navigation }) => {
     const [myBooks, setMyBooks] = React.useState(dummyData.myBooksData);
     const [categories, setCategories] = React.useState(dummyData.categoriesData);
     const [selectedCategory, setSelectedCategory] = React.useState(1);
+    const [userdata, setUserdata] = React.useState({});
+
+
+    useEffect(() => {
+        usuario()
+    }, [])
+
+    async function usuario() {
+        let user = await AsyncStorage.getItem('@user_data');
+        const obj = JSON.parse(user);
+        setUserdata(obj)
+        console.log(userdata);
+    }
+
+
 
     function renderHeader(profile) {
         return (
@@ -33,7 +49,7 @@ const Home = ({ navigation }) => {
                 <View style={{ flex: 1 }}>
                     <View style={{ marginRight: SIZES.padding }}>
                         <Text style={{ ...FONTS.h3, color: COLORS.white }}>Buenos dias</Text>
-                        <Text style={{ ...FONTS.h2, color: COLORS.white }}>{profile.name}</Text>
+                        <Text style={{ ...FONTS.h2, color: COLORS.white }}>{userdata.nombre}</Text>
                     </View>
                 </View>
 
@@ -275,9 +291,9 @@ const Home = ({ navigation }) => {
                 <View style={{ marginVertical: SIZES.base }}>
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
-                        /*onPress={() => navigation.navigate("BookDetail", {
-                            book: item
-                        })}*/
+                    /*onPress={() => navigation.navigate("BookDetail", {
+                        book: item
+                    })}*/
                     >
                         {/* Book Cover */}
                         <Image
@@ -374,7 +390,7 @@ const Home = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black , paddingTop: 50}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 50 }}>
             {/* Header Section */}
             <View style={{ height: 200 }}>
                 {renderHeader(profile)}
