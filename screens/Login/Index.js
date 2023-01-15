@@ -259,7 +259,7 @@ const Login = ({ navigation }) => {
         <TextInput
           style={styles.input}
           onChangeText={setUsuario}
-          placeholder="Usuario"
+          placeholder="Correo electrónico"
           placeholderTextColor={COLORS.white}
           value={usuario}
         />
