@@ -15,7 +15,7 @@ import qs from "qs";
 */
 import { mainApi } from "../../services";
 import FullLoading from 'react-native-full-loading'
-import { AlertBug } from "../../helper/Alert";
+import { AlertBug, AlertSuccess } from "../../helper/Alert";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
@@ -259,8 +259,11 @@ const Register = ({ navigation }) => {
         await mainApi(datos, 'registro', 'POST')
         .then(res => {
           setVisible(false);
+          console.log(res.data);
           if (res.data.status === 200) {
+            navigation.navigate("Login");
             AlertSuccess('Registro exitoso', 'Login',navigation)
+            //navegar al login y limpiar los datoss}
             return
           } else {
             AlertBug(res.data.detalle)
