@@ -6,7 +6,7 @@ class Conexion{
         $host = 'localhost';
         $db   = 'deft-game';
         $user = 'root';
-        $pass = '123456';
+        $pass = '"#%56+1yyuRRt12345';
         $port = "3306";
         $charset = 'utf8mb4';
         

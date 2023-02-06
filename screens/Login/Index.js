@@ -6,32 +6,39 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  FlatList,
+  ImageBackground,
   TextInput,
   Alert,
+  KeyboardAvoidingView
 } from "react-native";
 //var qs = require('qs');
 import { mainApi } from "../../services";
 import FullLoading from 'react-native-full-loading'
 import { AlertBug } from "../../helper/Alert";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Input, Block } from 'galio-framework';
+import { LinearGradient } from 'expo-linear-gradient';
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import { COLORS, FONTS, SIZES, icons, images } from "../../constants";
 
 import { styles } from "./styles";
+
 const LineDivider = () => {
   return (
     <View style={{ width: 1, paddingVertical: 18 }}>
       <View
         style={{
           flex: 1,
-          borderLeftColor: COLORS.lightGray,
+          borderLeftColor: COLORS.white,
           borderLeftWidth: 1,
+          width: 100
         }}
       ></View>
     </View>
   );
 };
+
 
 const Login = ({ navigation }) => {
   const profileData = {
@@ -46,214 +53,41 @@ const Login = ({ navigation }) => {
   const [visible, setVisible] = React.useState(false);
 
 
-  function renderHeader(profile) {
+  function Header() {
     return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          paddingHorizontal: SIZES.padding,
-          alignItems: "center",
-        }}
-      >
+      <ImageBackground 
+      style={{ flex: 1, justifyContent: 'center', alignItems:'center' }}
+      source={images.bgheaderlogin}  resizeMode='contain' >
+      <View >
+            <Image source={images.logologin}/>
+      </View>
+        </ImageBackground>
+    );
+  };
+  function Footer() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems:'center', borderTopColor: '#fff',
+      borderTopWidth: 1, margin: SIZES.padding }}>
+        <View style={{marginTop: 20, borderBottomColor: '#DFA1ED'}}>
+          <Text style={styles.text}> Siguenos</Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <FontAwesome5 style={{margin:10}} name="instagram" size={34} color="white" />
+          <FontAwesome5 style={{margin:10}} name="facebook" size={34} color="white" />
+          <FontAwesome5 style={{margin:10}} name="linkedin" size={34} color="white" />
+        </View>
         
-        {/* Greetings */}
-        <View style={{ flex: 1 }}>
-          <View style={{ marginRight: SIZES.padding }}>
-            <Text style={{ ...FONTS.h3, color: COLORS.white }}>
-              Good Morning
-            </Text>
-            <Text style={{ ...FONTS.h2, color: COLORS.white }}>
-              {profile.name}
-            </Text>
-          </View>
-        </View>
-
-        {/* Points */}
-        <TouchableOpacity
-          style={{
-            backgroundColor: COLORS.primary,
-            height: 40,
-            paddingLeft: 3,
-            paddingRight: SIZES.radius,
-            borderRadius: 20,
-          }}
-          onPress={() => {
-            console.log("Point");
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <View
-              style={{
-                width: 30,
-                height: 30,
-                alignItems: "center",
-                justifyContent: "center",
-                borderRadius: 25,
-                backgroundColor: "rgba(0,0,0,0.5)",
-              }}
-            >
-              <Image
-                source={icons.plus_icon}
-                resizeMode="contain"
-                style={{
-                  width: 20,
-                  height: 20,
-                }}
-              />
-            </View>
-
-            <Text
-              style={{
-                marginLeft: SIZES.base,
-                color: COLORS.white,
-                ...FONTS.body3,
-              }}
-            >
-              {profile.point} point
-            </Text>
-          </View>
-        </TouchableOpacity>
       </View>
     );
-  }
-
-  function renderButtonSection() {
-    return (
-      <View
-        style={{ flex: 1, justifyContent: "center", padding: SIZES.padding }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            height: 70,
-            backgroundColor: COLORS.secondary,
-            borderRadius: SIZES.radius,
-          }}
-        >
-          {/* Claim */}
-          <TouchableOpacity
-            style={{ flex: 1 }}
-            onPress={() => console.log("Claim")}
-          >
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                source={icons.claim_icon}
-                resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                }}
-              />
-              <Text
-                style={{
-                  marginLeft: SIZES.base,
-                  ...FONTS.body3,
-                  color: COLORS.white,
-                }}
-              >
-                Claim
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          {/* Divider */}
-          <LineDivider />
-
-          {/* Get Point */}
-          <TouchableOpacity
-            style={{ flex: 1 }}
-            onPress={() => console.log("Get Point")}
-          >
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                source={icons.point_icon}
-                resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                }}
-              />
-              <Text
-                style={{
-                  marginLeft: SIZES.base,
-                  ...FONTS.body3,
-                  color: COLORS.white,
-                }}
-              >
-                Get Point
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          {/* Divider */}
-          <LineDivider />
-
-          {/* My Card */}
-          <TouchableOpacity
-            style={{ flex: 1 }}
-            onPress={() => console.log("My Card")}
-          >
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                source={icons.card_icon}
-                resizeMode="contain"
-                style={{
-                  width: 30,
-                  height: 30,
-                }}
-              />
-              <Text
-                style={{
-                  marginLeft: SIZES.base,
-                  ...FONTS.body3,
-                  color: COLORS.white,
-                }}
-              >
-                My Card
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
+  };
 
   function renderForm() {
     return (
-      <View>
+      <View style={{flex: 2,justifyContent: "center", height: '70%'}}>
         <Text
           style={{ textAlign: "center", ...FONTS.body1, color: COLORS.white }}
         >
-          Deft Games
+          Iniciar sesion
         </Text>
 
         <TextInput
@@ -272,33 +106,23 @@ const Login = ({ navigation }) => {
           autoCorrect={false}
           secureTextEntry={true}
         />
+
+        <View style={{marginTop: 20, borderBottomColor: '#fff', alignItems: 'flex-end'}}>
+          <Text style={styles.text}> Recuperar contrasena?</Text>
+        </View>
+
         <View style={{ alignItems: "center", margin: 20 }}>
-          <TouchableOpacity
+          <LinearGradient
             onPress={() => login()}
-            style={{
-              backgroundColor: COLORS.white,
-              width: 200,
-              borderRadius: 10,
-              alignItems: "center",
-              padding: 10,
-            }}
-          >
-            <Text>Iniciar sesion</Text>
-          </TouchableOpacity>
-          <View style={{ paddingTop: 20 }}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Register")}
-              style={{
-                backgroundColor: COLORS.primary,
-                width: 200,
-                borderRadius: 10,
-                alignItems: "center",
-                padding: 10,
-              }}
-            >
-              <Text style={{ color: COLORS.white }}>Registro</Text>
-            </TouchableOpacity>
-          </View>
+            colors={['#0014FF', '#8020EF', '#FF2CDF']}
+            start={[1, 0.7]}
+            style={styles.button}>
+          <Text style={styles.text}>Iniciar sesion</Text>
+        </LinearGradient>
+
+        <View style={{marginTop: 20, borderBottomColor: '#fff', borderBottomWidth: 1}}>
+          <Text style={styles.text}> ¿No tengo una cuenta?</Text>
+        </View>
         </View>
       </View>
     );
@@ -306,74 +130,37 @@ const Login = ({ navigation }) => {
 
   return (
     <>
-    <FullLoading visible={visible} />
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: COLORS.black, padding: SIZES.padding }}
-    >
-      {/* Header Section */}
-      <View style={{ justifyContent: "center", flex: 1 }}>
-        {/*renderHeader(profile)*/}
-        {renderForm()}
-      </View>
-    </SafeAreaView>
+      <FullLoading visible={visible} />
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background, padding: SIZES.padding }}>
+        <View style={{ flex: 3 }}>
+          {Header()}
+          {renderForm()}
+          {Footer()}
+        </View>
+      </SafeAreaView>
     </>
   );
 
   async function login() {
     try {
       setVisible(true);
-      let datos = { correo: usuario,password: password,}
+      let datos = { correo: usuario, password: password, }
       await mainApi(datos, 'usuario', 'POST')
-      .then(res => {
-        setVisible(false);
-        console.log(res.data);
-        if (res.data.status === 200) {
-          //console.log(res.data.detalle[0].id);
-          let jsonValue = JSON.stringify(res.data.detalle[0])
-          AsyncStorage.setItem('@user_data', jsonValue)
-          navigation.navigate("Home");
-          return
-          /*const jsonValue = JSON.stringify(token)
-          
-          await AsyncStorage.setItem('@token_key', jsonValue)
-          navigation.navigate("Home");*/
-        } else {
-          AlertBug(res.data.detalle)
-          console.log(res.data.detalle);
-        }
-      })
-      /*let requestOptions = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      };
-
-      let body = {
-        correo: usuario,
-        password: password,
-      };
-
-      return axios
-        .post(
-          "http://52.54.227.142/usuario",
-          qs.stringify(body),
-          requestOptions
-        )
-        .then((response) => {
-          let result = response.data.status;
-
-          if (result == 200) {
+        .then(res => {
+          setVisible(false);
+          console.log(res.data);
+          if (res.data.status === 200) {
+            //console.log(res.data.detalle[0].id);
+            let jsonValue = JSON.stringify(res.data.detalle[0])
+            AsyncStorage.setItem('@user_data', jsonValue)
             navigation.navigate("Home");
+            return
           } else {
-            console.log(response.data.detalle);
-            Alert.alert(response.data.detalle);
+            AlertBug(res.data.detalle)
+            console.log(res.data.detalle);
           }
-          return;
         })
-        .catch((err) => {
-          throw err;
-        });*/
-    } catch (error) {}
+    } catch (error) { }
   }
 };
 

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import { View, Image, Text } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { View, Image, Text, StyleSheet, ImageBackground } from 'react-native';
 import { images } from "../constants/";
 import { SIZES } from "../constants/";
 import { mainApi } from "../services";
@@ -16,12 +16,13 @@ export default function SplashScreen(props) {
   }, [])
 
   return (
-    <View>
-      <Image source={images.splash} style={{
-        width: SIZES.width,
-        height: "100%"
-      }}
-      />
+    <View style={styles.container}>
+      <ImageBackground source={images.splashbg}  resizeMode="cover" style={styles.image}> 
+      <View style={{alignItems:'center'}}>
+        <Image source={images.logosplash}/>
+        <Image source={images.titlelogo}/>
+      </View>
+      </ImageBackground>
     </View>
   )
 
@@ -29,9 +30,9 @@ export default function SplashScreen(props) {
     
     let user = await AsyncStorage.getItem('@user_data');
     //console.log(user);
-    console.log(user);
+    //console.log(user);
     if (user == null) {
-      goToScreen('Login');
+        goToScreen('Login');
     } else{
       setTimeout(() => {
         goToScreen('Home');
@@ -61,4 +62,24 @@ export default function SplashScreen(props) {
   function goToScreen(routeName) {
     props.navigation.replace(routeName)
   }
+
+
+  
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: '#000000c0',
+  },
+});

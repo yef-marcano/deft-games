@@ -15,105 +15,118 @@ if (isset($_GET["pagina"]) && is_numeric($_GET["pagina"])) {
 
 
 
-if (count(array_filter($arrayRutas)) == 0) {
+    if (count(array_filter($arrayRutas)) == 0) {
 
-    /* Cuando no se hace ninguna peticion a la API respondemos con no entontrado */
-    /*echo  "<pre>";
+        /* Cuando no se hace ninguna peticion a la API respondemos con no entontrado */
+        /*echo  "<pre>";
     print_r($arrayRutas);
     echo  "<pre>";*/
 
-    $json = array(
-        "detalle" => "no encontrado",
-        "ruta" => $_SERVER["REQUEST_URI"]
-    );
-    echo json_encode($json);
+        $json = array(
+            "detalle" => "no encontrado",
+            "ruta" => $_SERVER["REQUEST_URI"]
+        );
+        echo json_encode($json);
 
-    return;
+        return;
+    } else {
+        /* ALLOW CORS */
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: *");
+        /* ALLOW CORS */
 
-} else {
-    /* ALLOW CORS */
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: *");
-    /* ALLOW CORS */
 
-
-/*=============== 
+        /*=============== 
 Esto es para las peticiones simples
 ===============*/
 
-    /* Cuando se pasa un indice a la url verifico la posicion */
-    if (count(array_filter($arrayRutas)) == 1) {
+        /* Cuando se pasa un indice a la url verifico la posicion */
+        if (count(array_filter($arrayRutas)) == 1) {
 
 
 
-                /* peticiones de usuarios*/
-                if (array_filter($arrayRutas)[1] == "usuarios") {
-                    /*=============== 
+            /* peticiones de usuarios*/
+            if (array_filter($arrayRutas)[1] == "usuarios") {
+                /*=============== 
                     Tipo GET Consultar todos los usuarios registrados
                     ===============*/
-                    if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
 
-                        $usuarios = new ControladorUsuarios();
-                        $usuarios->index();
-                    }
+                    $usuarios = new ControladorUsuarios();
+                    $usuarios->index();
                 }
+            }
 
-        
-                /* peticiones de un usuario*/
-                if (array_filter($arrayRutas)[1] == "usuario") {
-                    /*=============== 
+            /* peticiones de usuarios*/
+            if (array_filter($arrayRutas)[1] == "juegos") {
+                /*=============== 
+                    Tipo GET Consultar todos los usuarios registrados
+                    ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+
+                    $usuarios = new ControladorJuegos();
+                    $usuarios->index();
+                }
+            }
+
+
+
+
+            /* peticiones de un usuario*/
+            if (array_filter($arrayRutas)[1] == "usuario") {
+                /*=============== 
                     Tipo POST
                     ===============*/
-                    if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
-                        if (isset($_POST["correo"]) && isset($_POST["password"])) {
+                    if (isset($_POST["correo"]) && isset($_POST["password"])) {
 
-                            /*$data = array(
+                        /*$data = array(
                                 "correo" => $_POST["correo"],
                                 "password" => $_POST["password"]
 
                             );*/
 
-                            // array vacio
-                            $datosenviados = array();
-                            // realizo un parse para obtener datos de file get content y pasarlos al array
-                            parse_str(file_get_contents('php://input'), $datosenviados);
-
-                            $usuario = new ControladorUsuarios();
-                            $usuario->login($datosenviados);
-                        } else {
-
-                            $json = array(
-                                "status" => 404,
-                                "detalle" => "no se esta enviando el usuario o password"
-                            );
-                            echo json_encode($json);
-
-                            return;
-                        }
-                    }
-                }
-
-
-
-                /* peticiones registro de usuarios*/
-                if (array_filter($arrayRutas)[1] == "registro") {
-                    /*=============== 
-                    Tipo POST
-                    ===============*/
-                    if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
-
-                    
                         // array vacio
                         $datosenviados = array();
                         // realizo un parse para obtener datos de file get content y pasarlos al array
                         parse_str(file_get_contents('php://input'), $datosenviados);
-                        //print_r($datosenviados);
-                        //return
-                        $usuarios = new ControladorUsuarios();
-                        $usuarios->create($datosenviados);
+
+                        $usuario = new ControladorUsuarios();
+                        $usuario->login($datosenviados);
+                    } else {
+
+                        $json = array(
+                            "status" => 404,
+                            "detalle" => "no se esta enviando el usuario o password"
+                        );
+                        echo json_encode($json);
+
+                        return;
                     }
                 }
+            }
+
+
+
+            /* peticiones registro de usuarios*/
+            if (array_filter($arrayRutas)[1] == "registro") {
+                /*=============== 
+                    Tipo POST
+                    ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+                    // array vacio
+                    $datosenviados = array();
+                    // realizo un parse para obtener datos de file get content y pasarlos al array
+                    parse_str(file_get_contents('php://input'), $datosenviados);
+                    //print_r($datosenviados);
+                    //return
+                    $usuarios = new ControladorUsuarios();
+                    $usuarios->create($datosenviados);
+                }
+            }
 
 
 
@@ -122,56 +135,53 @@ Esto es para las peticiones simples
 
 
 
-        /* peticiones dede cursos*/
-        if (array_filter($arrayRutas)[1] == "cotizaciones") {
-            /*=============== 
+            /* peticiones dede cursos*/
+            if (array_filter($arrayRutas)[1] == "cotizaciones") {
+                /*=============== 
             Tipo POST
             ===============*/
-            /*if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+                /*if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
                 $cursos = new ControladorCursos();
                 $cursos->create();*/
-            
-            if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET"){
-                $cursos = new ControladorCotizaciones();
-                $cursos->index();
+
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+                    $cursos = new ControladorCotizaciones();
+                    $cursos->index();
+                }
             }
-        }
-        /* peticiones dede cursos*/
+            /* peticiones dede cursos*/
 
 
-        if (array_filter($arrayRutas)[1] == "cursos") {
-            /*=============== 
+            if (array_filter($arrayRutas)[1] == "cursos") {
+                /*=============== 
             Tipo POST
             ===============*/
-            if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
-                $data = array(
-                    "titulo" => $_POST["titulo"],
-                    "descripcion" => $_POST["descripcion"],
-                    "instructor" => $_POST["instructor"],
-                    "imagen" => $_POST["imagen"],
-                    "precio" => $_POST["precio"]
+                    $data = array(
+                        "titulo" => $_POST["titulo"],
+                        "descripcion" => $_POST["descripcion"],
+                        "instructor" => $_POST["instructor"],
+                        "imagen" => $_POST["imagen"],
+                        "precio" => $_POST["precio"]
 
-                );
-                // echo "<pre>"; print_r($data); echo "<pre>";
-                // return;
-
-
-                $cursos = new ControladorCursos();
-                $cursos->create($data);
+                    );
+                    // echo "<pre>"; print_r($data); echo "<pre>";
+                    // return;
 
 
-
-            } else if(isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET"){
-                $cursos = new ControladorCursos();
-                $cursos->index(null);
+                    $cursos = new ControladorCursos();
+                    $cursos->create($data);
+                } else if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+                    $cursos = new ControladorCursos();
+                    $cursos->index(null);
+                }
             }
-        }
 
 
 
-        /* peticiones dede clientes*/
-        /*if (array_filter($arrayRutas)[1] == "registro") {
+            /* peticiones dede clientes*/
+            /*if (array_filter($arrayRutas)[1] == "registro") {
             if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $datos= array("nombre" => $_POST["nombre"],
@@ -182,53 +192,51 @@ Esto es para las peticiones simples
                 $clientes->create($datos);
             }
         }*/
+        } else {
 
-
-    } else {
-
-        /*=============== 
+            /*=============== 
         Esto es para las peticiones simples con un parametro 
         ===============*/
-        /* capturo la posicion de despues del la peticion ejmplo/1 */
-        
+            /* capturo la posicion de despues del la peticion ejmplo/1 */
+
 
             /*=============== #####
             Cursos
             =============== #########*/
 
-        if(array_filter($arrayRutas)[1] == "cursos" && is_numeric(array_filter($arrayRutas)[2]) ) {
-            /*=============== 
+            if (array_filter($arrayRutas)[1] == "cursos" && is_numeric(array_filter($arrayRutas)[2])) {
+                /*=============== 
             Tipo GET
             ===============*/
-            if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
-                $cursos = new ControladorCursos();
-                $cursos->show(array_filter($arrayRutas)[2]);
-            }
-            /*=============== 
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+                    $cursos = new ControladorCursos();
+                    $cursos->show(array_filter($arrayRutas)[2]);
+                }
+                /*=============== 
             Tipo PUT, subir cosas a la base
             ===============*/
-            if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "PUT") {
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "PUT") {
 
-                // array vacio
-                $datos = array();
+                    // array vacio
+                    $datos = array();
 
-                // realizo un parse para obtener datos de file get content y pasarlos al array
-                parse_str(file_get_contents('php://input'), $datos);
+                    // realizo un parse para obtener datos de file get content y pasarlos al array
+                    parse_str(file_get_contents('php://input'), $datos);
 
-                //echo "<pre>"; print_r($datos); echo "<pre>";
+                    //echo "<pre>"; print_r($datos); echo "<pre>";
 
 
-                $cursos = new ControladorCursos();
-                $cursos->update(array_filter($arrayRutas)[5], $datos);
-            }
-            /*=============== 
+                    $cursos = new ControladorCursos();
+                    $cursos->update(array_filter($arrayRutas)[5], $datos);
+                }
+                /*=============== 
             Tipo DELETE, subir cosas a la base
             ===============*/
-            if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "DELETE") {
-                $cursos = new ControladorCursos();
-                $cursos->delete(array_filter($arrayRutas)[5]);
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "DELETE") {
+                    $cursos = new ControladorCursos();
+                    $cursos->delete(array_filter($arrayRutas)[5]);
+                }
             }
-        }
 
 
 
@@ -236,20 +244,51 @@ Esto es para las peticiones simples
             /*=============== #####
             Cotizaciones
             =============== #########*/
-        
-        if(array_filter($arrayRutas)[2] == "cotizaciones" && is_numeric(array_filter($arrayRutas)[3]) ) {
-            /*=============== 
+
+            if (array_filter($arrayRutas)[1] == "cotizaciones" && is_numeric(array_filter($arrayRutas)[2])) {
+                /*=============== 
             Tipo GET
             ===============*/
-            if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
-                $cursos = new ControladorCotizaciones();
-                $cursos->show(array_filter($arrayRutas)[5]);
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+                    $cursos = new ControladorCotizaciones();
+                    $cursos->show(array_filter($arrayRutas)[5]);
+                }
             }
+
+
+
+
+            /*=============== #####
+            Saldo
+            =============== #########*/
+
+            if (array_filter($arrayRutas)[1] == "saldo" && is_numeric(array_filter($arrayRutas)[2])) {
+                /*=============== 
+            Tipo GET
+            ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+            
+                    $saldo = new ControladorUsuarios();
+                    $saldo->saldo(array_filter($arrayRutas)[2]);
+                }
+            }
+
+            
+            if (array_filter($arrayRutas)[1] == "juegosguardados" && is_numeric(array_filter($arrayRutas)[2])) {
+                /*=============== 
+            Tipo GET
+            ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+            
+                    $saldo = new ControladorJuegos();
+                    $saldo->JuegosGuardados(array_filter($arrayRutas)[2]);
+                }
+            }
+
+
+
+
+
         }
-
-
-
     }
-}
-
 }

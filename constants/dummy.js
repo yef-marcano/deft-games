@@ -1,5 +1,5 @@
 
-import { images } from './index';
+import  images  from './images';
 
 export const profileData = {
     name: 'Username',

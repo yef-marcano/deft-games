@@ -5,6 +5,7 @@ export const COLORS = {
     // base colors
     primary: "#F96D41",
     secondary: "#25282F",
+    background: "#0C0E19",
 
     // colors
     black: "#1E1B26",

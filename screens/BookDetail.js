@@ -237,7 +237,7 @@ const BookDetail = ({ route, navigation }) => {
                     }}
                     onPress={() => console.log("Start Reading")}
                 >
-                    <Text style={{ ...FONTS.h3, color: COLORS.white }}>Start Reading</Text>
+                    <Text style={{ ...FONTS.h3, color: COLORS.white }}>Iniciar</Text>
                 </TouchableOpacity>
             </View>
         )

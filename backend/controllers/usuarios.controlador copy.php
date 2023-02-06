@@ -15,15 +15,37 @@ class ControladorUsuarios
         $usuarios = ModelosUsuarios::index("usuarios", null);
 
 
-            $json = array(
-                "status" => 200,
-                "total_registros" => count($usuarios),
-                "detalle" => $usuarios
-            );
-            echo json_encode($json, true);
-            return;
-
+        $json = array(
+            "status" => 200,
+            "total_registros" => count($usuarios),
+            "detalle" => $usuarios
+        );
+        echo json_encode($json, true);
+        return;
     }
+
+
+    public function saldo($id)
+    {
+
+
+        /*=============== 
+        Defino la tabla de la base de datos a usar pasandole el nombre al nodelo de index
+        ===============*/
+
+        $usuarios = ModelosUsuarios::index("usuarios", $id);
+
+
+        $json = array(
+            "status" => 200,
+            "total_registros" => count($usuarios),
+            "detalle" => $usuarios
+        );
+        echo json_encode($json, true);
+        return;
+    }
+
+
 
     public function login($datos)
     {
@@ -142,7 +164,7 @@ class ControladorUsuarios
             "celular" => $datos["celular"]
         );
 
-        
+
 
 
 
@@ -185,7 +207,7 @@ class ControladorUsuarios
 
         $usuarios = ModelosUsuarios::index("usuarios", $id, $datos);
 
-        if(count($usuarios) == 0){
+        if (count($usuarios) == 0) {
 
             $json = array(
                 "status" => 404,
@@ -193,13 +215,12 @@ class ControladorUsuarios
             );
             echo json_encode($json, true);
             return;
-
         } else {
-            
+
             /*=============== 
                si todo es correcto voy a pasar los datos al modelo
-             ===============*/ 
-             
+             ===============*/
+
             $correo = !empty($datos['correo']) ? trim($datos['correo']) : $usuarios[0]->email;
             $pass = !empty($datos['pass']) ? trim($datos['pass']) : $usuarios[0]->pass;
             $nombre = !empty($datos['nombre']) ? trim($datos['nombre']) : $usuarios[0]->nombre;
@@ -210,7 +231,7 @@ class ControladorUsuarios
             $direccion = !empty($datos['direccion']) ? trim($datos['direccion']) : $usuarios[0]->direccion;
             $celular = !empty($datos['celular']) ? trim($datos['celular']) : $usuarios[0]->celular;
             $id = !empty($datos['id']) ? trim($datos['id']) : null;
-            
+
 
             $data = array(
                 'id' => $id,
@@ -228,7 +249,7 @@ class ControladorUsuarios
 
             //echo json_encode($data, true);
             //return;
-            
+
             $usuario_actualizado = ModelosUsuarios::update("usuarios", $id, $data);
 
             $json = array(
@@ -238,9 +259,7 @@ class ControladorUsuarios
             );
             echo json_encode($json, true);
             return;
-
         }
-
     }
 
 

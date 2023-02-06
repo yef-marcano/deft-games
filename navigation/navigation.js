@@ -4,6 +4,7 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 import { BookDetail, Login, Register, SplashScreen } from "../screens/";
 import Tabs from "../navigation/tabs";
+import DrawerNavigator from "../navigation/Drawer";
 import { useFonts } from 'expo-font';
 import { Root } from 'react-native-alert-notification';
 
@@ -35,11 +36,12 @@ const Appnavigator = () => {
                     headerShown: false
                 }}
                 initialRouteName={'Splash'}
+                
             >
                 {/* Tabs */}
                 <Stack.Screen name="Splash" component={SplashScreen} />
                 {/* Tabs */}
-                <Stack.Screen name="Home" component={Tabs} />
+                <Stack.Screen name="Home" component={DrawerNavigator} />
 
                 {/* Screens */}
                 <Stack.Screen name="BookDetail" component={BookDetail} options={{ headerShown: false }} />
@@ -49,11 +51,14 @@ const Appnavigator = () => {
                 
                 {/* Register */}
                 <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+                
 
             </Stack.Navigator>
             </NavigationContainer>
         </Root>
     )
+
 }
+
 
 export default Appnavigator;

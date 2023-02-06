@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "deft-games",
+    "name": "Deft games",
     "slug": "deft-games",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash1.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -23,10 +23,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.ymarcano.deftgames"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f1d6740e-7097-47ed-8ed3-6a7649565738"
+      }
     }
   }
 }

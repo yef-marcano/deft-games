@@ -1,10 +1,12 @@
 import React from "react";
 import {
-    Image
+    Image,
+    View
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile } from "../screens/";
+import { Home, Profile, Monedero,CrearPartida,Addgame } from "../screens/";
 import { icons, COLORS } from "../constants";
+import { Feather, Entypo, MaterialCommunityIcons, Ionicons  } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +18,7 @@ const tabOptions = {
     }
 }
 
-const Tabs = () => {
+const Tabs = ({navigation}) => {
     return (
         <Tab.Navigator
             tabBarOptions={tabOptions}
@@ -27,46 +29,28 @@ const Tabs = () => {
                     switch (route.name) {
                         case "Home":
                             return (
-                                <Image
-                                    source={icons.dashboard_icon}
-                                    resizeMode="contain"
-                                    style={{
-                                        tintColor: tintColor,
-                                        width: 25,
-                                        height: 25
-                                    }}
-                                />
+                                
+                                <MaterialCommunityIcons name="axe-battle" size={44} color={tintColor} />    
                             )
 
-                        case "Search":
-                            return (
-                                <Image
-                                    source={icons.bookmark_icon}
-                                    resizeMode="contain"
-                                    style={{
-                                        tintColor: tintColor,
-                                        width: 25,
-                                        height: 25
-                                    }}
-                                />
-                            )
 
                         case "Notification":
                             return (
-                                <Image
-                                    source={icons.notification_icon}
-                                    resizeMode="contain"
-                                    style={{
-                                        tintColor: tintColor,
-                                        width: 25,
-                                        height: 25
-                                    }}
-                                />
+                                <View style={{
+                                        backgroundColor: COLORS.primary,
+                                        borderRadius: 100,
+                                        marginTop: -40,
+                                        padding: 20
+                                }}>
+                                <Entypo name="plus" size={44} color={tintColor} />
+                                </View>
                             )
 
-                        case "Setting":
+                        case "Profile":
                             return (
-                                <Image
+                                <Ionicons name="person-circle-outline" size={44} color={tintColor} />
+                            )
+                                {/*<Image
                                     source={icons.menu_icon}
                                     resizeMode="contain"
                                     style={{
@@ -74,8 +58,7 @@ const Tabs = () => {
                                         width: 25,
                                         height: 25
                                     }}
-                                />
-                            )
+                                />*/}
                     }
                 }
             })}
@@ -85,16 +68,21 @@ const Tabs = () => {
                 component={Home}
             />
             <Tab.Screen
-                name="Search"
-                component={Home}
-            />
-            <Tab.Screen
                 name="Notification"
-                component={Home}
+                component={CrearPartida}
             />
             <Tab.Screen
-                name="Setting"
+                name="Profile"
                 component={Profile}
+            />
+
+            <Tab.Screen
+                name="Agregarjuego"
+                component={Addgame}
+                options={{
+                headerShown: false,
+                tabBarButton: () => null,
+                }}
             />
         </Tab.Navigator>
     )

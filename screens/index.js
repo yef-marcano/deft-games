@@ -4,6 +4,12 @@ import Login from "./Login/Index"
 import Profile from "./Profile/Index"
 import Register from "./Register/Index"
 import SplashScreen from "./SplashScreen"
+import Monedero from "./Monedero/Index"
+import HazPremium from "./HazPremium/Index"
+import InvitarAmigo from "./InvitarAmigo/Index"
+import Ayuda from "./Ayuda/Index"
+import CrearPartida from "./CrearPartida/Index"
+import Addgame from "./Addgame/Index"
 
 export {
     Home,
@@ -11,5 +17,11 @@ export {
     Login,
     Profile,
     Register,
-    SplashScreen
+    SplashScreen,
+    Monedero,
+    HazPremium,
+    InvitarAmigo,
+    Ayuda,
+    CrearPartida,
+    Addgame
 };
