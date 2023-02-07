@@ -68,10 +68,10 @@ const Login = ({ navigation }) => {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems:'center', borderTopColor: '#fff',
       borderTopWidth: 1, margin: SIZES.padding }}>
-        <View style={{marginTop: 20, borderBottomColor: '#DFA1ED'}}>
-          <Text style={styles.text}> Siguenos</Text>
+        <View style={{marginTop: 50, borderBottomColor: '#DFA1ED'}}>
+          <Text style={styles.text}> Síguenos</Text>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginTop: 10}}>
           <FontAwesome5 style={{margin:10}} name="instagram" size={34} color="white" />
           <FontAwesome5 style={{margin:10}} name="facebook" size={34} color="white" />
           <FontAwesome5 style={{margin:10}} name="linkedin" size={34} color="white" />
@@ -83,11 +83,11 @@ const Login = ({ navigation }) => {
 
   function renderForm() {
     return (
-      <View style={{flex: 2,justifyContent: "center", height: '70%'}}>
+      <View style={{flex: 4, justifyContent: "center", height: '70%', marginTop: 50}}>
         <Text
           style={{ textAlign: "center", ...FONTS.body1, color: COLORS.white }}
         >
-          Iniciar sesion
+          Iniciar sesión
         </Text>
 
         <TextInput
@@ -107,18 +107,21 @@ const Login = ({ navigation }) => {
           secureTextEntry={true}
         />
 
-        <View style={{marginTop: 20, borderBottomColor: '#fff', alignItems: 'flex-end'}}>
-          <Text style={styles.text}> Recuperar contrasena?</Text>
+        <View style={{borderBottomColor: '#fff', alignItems: 'flex-end'}}>
+          <Text style={styles.text}> Recuperar contraseña?</Text>
         </View>
 
         <View style={{ alignItems: "center", margin: 20 }}>
-          <LinearGradient
-            onPress={() => login()}
-            colors={['#0014FF', '#8020EF', '#FF2CDF']}
-            start={[1, 0.7]}
-            style={styles.button}>
-          <Text style={styles.text}>Iniciar sesion</Text>
-        </LinearGradient>
+          <TouchableOpacity onPress={() => login()}>
+            <LinearGradient
+              onPress={() => login()}
+              colors={['#0014FF', '#8020EF', '#FF2CDF']}
+              start={[1, 0.7]}
+              style={styles.button}>
+              {/* <Text style={styles.text}>Iniciar sesión</Text> */}
+              <Text style={styles.text}>Ingresar</Text>
+            </LinearGradient>
+          </TouchableOpacity>
 
         <View style={{marginTop: 20, borderBottomColor: '#fff', borderBottomWidth: 1}}>
           <Text style={styles.text}> ¿No tengo una cuenta?</Text>
