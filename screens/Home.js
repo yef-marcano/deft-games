@@ -69,48 +69,6 @@ const Home = ({navigation}) => {
     }
 
 
-
-function renderHeader(profile) {
-    return (
-        <View style={{ flex: 1, flexDirection: 'row', paddingHorizontal: SIZES.padding, alignItems: 'center' }}>
-            {/* Greetings */}
-            <View style={{ flex: 1 }}>
-                <View style={{ marginRight: SIZES.padding }}>
-                    <Text style={{ ...FONTS.h3, color: COLORS.white }}>Buenos dias</Text>
-                    <Text style={{ ...FONTS.h2, color: COLORS.white }}>{userdata.nombre}</Text>
-                </View>
-            </View>
-
-            {/* Points */}
-            <TouchableOpacity
-                style={{
-                    backgroundColor: COLORS.primary,
-                    height: 40,
-                    paddingLeft: 3,
-                    paddingRight: SIZES.radius,
-                    borderRadius: 20
-                }}
-                onPress={() => { console.log("Point") }}
-            >
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ width: 30, height: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 25, backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                        <Image
-                            source={icons.plus_icon}
-                            resizeMode="contain"
-                            style={{
-                                width: 20,
-                                height: 20
-                            }}
-                        />
-                    </View>
-
-                    <Text style={{ marginLeft: SIZES.base, color: COLORS.white, ...FONTS.body3 }}>{profile.point} POINTS</Text>
-                </View>
-            </TouchableOpacity>
-        </View>
-    )
-}
-
 function renderButtonSection() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
@@ -213,8 +171,8 @@ function renderMyBookSection(juegos) {
                     source={{uri:item.img}}
                     resizeMode="cover"
                     style={{
-                        width: 180,
-                        height: 250,
+                        width: 80,
+                        height: 120,
                         borderRadius: 20
                     }}
                 />
@@ -250,7 +208,7 @@ function renderMyBookSection(juegos) {
         <View style={{ flex: 1 }}>
             {/* Header */}
             <View style={{ paddingHorizontal: SIZES.padding, flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ ...FONTS.h2, color: COLORS.white }}>Juegos disponibles</Text>
+                <Text style={{ ...FONTS.h2, color: COLORS.white }}>Todos los juegos</Text>
 
                 {/*<TouchableOpacity
                     onPress={() => console.log("See More")}
