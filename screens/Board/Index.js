@@ -44,6 +44,16 @@ const Board = ({ navigation }) => {
     usuario();
   }, []);
 
+
+
+  async function logout() {
+    setVisible(true)
+    await AsyncStorage.removeItem('@user_data');
+    navigation.navigate('Login')
+    setVisible(false)
+}
+
+
   async function usuario() {
     let user = await AsyncStorage.getItem("@user_data");
     const obj = JSON.parse(user);
@@ -66,7 +76,7 @@ const Board = ({ navigation }) => {
               marginTop: 120,
               backgroundColor: '#FF5555'
             }}
-            onPress={() => navigation.navigate("Agregarjuego")}
+            onPress={() => logout()}
           >
             <Text style={{ ...FONTS.h2, color: COLORS.white }}>
               {" "}
