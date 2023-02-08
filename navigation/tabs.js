@@ -1,12 +1,13 @@
 import React from "react";
 import {
     Image,
-    View
+    View,
+    Text
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile, Monedero,CrearPartida,Addgame } from "../screens/";
+import { Home, Profile, Monedero, CrearPartida, Addgame } from "../screens/";
 import { icons, COLORS } from "../constants";
-import { Feather, Entypo, MaterialCommunityIcons, Ionicons  } from '@expo/vector-icons';
+import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +19,7 @@ const tabOptions = {
     }
 }
 
-const Tabs = ({navigation}) => {
+const Tabs = ({ navigation }) => {
     return (
         <Tab.Navigator
             tabBarOptions={tabOptions}
@@ -29,28 +30,38 @@ const Tabs = ({navigation}) => {
                     switch (route.name) {
                         case "Home":
                             return (
-                                
-                                <MaterialCommunityIcons name="axe-battle" size={44} color={tintColor} />    
+                                <>
+                                    <Entypo name="game-controller" size={44} color={tintColor} />
+                                    <Text>Competir</Text>
+                                </>
                             )
 
 
                         case "Notification":
                             return (
                                 <View style={{
-                                        backgroundColor: COLORS.primary,
-                                        borderRadius: 100,
-                                        marginTop: -40,
-                                        padding: 20
+                                    // width: 80,
+                                    // height: 80,
+                                    backgroundColor: COLORS.primary,
+                                    borderRadius: 10,
+                                    marginTop: -70,
+                                    padding: 20,
+                                    transform: [
+                                        { rotate: '45deg' }
+                                    ]
                                 }}>
-                                <Entypo name="plus" size={44} color={tintColor} />
+                                    <Entypo name="plus" size={44} color={tintColor} />
                                 </View>
                             )
 
                         case "Profile":
                             return (
-                                <Ionicons name="person-circle-outline" size={44} color={tintColor} />
+                                <>
+                                    <Ionicons name="person-circle-outline" size={44} color={tintColor} />
+                                    <Text>Perfil</Text>
+                                </>
                             )
-                                {/*<Image
+                            {/*<Image
                                     source={icons.menu_icon}
                                     resizeMode="contain"
                                     style={{
@@ -80,8 +91,8 @@ const Tabs = ({navigation}) => {
                 name="Agregarjuego"
                 component={Addgame}
                 options={{
-                headerShown: false,
-                tabBarButton: () => null,
+                    headerShown: false,
+                    tabBarButton: () => null,
                 }}
             />
         </Tab.Navigator>
