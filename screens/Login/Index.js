@@ -55,35 +55,14 @@ const Login = ({ navigation }) => {
 
   function Header() {
     return (
-      <ImageBackground 
-      style={{ flex: 1, justifyContent: 'center', alignItems:'center' }}
-      source={images.bgheaderlogin}  resizeMode='contain' >
-      <View >
+      <View style={{alignItems:'center', height: SIZES.height/4, justifyContent:'flex-end'}}>
             <Image source={images.logologin}/>
       </View>
-        </ImageBackground>
     );
   };
-  function Footer() {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems:'center', borderTopColor: '#fff',
-      borderTopWidth: 1, margin: SIZES.padding }}>
-        <View style={{marginTop: 50, borderBottomColor: '#DFA1ED'}}>
-          <Text style={styles.text}> Síguenos</Text>
-        </View>
-        <View style={{flexDirection: 'row', marginTop: 10}}>
-          <FontAwesome5 style={{margin:10}} name="instagram" size={34} color="white" />
-          <FontAwesome5 style={{margin:10}} name="facebook" size={34} color="white" />
-          <FontAwesome5 style={{margin:10}} name="linkedin" size={34} color="white" />
-        </View>
-        
-      </View>
-    );
-  };
-
   function renderForm() {
     return (
-      <View style={{flex: 4, justifyContent: "center", height: '70%', marginTop: 50}}>
+      <View style={{justifyContent: "center", height: SIZES.height/2, marginTop: 50}}>
         <Text
           style={{ textAlign: "center", ...FONTS.body1, color: COLORS.white }}
         >
@@ -107,11 +86,11 @@ const Login = ({ navigation }) => {
           secureTextEntry={true}
         />
 
-        <View style={{borderBottomColor: '#fff', alignItems: 'flex-end'}}>
+        <View style={{borderBottomColor: '#fff', alignItems: 'flex-end', paddingTop: 20}}>
           <Text style={styles.text}> Recuperar contraseña?</Text>
         </View>
 
-        <View style={{ alignItems: "center", margin: 20 }}>
+        <View style={{ alignItems: "center", margin: 40 }}>
           <TouchableOpacity onPress={() => login()}>
             <LinearGradient
               onPress={() => login()}
@@ -123,23 +102,43 @@ const Login = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
 
-        <View style={{marginTop: 20, borderBottomColor: '#fff', borderBottomWidth: 1}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Register')} style={{paddingTop: 20, borderBottomColor: '#fff', borderBottomWidth: 1}}>
           <Text style={styles.text}> ¿No tengo una cuenta?</Text>
-        </View>
+        </TouchableOpacity>
         </View>
       </View>
     );
   }
+  function Footer() {
+    return (
+      <View style={{ height: SIZES.height/5, justifyContent: 'center', alignItems:'center', borderTopColor: '#DFA1ED',
+      borderTopWidth: 1 }}>
+        <View style={{ borderBottomColor: '#DFA1ED'}}>
+          <Text style={styles.text}> Síguenos</Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <FontAwesome5 style={{margin:10}} name="instagram" size={34} color="white" />
+          <FontAwesome5 style={{margin:10}} name="facebook" size={34} color="white" />
+          <FontAwesome5 style={{margin:10}} name="linkedin" size={34} color="white" />
+        </View>
+        
+      </View>
+    );
+  };
+
 
   return (
     <>
       <FullLoading visible={visible} />
-      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background, padding: SIZES.padding }}>
-        <View style={{ flex: 3 }}>
+      <SafeAreaView style={{ flex: 1, width: '100%', height: '100%',
+      alignItems:'center' }}>
+      <ImageBackground source={images.bglogin}  resizeMode="cover" style={styles.image}>
+        <ScrollView style={{ paddingHorizontal: SIZES.padding }}>
           {Header()}
           {renderForm()}
           {Footer()}
-        </View>
+        </ScrollView>
+      </ImageBackground>
       </SafeAreaView>
     </>
   );

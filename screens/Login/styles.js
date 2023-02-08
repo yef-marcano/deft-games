@@ -25,6 +25,10 @@ export const styles = StyleSheet.create({
       fontSize: SIZES.body3
     },
     
+  image: {
+    flex: 1,
+    width:'100%'
+  },
   container: {
     flex: 1
   },

@@ -9,6 +9,7 @@ export const logosplash = require("../assets/images/logosplash.png");
 export const titlelogo = require("../assets/images/titlelogo.png");
 export const bgheaderlogin = require("../assets/background/bgheaderlogin.png");
 export const logologin = require("../assets/images/logologin.png");
+export const bglogin = require("../assets/background/loginbg.png");
 
 
 export default {
@@ -21,5 +22,6 @@ export default {
     logosplash,
     titlelogo,
     bgheaderlogin,
-    logologin
+    logologin,
+    bglogin,
 }

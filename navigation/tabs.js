@@ -12,7 +12,6 @@ import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-
 const Tab = createBottomTabNavigator();
 
 const tabOptions = {
-    showLabel: false,
     style: {
         height: "10%",
         backgroundColor: COLORS.black
