@@ -35,7 +35,7 @@ const LineDivider = () => {
   );
 };
 
-const Profile = ({ navigation }) => {
+const Menu = ({ navigation }) => {
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
 
@@ -94,4 +94,4 @@ const Profile = ({ navigation }) => {
   );
 };
 
-export default Profile;
+export default Menu;

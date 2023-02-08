@@ -38,7 +38,7 @@ const Appnavigator = () => {
                 {/* Tabs */}
                 <Stack.Screen name="Splash" component={SplashScreen}  options={{ headerShown: false }} />
                 {/* Tabs */}
-                <Stack.Screen name="Home" component={DrawerNavigator}  options={{ headerShown: false }} />
+                <Stack.Screen name="Home" component={Tabs}  options={{ headerShown: false }} />
 
                 {/* Screens */}
                 <Stack.Screen name="BookDetail" component={BookDetail} options={{ headerShown: false }} />

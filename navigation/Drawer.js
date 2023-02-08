@@ -1,27 +1,18 @@
 import * as React from "react";
 import {
-  SafeAreaView,
   View,
   Text,
   TouchableOpacity,
   Image,
-  ScrollView,
-  FlatList,
 } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { NavigationContainer } from "@react-navigation/native";
-import { Home, Login, Register, SplashScreen } from "../screens/";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
-import DrawerItems from "../constants/DrawerItems";
 import { Monedero, HazPremium, InvitarAmigo, Ayuda } from "../screens/";
 import Tabs from "../navigation/tabs";
-import { HeaderTitle } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { mainApi } from "../services";
 import { useIsFocused } from "@react-navigation/native";
@@ -92,7 +83,6 @@ function Menu({ navigation }) {
           paddingRight: SIZES.radius,
         }}
         onPress={() => {
-          navigation.navigation.toggleDrawer();
         }}
       >
         <View

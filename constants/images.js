@@ -10,6 +10,9 @@ export const titlelogo = require("../assets/images/titlelogo.png");
 export const bgheaderlogin = require("../assets/background/bgheaderlogin.png");
 export const logologin = require("../assets/images/logologin.png");
 export const bglogin = require("../assets/background/loginbg.png");
+export const iconmenu = require("../assets/icons/iconmenu.png");
+export const cartera = require("../assets/icons/cartera.png");
+export const coindeft = require("../assets/icons/coindeft.png");
 
 
 export default {
@@ -24,4 +27,7 @@ export default {
     bgheaderlogin,
     logologin,
     bglogin,
+    iconmenu,
+    cartera,
+    coindeft
 }

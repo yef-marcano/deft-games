@@ -2,7 +2,8 @@ import React from "react";
 import {
     Image,
     View,
-    Text
+    Text,
+    TouchableOpacity
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home, Profile, Monedero, CrearPartida, Addgame } from "../screens/";
@@ -12,17 +13,45 @@ import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-
 const Tab = createBottomTabNavigator();
 
 const tabOptions = {
+    showLabel: false,
     style: {
         height: "10%",
         backgroundColor: COLORS.black
     }
 }
-
+function Menu({ navigation }) {
+    //console.log(navigation);
+    return (
+      <View style={{ marginLeft: 15, flexDirection: "row", height:200 }}>
+        <TouchableOpacity
+          style={{
+            height: 40,
+            paddingLeft: 3,
+            paddingRight: SIZES.radius,
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingLeft: 10,
+            }}
+          >
+            <Ionicons name="menu" size={34} color="white" />
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 const Tabs = ({ navigation }) => {
     return (
         <Tab.Navigator
             tabBarOptions={tabOptions}
+
             screenOptions={({ route }) => ({
+                headerShown: false,
                 tabBarIcon: ({ focused }) => {
                     const tintColor = focused ? COLORS.white : COLORS.gray;
 
@@ -31,7 +60,7 @@ const Tabs = ({ navigation }) => {
                             return (
                                 <>
                                     <Entypo name="game-controller" size={44} color={tintColor} />
-                                    <Text>Competir</Text>
+                                    <Text style={{color:'#fff'}}>Competir</Text>
                                 </>
                             )
 
@@ -57,23 +86,18 @@ const Tabs = ({ navigation }) => {
                             return (
                                 <>
                                     <Ionicons name="person-circle-outline" size={44} color={tintColor} />
-                                    <Text>Perfil</Text>
+                                    <Text style={{color:'#fff'}}>Perfil</Text>
                                 </>
                             )
-                            {/*<Image
-                                    source={icons.menu_icon}
-                                    resizeMode="contain"
-                                    style={{
-                                        tintColor: tintColor,
-                                        width: 25,
-                                        height: 25
-                                    }}
-                                />*/}
                     }
                 }
             })}
         >
             <Tab.Screen
+
+
+
+            
                 name="Home"
                 component={Home}
             />

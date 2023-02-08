@@ -12,8 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AlertBug } from "../helper/Alert";
 import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import { mainApi } from "../services";
+import Menu from '../components/Menu';
 
-import { NavBar } from 'galio-framework';
 import { DrawerActions } from '@react-navigation/native';
 
 import { COLORS, FONTS, SIZES, icons, images, dummyData } from '../constants';
@@ -76,7 +76,6 @@ function renderButtonSection() {
                 {/* Claim */}
                 <TouchableOpacity
                     style={{ flex: 1 }}
-                    onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
                 >
                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
@@ -378,6 +377,7 @@ function renderCategoryData() {
 
 return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}>
+        <Menu/>
         {/*<NavBar left={
 
 
