@@ -3,15 +3,21 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, StatusBar } from "reac
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NavBar } from 'galio-framework';
-
 import { COLORS, FONTS, SIZES, icons, images } from "../constants";
+
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24; 
-export default function Menu(props) {
+export default function Menu({back, ...props}) {
+    const navigation = useNavigation();
   return (
     <View style={headerStyles.container}>
         <NavBar
         left={<View style={{flexDirection:'row', alignItems:'center', height:80, width: '20%'}}> 
-            <Image source={images.iconmenu} style={headerStyles.iconm}/>
+            {back ? <TouchableOpacity onPress={()=> navigation.goBack()}>
+                <Image source={images.arrowback} style={headerStyles.iconm}/>
+            </TouchableOpacity>: <TouchableOpacity onPress={()=> navigation.navigate('Board')}>
+                <Image source={images.iconmenu} style={headerStyles.iconm}/>
+            </TouchableOpacity>}
+
         </View>}
         title={<View style={{flexDirection:'row', alignItems:'center', height:80, justifyContent: 'flex-end', width: '80%'}}> 
             

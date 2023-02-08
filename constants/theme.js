@@ -7,6 +7,7 @@ export const COLORS = {
     secondary: "#25282F",
     background: "#0C0E19",
     game: "#9E2FEB",
+    theme: "#0C0E19",
     // colors
     black: "#1E1B26",
     white: "#FFFFFF",

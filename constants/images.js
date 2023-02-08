@@ -13,6 +13,8 @@ export const bglogin = require("../assets/background/loginbg.png");
 export const iconmenu = require("../assets/icons/iconmenu.png");
 export const cartera = require("../assets/icons/cartera.png");
 export const coindeft = require("../assets/icons/coindeft.png");
+export const arrowback = require("../assets/icons/arrowback.png");
+
 
 
 export default {
@@ -29,5 +31,6 @@ export default {
     bglogin,
     iconmenu,
     cartera,
-    coindeft
+    coindeft,
+    arrowback
 }

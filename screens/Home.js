@@ -14,6 +14,7 @@ import { Feather, FontAwesome5 } from '@expo/vector-icons';
 import { mainApi } from "../services";
 import Menu from '../components/Menu';
 
+import { LinearGradient } from 'expo-linear-gradient';
 import { DrawerActions } from '@react-navigation/native';
 
 import { COLORS, FONTS, SIZES, icons, images, dummyData } from '../constants';
@@ -273,8 +274,14 @@ function renderCategoryData() {
     }
 
     const renderItem = ({ item }) => {
-        return (
-            <View style={{ marginVertical: SIZES.base }}>
+        return (    
+            <View style={{ marginVertical: SIZES.base, }}>
+            <LinearGradient
+                // Background Linear Gradient
+              colors={['#31323B', '#fff']}
+              start={[1, 0.7]}
+              style={{borderRadius: 20, padding: 10, paddingHorizontal: 20}}
+              >
                 <TouchableOpacity
                     style={{ flex: 1, flexDirection: 'row' }}
                 /*onPress={() => navigation.navigate("BookDetail", {
@@ -285,86 +292,40 @@ function renderCategoryData() {
                     <Image
                         source={item.bookCover}
                         resizeMode="cover"
-                        style={{ width: 100, height: 150, borderRadius: 10 }}
+                        style={{ width: 80, height: 80, borderRadius: 80 }}
                     />
 
-                    <View style={{ flex: 1, marginLeft: SIZES.radius }}>
+                    <View style={{ flex: 1, marginLeft: SIZES.radius, height: '100%', justifyContent: 'center', }}>
                         {/* Book name and author */}
                         <View>
-                            <Text style={{ paddingRight: SIZES.padding, ...FONTS.h2, color: COLORS.white }}>{item.bookName}</Text>
-                            <Text style={{ ...FONTS.h3, color: COLORS.lightGray }}>{item.author}</Text>
-                        </View>
-
-                        {/* Book Info */}
-                        <View style={{ flexDirection: 'row', marginTop: SIZES.radius }}>
-                            <Image
-                                source={icons.page_filled_icon}
-                                resizeMode="contain"
-                                style={{
-                                    width: 20,
-                                    height: 20,
-                                    tintColor: COLORS.lightGray
-                                }}
-                            />
-                            <Text style={{ ...FONTS.body4, color: COLORS.lightGray, paddingHorizontal: SIZES.radius }}>{item.pageNo}</Text>
-
-                            <Image
-                                source={icons.read_icon}
-                                resizeMode="contain"
-                                style={{
-                                    width: 20,
-                                    height: 20,
-                                    tintColor: COLORS.lightGray
-                                }}
-                            />
-                            <Text style={{ ...FONTS.body4, color: COLORS.lightGray, paddingHorizontal: SIZES.radius }}>{item.readed}</Text>
-                        </View>
-
-                        {/* Genre */}
-                        <View style={{ flexDirection: 'row', marginTop: SIZES.base }}>
-                            {
-                                item.genre.includes("Aventura") &&
-                                <View style={{ justifyContent: 'center', alignItems: 'center', padding: SIZES.base, marginRight: SIZES.base, backgroundColor: COLORS.darkGreen, height: 40, borderRadius: SIZES.radius }}>
-                                    <Text style={{ ...FONTS.body3, color: COLORS.lightGreen }}>Aventura</Text>
-                                </View>
-                            }
-                            {
-                                item.genre.includes("Shooter") &&
-                                <View style={{ justifyContent: 'center', alignItems: 'center', padding: SIZES.base, marginRight: SIZES.base, backgroundColor: COLORS.darkRed, height: 40, borderRadius: SIZES.radius }}>
-                                    <Text style={{ ...FONTS.body3, color: COLORS.lightRed }}>Shooter</Text>
-                                </View>
-                            }
-                            {
-                                item.genre.includes("Cartas") &&
-                                <View style={{ justifyContent: 'center', alignItems: 'center', padding: SIZES.base, marginRight: SIZES.base, backgroundColor: COLORS.darkBlue, height: 40, borderRadius: SIZES.radius }}>
-                                    <Text style={{ ...FONTS.body3, color: COLORS.lightBlue }}>Cartas</Text>
-                                </View>
-                            }
+                            <Text style={{paddingRight: SIZES.padding, ...FONTS.h2, color: COLORS.white }}>{item.bookName}</Text>
                         </View>
                     </View>
-                </TouchableOpacity>
-
                 {/* Bookmark Button */}
-                <TouchableOpacity
-                    style={{ position: 'absolute', top: 5, right: 15 }}
+                <View
+                    style={{ color:'#fff',justifyContent: 'center', }}
                     onPress={() => console.log("Bookmark")}
                 >
-                    <Image
-                        source={icons.bookmark_icon}
-                        resizeMode="contain"
-                        style={{
-                            width: 25,
-                            height: 25,
-                            tintColor: COLORS.lightGray
-                        }}
-                    />
+                    <Text style={{color:'#fff', fontSize:22}}>40</Text>
+                </View>
                 </TouchableOpacity>
+
+            </LinearGradient>
             </View>
         )
     }
 
     return (
-        <View style={{ flex: 1, marginTop: SIZES.radius, paddingLeft: SIZES.padding }}>
+        <View style={{ flex: 1, marginTop: SIZES.radius }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ ...FONTS.h2, color: COLORS.white }}>Ultimos Ganadores</Text>
+
+                {/*<TouchableOpacity
+                    onPress={() => console.log("See More")}
+                >
+                    <Text style={{ ...FONTS.body3, color: COLORS.lightGray, alignSelf: 'flex-start', textDecorationLine: 'underline' }}>Ver más</Text>
+                </TouchableOpacity>*/}
+            </View>
             <FlatList
                 data={games}
                 renderItem={renderItem}
@@ -376,8 +337,8 @@ function renderCategoryData() {
 }
 
 return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}>
-        <Menu/>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background, paddingTop: 0 }}>
+        <Menu navigation/>
         {/*<NavBar left={
 
 
@@ -396,7 +357,7 @@ return (
         </View>
 
         {/* Body Section */}
-        <ScrollView style={{ marginTop: SIZES.radius }}>
+        <ScrollView style={{ marginTop: SIZES.radius , marginHorizontal: SIZES.padding}}>
             {/* Books Section */}
             <View>
                 {renderMyBookSection(games)}
@@ -408,7 +369,7 @@ return (
                     {/*renderCategoryHeader()*/}
                 </View>
                 <View>
-                    {/*renderCategoryData()*/}
+                    {renderCategoryData()}
                 </View>
             </View>
         </ScrollView>

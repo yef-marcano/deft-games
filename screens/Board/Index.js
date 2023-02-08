@@ -9,6 +9,7 @@ import {
   FlatList,
 } from "react-native";
 import { NavBar } from "galio-framework";
+import Menu from '../../components/Menu';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -35,7 +36,7 @@ const LineDivider = () => {
   );
 };
 
-const Menu = ({ navigation }) => {
+const Board = ({ navigation }) => {
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
 
@@ -54,21 +55,22 @@ const Menu = ({ navigation }) => {
 
   function renderCategoryHeader() {
     return (
-      <View style={{ flex: 1, paddingLeft: SIZES.padding }}>
+      <View style={{ flex: 1, }}>
         <Text style={{ ...FONTS.h2, color: COLORS.white }}> titulo </Text>
         <View style={{ justifyContent: "center" }}>
           <TouchableOpacity
             style={{
-              width: "80%",
-              borderRadius: 20,
+              width: "100%",
+              borderRadius: 10,
               padding: 10,
-              marginTop: 120
+              marginTop: 120,
+              backgroundColor: '#FF5555'
             }}
             onPress={() => navigation.navigate("Agregarjuego")}
           >
-            <Text style={{ ...FONTS.h2, color: COLORS.game }}>
+            <Text style={{ ...FONTS.h2, color: COLORS.white }}>
               {" "}
-              + Añadir otro juego{" "}
+              Cerrar sesion
             </Text>
           </TouchableOpacity>
         </View>
@@ -79,13 +81,11 @@ const Menu = ({ navigation }) => {
   return (
     <>
       <FullLoading visible={visible} text={"Cerrando sesión"} />
-
-      <SafeAreaView
-        style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}
-      >
-        <ScrollView style={{ marginTop: SIZES.radius }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.theme, paddingTop: 0 }}>
+        <Menu back />
+        <ScrollView >
           {/* Categories Section */}
-          <View style={{ marginTop: SIZES.padding }}>
+          <View style={{ marginTop: SIZES.padding, marginHorizontal: SIZES.padding }}>
             <View>{renderCategoryHeader()}</View>
           </View>
         </ScrollView>
@@ -94,4 +94,4 @@ const Menu = ({ navigation }) => {
   );
 };
 
-export default Menu;
+export default Board;

@@ -8,7 +8,7 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import { NavBar } from "galio-framework";
+import Menu from '../../components/Menu';
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -79,10 +79,10 @@ const Profile = ({ navigation }) => {
   return (
     <>
       <FullLoading visible={visible} text={"Cerrando sesión"} />
-
       <SafeAreaView
-        style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}
+        style={{ flex: 1, backgroundColor: COLORS.theme, paddingTop: 0 }}
       >
+        <Menu />
         <ScrollView style={{ marginTop: SIZES.radius }}>
           {/* Categories Section */}
           <View style={{ marginTop: SIZES.padding }}>

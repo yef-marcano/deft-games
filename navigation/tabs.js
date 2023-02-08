@@ -6,7 +6,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile, Monedero, CrearPartida, Addgame } from "../screens/";
+import { Home, Profile, Monedero, CrearPartida, Addgame, Board } from "../screens/";
 import { icons, COLORS } from "../constants";
 import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
@@ -19,32 +19,6 @@ const tabOptions = {
         backgroundColor: COLORS.black
     }
 }
-function Menu({ navigation }) {
-    //console.log(navigation);
-    return (
-      <View style={{ marginLeft: 15, flexDirection: "row", height:200 }}>
-        <TouchableOpacity
-          style={{
-            height: 40,
-            paddingLeft: 3,
-            paddingRight: SIZES.radius,
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              paddingLeft: 10,
-            }}
-          >
-            <Ionicons name="menu" size={34} color="white" />
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
 const Tabs = ({ navigation }) => {
     return (
         <Tab.Navigator
@@ -113,6 +87,14 @@ const Tabs = ({ navigation }) => {
             <Tab.Screen
                 name="Agregarjuego"
                 component={Addgame}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="Board"
+                component={Board}
                 options={{
                     headerShown: false,
                     tabBarButton: () => null,

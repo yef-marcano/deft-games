@@ -10,6 +10,7 @@ import InvitarAmigo from "./InvitarAmigo/Index"
 import Ayuda from "./Ayuda/Index"
 import CrearPartida from "./CrearPartida/Index"
 import Addgame from "./Addgame/Index"
+import Board from "./Board/Index"
 
 export {
     Home,
@@ -23,5 +24,6 @@ export {
     InvitarAmigo,
     Ayuda,
     CrearPartida,
-    Addgame
+    Addgame,
+    Board
 };
