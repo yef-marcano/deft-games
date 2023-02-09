@@ -14,4 +14,8 @@ export const styles = StyleSheet.create({
       color: COLORS.white,
       
     },
+    image: {
+      flex: 1,
+      justifyContent: 'center',
+    },
   });

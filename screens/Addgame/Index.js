@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   FlatList,
+  Text
 } from "react-native";
 import { NavBar, Button } from "galio-framework";
 
@@ -37,6 +38,40 @@ const LineDivider = () => {
 const Addgame = ({ navigation }) => {
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
+
+
+
+  const labels = ["Cart","Delivery Address","Order Summary","Payment Method","Track"];
+  const customStyles = {
+    stepIndicatorSize: 25,
+    currentStepIndicatorSize:30,
+    separatorStrokeWidth: 2,
+    currentStepStrokeWidth: 3,
+    stepStrokeCurrentColor: '#fe7013',
+    stepStrokeWidth: 3,
+    stepStrokeFinishedColor: '#fe7013',
+    stepStrokeUnFinishedColor: '#aaaaaa',
+    separatorFinishedColor: '#fe7013',
+    separatorUnFinishedColor: '#aaaaaa',
+    stepIndicatorFinishedColor: '#fe7013',
+    stepIndicatorUnFinishedColor: '#ffffff',
+    stepIndicatorCurrentColor: '#ffffff',
+    stepIndicatorLabelFontSize: 13,
+    currentStepIndicatorLabelFontSize: 13,
+    stepIndicatorLabelCurrentColor: '#fe7013',
+    stepIndicatorLabelFinishedColor: '#ffffff',
+    stepIndicatorLabelUnFinishedColor: '#aaaaaa',
+    labelColor: '#999999',
+    labelSize: 13,
+    currentStepLabelColor: '#fe7013'
+  }
+
+
+ 
+  /*function onPageChange(position){
+    this.setState({currentPosition: position});
+  }*/
+
 
   React.useEffect(() => {
     usuario();
@@ -76,11 +111,29 @@ const Addgame = ({ navigation }) => {
 
 
   const [selectedCategory, setSelectedCategory] = React.useState(1);
+  const [currentPosition, setCurrentPosition] = React.useState(0);
+/*
+  React.useEffect(() => {
+    usuario();
+  }, [currentPosition]);*/
+
+
 
   function renderCategoryHeader() {
     return (
-      <View style={{ flex: 1, paddingLeft: SIZES.padding }}>
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, }}>
+        <View style={{ justifyContent: "center" }}>
+
+        <StepIndicator
+         customStyles={customStyles}
+         currentPosition={currentPosition}
+         labels={labels}
+    />
+
+
+        <Text style={{ ...FONTS.h2, color: COLORS.white, marginVertical: 20 }}>Creacion de partida</Text>
+          
+
         <TextInput
           style={styles.input}
           placeholderTextColor={COLORS.white}
@@ -105,14 +158,11 @@ const Addgame = ({ navigation }) => {
 
   return (
     <>
-      <FullLoading visible={visible} text={"Cerrando sesión"} />
-
-      <SafeAreaView
-        style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}
-      >
+      <FullLoading visible={visible} text={"Cargando"} />
+      <SafeAreaView style={{ flex: 1,  backgroundColor: COLORS.theme }} >
         <ScrollView style={{ marginTop: SIZES.radius }}>
           {/* Categories Section */}
-          <View style={{ marginTop: SIZES.padding }}>
+          <View style={{ marginTop: SIZES.padding, marginHorizontal: SIZES.padding }}>
             <View>{renderCategoryHeader()}</View>
           </View>
         </ScrollView>

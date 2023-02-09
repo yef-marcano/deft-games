@@ -14,6 +14,7 @@ export const iconmenu = require("../assets/icons/iconmenu.png");
 export const cartera = require("../assets/icons/cartera.png");
 export const coindeft = require("../assets/icons/coindeft.png");
 export const arrowback = require("../assets/icons/arrowback.png");
+export const bgprofile = require("../assets/background/bgprofile.png");
 
 
 
@@ -32,5 +33,6 @@ export default {
     iconmenu,
     cartera,
     coindeft,
-    arrowback
+    arrowback,
+    bgprofile
 }

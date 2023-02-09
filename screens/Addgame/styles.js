@@ -6,8 +6,7 @@ import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 export const styles = StyleSheet.create({
     input: {
       height: 40,
-      margin: 12,
-      width:'100%',
+      marginVertical: 12,
       borderWidth: 1,
       borderRadius: 10,
       padding: 10,

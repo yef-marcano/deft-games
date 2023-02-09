@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  FlatList,
+  Alert,
   Linking,
+  Modal,
+  Pressable
 } from "react-native";
 import { Button, Card } from "galio-framework";
 import Menu from '../../components/Menu';
@@ -78,6 +80,7 @@ const HazPremium = ({ navigation }) => {
 
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   React.useEffect(() => {
     usuario();
@@ -89,6 +92,17 @@ const HazPremium = ({ navigation }) => {
     setUserdata(obj);
     console.log(userdata);
   }
+
+  const createTwoButtonAlert = () =>
+  Alert.alert('Estas seguro que quieres ', 'mensaje de ayuda', [
+    {
+      text: 'Cancelar',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    },
+    {text: 'Aceptar', onPress: () => console.log('OK Pressed')},
+  ]);
+
 
 
   const TextNumber = (props) => {
@@ -182,7 +196,26 @@ const HazPremium = ({ navigation }) => {
 
   return (
     <>
-      <FullLoading visible={visible} text={"Cerrando sesión"} />
+      <FullLoading visible={visible} text={"Cargando"} />
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Hello World!</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
 
       <SafeAreaView
         style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}
@@ -190,7 +223,7 @@ const HazPremium = ({ navigation }) => {
 
         <Menu back />
         {/* Body Section */}
-        <ScrollView style={{ marginHorizontal: SIZES.padding }}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: SIZES.padding }}>
           <View style={{ alignItems: 'center' }}>
             <Image source={images.logologin} />
           </View>
@@ -228,7 +261,7 @@ const HazPremium = ({ navigation }) => {
                         </View>*/}
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={{width: '50%'}}>
+                <TouchableOpacity style={{width: '50%'}} onPress={() => () => setModalVisible(!modalVisible)}>
                     <View style={{
                         margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
                         paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
@@ -256,7 +289,12 @@ const HazPremium = ({ navigation }) => {
             {/*renderCategoryData()*/}
           </View>
         </ScrollView>
+
       </SafeAreaView>
+
+
+
+
     </>
   );
 };

@@ -591,7 +591,7 @@ const Monedero = ({ navigation }) => {
             <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.theme }}>
 
                 <Menu back />
-                <ScrollView style={{  marginHorizontal: SIZES.padding }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{  marginHorizontal: SIZES.padding }}>
                     <View style={{ alignItems: 'center' }}>
                         <Image source={images.logologin} />
                     </View>
