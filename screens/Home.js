@@ -19,13 +19,13 @@ import { DrawerActions } from '@react-navigation/native';
 
 import { COLORS, FONTS, SIZES, icons, images, dummyData } from '../constants';
 
-const LineDivider = () => {
-    return (
-        <View style={{ width: 1, paddingVertical: 18 }}>
-            <View style={{ flex: 1, borderLeftColor: COLORS.lightGray, borderLeftWidth: 1 }}></View>
-        </View>
-    )
-}
+// const LineDivider = () => {
+//     return (
+//         <View style={{ width: 1, paddingVertical: 18 }}>
+//             <View style={{ flex: 1, borderLeftColor: COLORS.lightGray, borderLeftWidth: 1 }}></View>
+//         </View>
+//     )
+// }
 
 const Home = ({navigation}) => {
 
@@ -69,87 +69,108 @@ const Home = ({navigation}) => {
         } catch (error) { }
     }
 
-
-function renderButtonSection() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
-            <View style={{ flexDirection: 'row', height: 70, backgroundColor: COLORS.secondary, borderRadius: SIZES.radius }}>
-                {/* Claim */}
-                <TouchableOpacity
-                    style={{ flex: 1 }}
-                >
-                    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                            source={icons.claim_icon}
-                            resizeMode="contain"
-                            style={{
-                                width: 30,
-                                height: 30
-                            }}
-                        />
-                        <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Reclamar</Text>
-                    </View>
-                </TouchableOpacity>
-
-                {/* Divider */}
-                <LineDivider />
-
-                {/* Get Point 
-                    <TouchableOpacity
-                        style={{ flex: 1 }}
-                        onPress={() => console.log("Get Point")}
-                    >
-                        <View
-                            style={{
-                                flex: 1,
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Image
-                                source={icons.point_icon}
-                                resizeMode="contain"
-                                style={{
-                                    width: 30,
-                                    height: 30
-                                }}
-                            />
-                            <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Comprar BUSD</Text>
-                        </View>
-                    </TouchableOpacity>*/}
-
-                {/* Divider 
-                    <LineDivider />*/}
-
-                {/* My Card */}
-                <TouchableOpacity
-                    style={{ flex: 1 }}
-                    onPress={() => console.log("My Card")}
-                >
-                    <View
-                        style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        <Image
-                            source={icons.card_icon}
-                            resizeMode="contain"
-                            style={{
-                                width: 30,
-                                height: 30
-                            }}
-                        />
-                        <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Mi perfil</Text>
-                    </View>
-                </TouchableOpacity>
+    function renderButtonSection() {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
+                <Text style={{ ...FONTS.h2, color: COLORS.white }}>Torneos Destacados</Text>
+                <View style={{ flexDirection: 'row', height: 100, backgroundColor: COLORS.secondary, borderRadius: SIZES.radius }}>
+                
+                <Image
+                    // source={{uri:item.img}}
+                    resizeMode="cover"
+                    style={{
+                        width: 80,
+                        height: 120,
+                        borderRadius: 20
+                    }}
+                />
+                </View>
             </View>
-        </View>
-    )
-}
+        )
+    }
+    
+
+// FUNCION PENDIENTE POR ELIMINAR remplazada por la de arriba
+// function renderButtonSection() {
+//     return (
+//         <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
+//             <View style={{ flexDirection: 'row', height: 70, backgroundColor: COLORS.secondary, borderRadius: SIZES.radius }}>
+//                 {/* Claim */}
+//                 <TouchableOpacity
+//                     style={{ flex: 1 }}
+//                 >
+//                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+//                         <Image
+//                             source={icons.claim_icon}
+//                             resizeMode="contain"
+//                             style={{
+//                                 width: 30,
+//                                 height: 30
+//                             }}
+//                         />
+//                         <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Reclamar</Text>
+//                     </View>
+//                 </TouchableOpacity>
+
+//                 {/* Divider */}
+//                 <LineDivider />
+
+//                 {/* Get Point 
+//                     <TouchableOpacity
+//                         style={{ flex: 1 }}
+//                         onPress={() => console.log("Get Point")}
+//                     >
+//                         <View
+//                             style={{
+//                                 flex: 1,
+//                                 flexDirection: 'row',
+//                                 alignItems: 'center',
+//                                 justifyContent: 'center'
+//                             }}
+//                         >
+//                             <Image
+//                                 source={icons.point_icon}
+//                                 resizeMode="contain"
+//                                 style={{
+//                                     width: 30,
+//                                     height: 30
+//                                 }}
+//                             />
+//                             <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Comprar BUSD</Text>
+//                         </View>
+//                     </TouchableOpacity>*/}
+
+//                 {/* Divider 
+//                     <LineDivider />*/}
+
+//                 {/* My Card */}
+//                 <TouchableOpacity
+//                     style={{ flex: 1 }}
+//                     onPress={() => console.log("My Card")}
+//                 >
+//                     <View
+//                         style={{
+//                             flex: 1,
+//                             flexDirection: 'row',
+//                             alignItems: 'center',
+//                             justifyContent: 'center'
+//                         }}
+//                     >
+//                         <Image
+//                             source={icons.card_icon}
+//                             resizeMode="contain"
+//                             style={{
+//                                 width: 30,
+//                                 height: 30
+//                             }}
+//                         />
+//                         <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Mi perfil</Text>
+//                     </View>
+//                 </TouchableOpacity>
+//             </View>
+//         </View>
+//     )
+// }
 
 function renderMyBookSection(juegos) {
 
@@ -167,6 +188,7 @@ function renderMyBookSection(juegos) {
                 })}
             >
                 {/* Book Cover */}
+                <View style={{ flexDirection: 'row', height: 100, backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10, height: 150}}>
                 <Image
                     source={{uri:item.img}}
                     resizeMode="cover"
@@ -176,6 +198,8 @@ function renderMyBookSection(juegos) {
                         borderRadius: 20
                     }}
                 />
+                    </View>
+                
 
                 {/* Book Info 
                     <View style={{ marginTop: SIZES.radius, flexDirection: 'row', alignItems: 'center' }}>
