@@ -207,7 +207,7 @@ function renderMyBookSection(juegos) {
     return (
         <View style={{ flex: 1 }}>
             {/* Header */}
-            <View style={{ paddingHorizontal: SIZES.padding, flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={{ ...FONTS.h2, color: COLORS.white }}>Todos los juegos</Text>
 
                 {/*<TouchableOpacity

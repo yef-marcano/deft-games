@@ -68,21 +68,6 @@ const Board = ({ navigation }) => {
       <View style={{ flex: 1, }}>
         <Text style={{ ...FONTS.h2, color: COLORS.white }}> titulo </Text>
         <View style={{ justifyContent: "center" }}>
-          <TouchableOpacity
-            style={{
-              width: "100%",
-              borderRadius: 10,
-              padding: 10,
-              marginTop: 120,
-              backgroundColor: '#FF5555'
-            }}
-            onPress={() => logout()}
-          >
-            <Text style={{ ...FONTS.h2, color: COLORS.white }}>
-              {" "}
-              Cerrar sesion
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     );
@@ -93,11 +78,26 @@ const Board = ({ navigation }) => {
       <FullLoading visible={visible} text={"Cerrando sesión"} />
       <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.theme, paddingTop: 0 }}>
         <Menu back />
-        <ScrollView >
-          {/* Categories Section */}
-          <View style={{ marginTop: SIZES.padding, marginHorizontal: SIZES.padding }}>
+        <ScrollView style={{ marginHorizontal: SIZES.padding}} >
+          {/* Categorstylies Section */}
+          <View style={{ marginTop: SIZES.padding }}>
             <View>{renderCategoryHeader()}</View>
           </View>
+            <TouchableOpacity
+              style={{
+                width: "100%",
+                borderRadius: 10,
+                padding: 10,
+                marginTop: 120,
+                backgroundColor: '#FF5555', alignItems:'center'
+              }}
+              onPress={() => logout()}
+            >
+              <Text style={{ ...FONTS.h2, color: COLORS.white }}>
+                {" "}
+                Cerrar sesion
+              </Text>
+            </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
     </>

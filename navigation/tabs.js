@@ -6,7 +6,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile, Monedero, CrearPartida, Addgame, Board } from "../screens/";
+import { Home, Profile, Monedero, CrearPartida, Addgame, Board, HazPremium } from "../screens/";
 import { icons, COLORS } from "../constants";
 import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 
@@ -68,10 +68,6 @@ const Tabs = ({ navigation }) => {
             })}
         >
             <Tab.Screen
-
-
-
-            
                 name="Home"
                 component={Home}
             />
@@ -82,6 +78,14 @@ const Tabs = ({ navigation }) => {
             <Tab.Screen
                 name="Profile"
                 component={Profile}
+            />
+            <Tab.Screen
+                name="Monedero"
+                component={Monedero}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
             />
 
             <Tab.Screen
@@ -98,6 +102,15 @@ const Tabs = ({ navigation }) => {
                 options={{
                     headerShown: false,
                     tabBarButton: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="HazPremium"
+                component={HazPremium}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                
                 }}
             />
         </Tab.Navigator>

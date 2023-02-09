@@ -22,7 +22,8 @@ export default function Menu({back, ...props}) {
         title={<View style={{flexDirection:'row', alignItems:'center', height:80, justifyContent: 'flex-end', width: '80%'}}> 
             
             <TouchableOpacity style={{borderWidth: 2, borderColor: COLORS.primary, borderStyle:'solid',
-            borderRadius: 5,padding: 5, marginHorizontal:10}}>
+            borderRadius: 5,padding: 5, marginHorizontal:10}}
+            onPress={()=> navigation.navigate('HazPremium')}>
                 <Text style={{fontSize: SIZES.body3, color: COLORS.primary}}> DEFT PREMIUM</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{
@@ -30,7 +31,10 @@ export default function Menu({back, ...props}) {
                 <Text style={{fontSize: SIZES.body2, color: COLORS.white}}> 20</Text>
             </TouchableOpacity>
             <Image source={images.coindeft} style={headerStyles.iconb}/>
+            <TouchableOpacity onPress={()=> navigation.navigate('Monedero')}>
             <Image source={images.cartera} style={headerStyles.iconc}/>
+            </TouchableOpacity>
+           
         </View>}
          transparent={true}
           titleStyle={{color:'#fff'}} />

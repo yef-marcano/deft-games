@@ -6,31 +6,25 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    FlatList
+    FlatList,
+    TouchableHighlight
 } from 'react-native';
-import { NavBar } from 'galio-framework';
+import Menu from '../../components/Menu';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import FullLoading from 'react-native-full-loading'
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
-import { Feather,FontAwesome5  } from '@expo/vector-icons'; 
-
-import  Header from '../../components/Header';
+import { Feather, FontAwesome5 } from '@expo/vector-icons';
 
 import {
     styles
-  } from './styles';
+} from './styles';
 
 
-const LineDivider = () => {
-    return (
-        <View style={{ width: 1, paddingVertical: 18 }}>
-            <View style={{ flex: 1, borderLeftColor: COLORS.lightGray, borderLeftWidth: 1 }}></View>
-        </View>
-    )
-}
+
 
 const Monedero = ({ navigation }) => {
 
@@ -283,9 +277,9 @@ const Monedero = ({ navigation }) => {
                         marginLeft: index == 0 ? SIZES.padding : 0,
                         marginRight: SIZES.radius
                     }}
-                    /*onPress={() => navigation.navigate("BookDetail", {
-                        book: item
-                    })}*/
+                /*onPress={() => navigation.navigate("BookDetail", {
+                    book: item
+                })}*/
                 >
                     {/* Book Cover */}
                     <Image
@@ -399,9 +393,9 @@ const Monedero = ({ navigation }) => {
                 <View style={{ marginVertical: SIZES.base }}>
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
-                        /*onPress={() => navigation.navigate("BookDetail", {
-                            book: item
-                        })}*/
+                    /*onPress={() => navigation.navigate("BookDetail", {
+                        book: item
+                    })}*/
                     >
                         {/* Book Cover */}
                         <Image
@@ -496,41 +490,150 @@ const Monedero = ({ navigation }) => {
             </View>
         )
     }
+    const LineDivider = () => {
+        return (
+            <View style={{ width: 50, paddingVertical: 5 }}>
+                <View
+                    style={{
+                        flex: 1,
+                        borderTopColor: COLORS.primary,
+                        borderTopWidth: 1,
+                    }}
+                ></View>
+            </View>
+        );
+    };
 
+    function cardPack() {
+        return (
+            <View style={{ flexDirection: 'row', paddingBottom: 100 }}>
+                <TouchableOpacity>
+                    <View style={{
+                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
+                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
+                    }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>1250</Text>
+                            <Image source={images.coindeft} />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ ...FONTS.h3, color: COLORS.white }}>D-Coins</Text>
+                        </View>
+                        {LineDivider()}
+                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>$4,99</Text>
+
+                        <View style={{ position: 'absolute', bottom: -25 }}>
+                            <LinearGradient
+                                colors={['#FEA800', '#FEA800']}
+                                start={[1, 1]}
+                                style={styles.buttonPack}>
+                                <Text>Comprar</Text>
+                            </LinearGradient>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View style={{
+                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
+                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
+                    }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>1250</Text>
+                            <Image source={images.coindeft} />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ ...FONTS.h3, color: COLORS.white }}>D-Coins</Text>
+                        </View>
+                        {LineDivider()}
+                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>$19,99</Text>
+
+                        <View style={{ position: 'absolute', bottom: -25 }}>
+                            <LinearGradient
+                                colors={['#FEA800', '#FEA800']}
+                                start={[1, 1]}
+                                style={styles.buttonPack}>
+                                <Text>Comprar</Text>
+                            </LinearGradient>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <View style={{
+                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
+                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
+                    }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>1250</Text>
+                            <Image source={images.coindeft} />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ ...FONTS.h3, color: COLORS.white }}>D-Coins</Text>
+                        </View>
+                        {LineDivider()}
+                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>$49,99</Text>
+
+                        <View style={{ position: 'absolute', bottom: -25 }}>
+                            <LinearGradient
+                                colors={['#FEA800', '#FEA800']}
+                                start={[1, 1]}
+                                style={styles.buttonPack}>
+                                <Text>Comprar</Text>
+                            </LinearGradient>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
     return (
         <>
-        <FullLoading visible={visible} text={'Cerrando sesión'} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black , paddingTop: 50}}>
-        {<NavBar left={
-            <Feather name="menu" size={24} color="black" />
-        } title="200 POINS" right={
-            <FontAwesome5 name="piggy-bank" size={24} color="black" />
-        } />}
-        <Header></Header>
+            <FullLoading visible={visible} text={'Cerrando sesión'} />
+            <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.theme }}>
 
-            {/* Header Section */}
-            {/*<View style={{ height: 80 }}>
-                renderHeader(profile)
-            </View>*/}
-
-            {/* Body Section */}
-            <ScrollView style={{ marginTop: SIZES.radius }}>
-                {/* Books Section */}
-                <View>
-                    {/*renderMyBookSection(myBooks)*/}
-                </View>
-
-                {/* Categories Section */}
-                <View style={{ marginTop: SIZES.padding }}>
-                    <View>
-                        {/*renderCategoryHeader()*/}
+                <Menu back />
+                <ScrollView style={{  marginHorizontal: SIZES.padding }}>
+                    <View style={{ alignItems: 'center' }}>
+                        <Image source={images.logologin} />
                     </View>
                     <View>
-                        {/*renderCategoryData()*/}
+                        <View>
+                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>Reclama tus recompensas</Text>
+                            {/*renderCategoryHeader()*/}
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <LinearGradient
+                                colors={['#26073D', '#7522B0']}
+                                start={[1, 0.7]}
+                                style={styles.button}>
+                                <Text style={{ ...FONTS.h1, color: COLORS.white }}>Deft Coins</Text>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Text style={{ ...FONTS.h1, color: COLORS.white }}>1250</Text>
+                                    <Image source={images.coindeft} />
+                                </View>
+
+                                <TouchableOpacity >
+                                    <LinearGradient
+                                        colors={['#FEA800', '#FEA80091']}
+                                        start={[1, 0.7]}
+                                        style={styles.buttonReclamo}>
+                                        <Text>Reclamar</Text>
+                                    </LinearGradient>
+                                </TouchableOpacity>
+                                <TouchableOpacity >
+                                    <Text style={{ color: '#979797' }}> MAS INFO ?</Text>
+                                </TouchableOpacity>
+
+
+                            </LinearGradient>
+
+                            <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 20 }}>¡Consigue tu pack y compite!</Text>
+                            {cardPack()}
+
+                            {/*renderCategoryData()*/}
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                </ScrollView>
+            </SafeAreaView>
         </>
     )
 }

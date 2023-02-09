@@ -14,4 +14,25 @@ export const styles = StyleSheet.create({
       color: COLORS.white,
       
     },
+    number:{
+      height: 30,
+      padding: 1,
+      alignItems:'center',
+      borderRadius: 30,
+      width:30
+    },
+    buttonReclamo: {
+      width: 200,
+      borderRadius: 10,
+      alignItems: "center",
+      padding: 10,
+      margin: 20
+    },
+    buttonPack: {
+      width: '100%',
+      borderRadius: 10,
+      alignItems: "center",
+      padding: 10,
+      margin: 0,
+    },
   });

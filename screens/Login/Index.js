@@ -93,7 +93,6 @@ const Login = ({ navigation }) => {
         <View style={{ alignItems: "center", margin: 40 }}>
           <TouchableOpacity onPress={() => login()}>
             <LinearGradient
-              onPress={() => login()}
               colors={['#0014FF', '#8020EF', '#FF2CDF']}
               start={[1, 0.7]}
               style={styles.button}>
