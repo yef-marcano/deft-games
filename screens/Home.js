@@ -70,19 +70,45 @@ const Home = ({navigation}) => {
     }
 
     function renderButtonSection() {
+        var games = []
+
+        let selectedCategoryBooks = categories.filter(a => a.id == selectedCategory)
+    
+        if (selectedCategoryBooks.length > 0) {
+            games = selectedCategoryBooks[0].books
+        }
+    
+        const renderItem = ({ item }) => {
+            return (    
+                <View style={{ marginVertical: SIZES.base, }}>
+                    <TouchableOpacity
+                        style={{ flex: 1, flexDirection: 'row' }}
+                    >
+                        {/* Book Cover */}
+                        <Image
+                            source={item.bookCover}
+                            resizeMode="cover"
+                            style={{ width: 350, height: 100, borderRadius: 15}}
+                        />
+    
+                        <View style={{ flex: 1, marginLeft: SIZES.radius, height: '100%', justifyContent: 'center', }}>
+                            {/* aqui texto */}
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+    
         return (
             <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
                 <Text style={{ ...FONTS.h2, color: COLORS.white }}>Torneos Destacados</Text>
-                <View style={{ flexDirection: 'row', height: 100, backgroundColor: COLORS.secondary, borderRadius: SIZES.radius }}>
+                <View style={{ flexDirection: 'row', height: 100}}>
                 
-                <Image
-                    // source={{uri:item.img}}
-                    resizeMode="cover"
-                    style={{
-                        width: 80,
-                        height: 120,
-                        borderRadius: 20
-                    }}
+                <FlatList
+                    data={games}
+                    renderItem={renderItem}
+                    keyExtractor={item => `${item.id}`}
+                    showsVerticalScrollIndicator={false}
                 />
                 </View>
             </View>
