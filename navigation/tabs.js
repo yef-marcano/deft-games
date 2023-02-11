@@ -51,22 +51,26 @@ const Tabs = ({ navigation }) => {
                                     top:0,
                                     borderRadius: 10,
                                     marginTop: -70,
-                                    padding: 20,
+                                    paddingHorizontal: 0,
                                     transform: [
                                         { rotate: '45deg' }
                                     ]
                                       }
                                 }>
                                 <View style={{
-                                    alignItems:'center',
+                                    
                                     width: 70,
                                     height:70,
+                                    marginVertical:10,
+                                    marginHorizontal:10,
                                     transform: [
                                         { rotate: '-45deg' }
                                     ]}}>
+                                    <View style={{marginTop: -10,alignItems:'center'}}>
                                     <Entypo name="plus" size={44} color={COLORS.theme} style={{opacity: opa}}  />
                                     <Text style={{color:'#000'}}>Crear</Text>
                                     <Text style={{color:'#000'}}>Partida</Text>
+                                    </View>
                                     {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> <Text> Your Text Here </Text> </LinearGradient>  */}
                                 </View>
                                 </LinearGradient>
