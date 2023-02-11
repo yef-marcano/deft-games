@@ -67,7 +67,7 @@ const CrearPartida = ({ navigation }) => {
 
   React.useEffect(() => {
     if (isFocused == true) {
-      //setCurrentStep(0)
+      setCurrentStep(0)
       // setUsuarioName('')
     }
   }, [isFocused]);
