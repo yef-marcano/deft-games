@@ -5,8 +5,6 @@ import { COLORS, FONTS, SIZES, icons, images } from '../constants';
 
 const CardPack = (item, index) => {
     const [itemSelect, setItemSelect] = useState(0);
-
-
     const LineDivider = () => {
         return (
             <View style={{ width: 50, paddingVertical: 5 }}>
@@ -21,8 +19,6 @@ const CardPack = (item, index) => {
         );
     };
 
-
-    
     return (
         <TouchableOpacity onPress={() => item.setSelectedId(item.id === item.selectedId ? null : item.id)}   >
             {/*<TouchableOpacity onPress={handlePress} style={styles.button}>
@@ -37,7 +33,8 @@ const CardPack = (item, index) => {
                     start={[1, 1]}
                     style={{
                 margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
+                paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25,
+               
             }}>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>

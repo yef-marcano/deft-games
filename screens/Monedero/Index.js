@@ -83,11 +83,11 @@ const Monedero = ({ navigation }) => {
 
     return (
         <>
-            <FullLoading visible={visible} text={'Cerrando sesión'} />
+            <FullLoading visible={visible} text={'Cargando...s'} />
             <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.theme }}>
 
                 <Menu back />
-                <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: SIZES.padding }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: SIZES.padding, }}>
                     <View style={{ alignItems: 'center' }}>
                         <Image source={images.logologin} />
                     </View>
