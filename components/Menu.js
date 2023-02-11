@@ -9,6 +9,7 @@ const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 export default function Menu({back, ...props}) {
     const navigation = useNavigation();
   return (
+    <View style={{backgroundColor: COLORS.background}}>
     <View style={headerStyles.container}>
         <NavBar
         left={<View style={{flexDirection:'row', alignItems:'center', height:80, width: '20%'}}> 
@@ -40,6 +41,7 @@ export default function Menu({back, ...props}) {
           titleStyle={{color:'#fff'}} />
           
     </View>
+    </View>
   );
 }
 
@@ -47,7 +49,8 @@ const headerStyles = StyleSheet.create({
   container: {
     height: 80,
     width: SIZES.width,
-    marginTop: STATUS_BAR_HEIGHT
+    marginTop: STATUS_BAR_HEIGHT,
+    
   },
   iconm: {
     height: 30,

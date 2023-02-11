@@ -130,6 +130,36 @@ Esto es para las peticiones simples
 
 
 
+            /* peticiones registro de usuarios*/
+            if (array_filter($arrayRutas)[1] == "juegosguardados") {
+                /*=============== 
+                    Tipo POST
+                    ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+                    // array vacio
+                    $datosenviados = array();
+                    // realizo un parse para obtener datos de file get content y pasarlos al array
+                    parse_str(file_get_contents('php://input'), $datosenviados);
+                    //print_r($datosenviados);
+                    //return
+                    $usuarios = new ControladorJuegos();
+                    $usuarios->create($datosenviados);
+                }
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+
+
+                    // array vacio
+                    $datosenviados = array();
+                    // realizo un parse para obtener datos de file get content y pasarlos al array
+                    parse_str(file_get_contents('php://input'), $datosenviados);
+                    //print_r($datosenviados);
+                    //return
+                    $usuarios = new ControladorJuegos();
+                    $usuarios->create($datosenviados);
+                }
+            }
 
 
 

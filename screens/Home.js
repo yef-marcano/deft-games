@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    FlatList
+    FlatList,
+    LogBox 
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AlertBug } from "../helper/Alert";
@@ -37,6 +38,10 @@ const Home = ({navigation}) => {
     const [games, setGames] = React.useState([]);
 
 
+    useEffect(() => {
+        LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    }, [])
+    
     useEffect(() => {
         usuario()
         juegos()
@@ -204,9 +209,10 @@ function renderMyBookSection(juegos) {
         console.log(item);
         return (
             <TouchableOpacity
+                key={index}
                 style={{
                     flex: 1,
-                    marginLeft: index == 0 ? SIZES.padding : 0,
+                    //marginLeft: index == 0 ? SIZES.padding : 0,
                     marginRight: SIZES.radius
                 }}
                 onPress={() => navigation.navigate("BookDetail", {
@@ -268,15 +274,15 @@ function renderMyBookSection(juegos) {
             </View>
 
             {/* Books */}
-            <View style={{ flex: 1, marginTop: SIZES.padding }}>
+            <SafeAreaView style={{ flex: 1, marginTop: SIZES.padding }}>
                 <FlatList
                     data={juegos}
                     renderItem={renderItem}
-                    keyExtractor={item => `${item.id}`}
+                    keyExtractor={(item, index) => `${index}`}
                     horizontal
                     showsHorizontalScrollIndicator={false}
                 />
-            </View>
+            </SafeAreaView>
         </View>
     )
 }
@@ -376,12 +382,14 @@ function renderCategoryData() {
                     <Text style={{ ...FONTS.body3, color: COLORS.lightGray, alignSelf: 'flex-start', textDecorationLine: 'underline' }}>Ver más</Text>
                 </TouchableOpacity>*/}
             </View>
+            <SafeAreaView style={{flex: 1}}> 
             <FlatList
                 data={games}
                 renderItem={renderItem}
                 keyExtractor={item => `${item.id}`}
                 showsVerticalScrollIndicator={false}
             />
+            </SafeAreaView>
         </View>
     )
 }

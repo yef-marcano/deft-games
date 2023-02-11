@@ -110,15 +110,7 @@ class ControladorJuegos
         /*=============================================
         Validar datos correo
         =============================================*/
-        if (isset($datos["correo"]) && !preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $datos["correo"])) {
 
-            $json = array(
-                "status" => 404,
-                "detalle" => "error en el correo electronico"
-            );
-            echo json_encode($json, true);
-            return;
-        }
         /*if (!is_numeric($datos["tipoDocumento"]) || !is_numeric($datos["documento"]) || !is_numeric($datos["estadoCivil"]) || !is_numeric($datos["tipoVivienda"]) || !is_numeric($datos["actividad"]) || !is_numeric($datos["sector"]) || !is_numeric($datos["telefono"]) || !is_numeric($datos["ingresos"]) || !is_numeric($datos["opcion"]) && !is_numeric($datos["TelRef1"]) || !is_numeric($datos["TelRef2"]) || !is_numeric($datos["gastos"]) || !is_numeric($datos["estrato"]) || !is_numeric($datos["cuenta"]) || !is_numeric($datos["TelEmpresa"])) {
 
             $json = array(
@@ -150,15 +142,9 @@ class ControladorJuegos
         //print_r($datos);
 
         $data = array(
-            "correo" => $datos["correo"],
-            "pass" => $datos["pass"],
-            "nombre" => $datos["nombre"],
-            "apellidos" => $datos["apellidos"],/*
-            "tipoDocumento" => $datos["tipoDocumento"],
-            "documento" => $datos["documento"],
-            "fechaExpedicion" => $datos["fechaExpedicion"],
-            "direccion" => $datos["direccion"],*/
-            "celular" => $datos["celular"]
+            "usuario" => $datos["usuario"],
+            "idgame" => $datos["idgame"],
+            "nombrejuego" => $datos["nombrejuego"]
         );
 
         //echo $data;
@@ -168,16 +154,16 @@ class ControladorJuegos
 
 
 
-        $usuarios = ModelosUsuarios::index("usuarios", $data["correo"]);
+        $usuarios = ModelosJuegos::indexCompare("jugador_game_guardados", $data["idgame"]);
 
         if (count($usuarios) === 0) {
 
-            $usuario_creado = ModelosUsuarios::create("usuarios", $data);
+            $juego_guardado = ModelosJuegos::create("jugador_game_guardados", $data);
 
             $json = array(
                 "status" => 200,
-                "usuario" => "usuario creado con exito",
-                "detalle" => $usuario_creado
+                "usuario" => "Juego agregado con exito",
+                "detalle" => $juego_guardado
             );
 
             echo json_encode($json, true);
@@ -185,11 +171,11 @@ class ControladorJuegos
         } else {
 
             $json = array(
-                "status" => 200,
-                "usuario" => "usuario existente",
-                "correo" => $data["correo"],
+                "status" => 400,
+                "usuario" => "juego guardado previamente existente",
                 "detalle" => $usuarios
             );
+
             echo json_encode($json, true);
             return;
         }

@@ -9,7 +9,8 @@ import {
   ImageBackground,
   TextInput,
   Alert,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  StatusBar
 } from "react-native";
 //var qs = require('qs');
 import { mainApi } from "../../services";
@@ -128,7 +129,8 @@ const Login = ({ navigation }) => {
 
   return (
     <>
-      <FullLoading visible={visible} />
+      <FullLoading visible={visible} text={'Iniciando sesión'} />
+      <StatusBar backgroundColor = '#000' />
       <SafeAreaView style={{ flex: 1, width: '100%', height: '100%',
       alignItems:'center' }}>
       <ImageBackground source={images.bglogin}  resizeMode="cover" style={styles.image}>

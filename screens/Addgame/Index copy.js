@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, ScrollView,
-TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, ScrollView } from 'react-native';
 
-import Menu from '../../components/Menu';
 import { COLORS, FONTS, SIZES, icons, images } from "../../constants";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { useIsFocused } from "@react-navigation/native";
-import { AlertBug, AlertSuccess } from "../../helper/Alert";
 import { mainApi } from "../../services";
 
-const steps = ['Selecciona el juego', 'Agrega tu usuario'];
+const steps = ['Selecciona el juego', 'Tipo de partida', '¿Nivelado?', '¿Cuanto quieres ganar?'];
 
 
 
-const Addgame = ({navigation}) => {
-  const isFocused = useIsFocused();
+const Addgame = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   const [userdata, setUserdata] = React.useState({});
@@ -25,28 +19,13 @@ const Addgame = ({navigation}) => {
 
   const [games, setGames] = React.useState([]);
 
-  const [game, setGame] = useState(0);
-  const [usuarioName, setUsuarioName] = React.useState('');
 
   
-
-
-  navigation.setOptions({ tabBarVisible: false })
 
   React.useEffect(() => {
     usuario();
     juegoslista()
   }, []);
-
-
-
-  React.useEffect(() => {
-    if (isFocused == true) {
-      setCurrentStep(0)
-      setUsuarioName('')
-    }
-  }, [isFocused]);
-
 
 
   const juegosCard = ({ item, index }) => {
@@ -59,14 +38,14 @@ const Addgame = ({navigation}) => {
           start={[1, 0.7]}
           style={{ borderRadius: 20, padding: 10, paddingHorizontal: 20 }}
         >
-          <TouchableOpacity onPress={() => paso1(item?.id_game)} style={{ flex: 1, flexDirection: 'column' }}  >
+          <TouchableOpacity onPress={() => paso1()} style={{ flex: 1, flexDirection: 'column' }}  >
             <View style={{ alignItems:'center'}}>
               <Image
-                source={{ uri: item?.img }}
+                source={{ uri: item.img }}
                 resizeMode="cover"
                 style={{ width: 80, height: 80, borderRadius: 10 }}
               />
-                <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{item?.name}</Text>
+                <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{item.name}</Text>
             </View>
           </TouchableOpacity>
 
@@ -122,33 +101,20 @@ const Addgame = ({navigation}) => {
   const Modo = () => {
     return(
     <View style={{ flexDirection: 'column', paddingHorizontal: 20, marginBottom: 20 }}>
-    <Text style={{ fontSize: SIZES.h3, color: COLORS.white, marginVertical: SIZES.base }}>  Nombre de usuario dentro del juego: </Text>
- 
-
-    <TextInput
-          style={styles.input}
-          onChangeText={setUsuarioName}
-          placeholder="Ingrese el nombre"
-          placeholderTextColor={COLORS.white}
-          value={usuarioName}
-        />
-  <View style={{flexDirection:'row'}}>
-
-  <View style={{marginVertical: 20, alignItems:'flex-start'}}>
-      <TouchableOpacity
-          onPress={() => {
-            save()
-          }}
-          disabled={currentStep === 0}
-          style={[
-            styles.button,
-            { backgroundColor: currentStep === 0 ? '#ddd' : '#7C24BA' },
-          ]}
+    <Text style={{ fontSize: SIZES.h3, color: COLORS.white, marginVertical: SIZES.base }}>  Modo: </Text>
+         <LinearGradient
+          // Background Linear Gradient
+          colors={['#31323B', '#fff']}
+          start={[1, 0.7]}
+          style={{ borderRadius: 20, padding: 10, paddingHorizontal: 20, flexDirection: 'row', width: 100 }}
         >
-          <Text style={styles.buttonText}>Guardar</Text>
-        </TouchableOpacity>
-        </View>  
+          <TouchableOpacity  onPress={() => paso2()} style={{ flex: 1, flexDirection: 'column' }} >
+            <View style={{ alignItems:'center'}}>
+                <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'1 vs 1'}</Text>
+            </View>
+          </TouchableOpacity>
 
+        </LinearGradient>
       <View style={{marginVertical: 20, alignItems:'flex-start'}}>
       <TouchableOpacity
           onPress={() => {
@@ -157,14 +123,12 @@ const Addgame = ({navigation}) => {
           disabled={currentStep === 0}
           style={[
             styles.button,
-            { backgroundColor: currentStep === 0 ? '#ddd' : '#0C0344' },
+            { backgroundColor: currentStep === 0 ? '#ddd' : '#7C24BA' },
           ]}
         >
           <Text style={styles.buttonText}>Anterior</Text>
         </TouchableOpacity>
         </View>  
-  </View>
-
     </View>
     )
   }
@@ -210,10 +174,7 @@ const Addgame = ({navigation}) => {
 
 
   return (
-    <>
-    
-    <Menu back />
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
 
       <Text style={{ ...FONTS.h2, color: COLORS.white, marginVertical: 20 }}>Agregar juego</Text>
 
@@ -233,7 +194,7 @@ const Addgame = ({navigation}) => {
 
           </View>
           {(currentStep === 0 && index === currentStep) ? <Juegos /> : ''}
-          {(currentStep === 1 && index === currentStep) ?  Modo() : ''}
+          {(currentStep === 1 && index === currentStep) ?  <Modo /> : ''}
           {(currentStep === 2 && index === currentStep) ? <Nivelado />: ''}  
           {(currentStep === 3 && index === currentStep) ? <Ganar /> : '' }
         </View>
@@ -264,8 +225,7 @@ const Addgame = ({navigation}) => {
           <Text style={styles.buttonText}>Siguiente</Text>
         </TouchableOpacity>
       </View>*/}
-    </View>
-    </>
+    </ScrollView>
   );
 
 
@@ -274,11 +234,11 @@ const Addgame = ({navigation}) => {
   async function juegoslista() {
     try {
       //setVisible(true);
-      //console.log("HOALALALAL");
+      console.log("HOALALALAL");
       //let datos = { correo: usuario, password: password, }
       await mainApi('', 'juegos', 'GET')
         .then(res => {
-         // console.log(res.data);
+          console.log(res.data);
           //      setVisible(false);
           // console.log(res.data);
           if (res.data.status === 200) {
@@ -292,10 +252,8 @@ const Addgame = ({navigation}) => {
     } catch (error) { }
   }
 
-  async function paso1(idgame) {
-   // console.log("----> juego select"+ idgame);
+  async function paso1(params) {
     setCurrentStep(currentStep + 1);
-    setGame(idgame)
   }
   async function paso2(params) {
     setCurrentStep(currentStep + 1);
@@ -304,55 +262,21 @@ const Addgame = ({navigation}) => {
     setCurrentStep(currentStep + 1);
   }
   
-  async function save() {
-    let user = await AsyncStorage.getItem("@user_data");
-    const obj = JSON.parse(user);
-
-    let data = {usuario: obj.id, idgame: game, nombrejuego: usuarioName}
-
-    try {
-      await mainApi(data, 'juegosguardados', 'POST')
-        .then(res => {
-          console.log(res.data);
-          if (res.data.status === 200) {
-            AlertSuccess(res.usuario, 'Home', navigation)
-            return
-          } else {
-       //     console.log('error de juegos guardados')
-            AlertBug(res.data.usuario)
-          }
-        })
-    } catch (error) {
-     // console.log('-----> Error');
-      console.log(error); }
-  }
-  
   
   async function usuario() {
     let user = await AsyncStorage.getItem("@user_data");
     const obj = JSON.parse(user);
     setUserdata(obj);
-    //console.log(userdata);
+    console.log(userdata);
   }
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    borderRadius: 20,
-    padding: 10,
-    borderColor: COLORS.white,
-    color: COLORS.white,
-    
-  },
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
     paddingHorizontal: SIZES.padding,
-    paddingVertical: SIZES.padding,
-    justifyContent:'center'
+    paddingVertical: SIZES.padding
   },
   stepContainer: {
     flexDirection: 'row',
@@ -384,7 +308,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginHorizontal: 10,
-    alignItems:'center',
   },
   buttonText: {
     fontSize: 18,

@@ -14,7 +14,29 @@ class ModelosJuegos{
 
             } else if(is_numeric($dato)) {
 
-                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_gameguardado =:id");
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_user =:id");
+                $stmt->bindParam(":id", $dato, PDO::PARAM_STR);
+                $stmt->execute();
+                return $stmt->fetchALL(PDO::FETCH_CLASS);
+                $stmt->close();
+                $stmt=null;
+
+
+            }
+
+        }
+        
+        static public function indexCompare($tabla,$dato){
+            if($dato == null){
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla");
+                $stmt->execute();
+                return $stmt->fetchALL(PDO::FETCH_CLASS);
+                $stmt->close();
+                $stmt=null;
+
+            } else if(is_numeric($dato)) {
+
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_game =:id");
                 $stmt->bindParam(":id", $dato, PDO::PARAM_STR);
                 $stmt->execute();
                 return $stmt->fetchALL(PDO::FETCH_CLASS);
@@ -94,22 +116,22 @@ class ModelosJuegos{
         static public function create($tabla,$datos){
             
 
-            $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(email, pass, nombre, apellidos, celular)
-             VALUES (:email,:pass,:nombre,:apellidos,:celular)");
+            $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(id_user, id_game, nombre_eneljuego)
+             VALUES (:id_user,:id_game,:nombre_eneljuego)");
             
-            $stmt->bindParam(":email", $datos["correo"], PDO::PARAM_STR);
-            $stmt->bindParam(":pass", $datos["pass"], PDO::PARAM_STR);
-            $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-            $stmt->bindParam(":apellidos", $datos["apellidos"], PDO::PARAM_STR);/*
+            $stmt->bindParam(":id_user", $datos["usuario"], PDO::PARAM_INT);
+            $stmt->bindParam(":id_game", $datos["idgame"], PDO::PARAM_INT);
+            $stmt->bindParam(":nombre_eneljuego", $datos["nombrejuego"], PDO::PARAM_STR);/*
+            $stmt->bindParam(":apellidos", $datos["apellidos"], PDO::PARAM_STR);
             $stmt->bindParam(":tipoDocumento", $datos["tipoDocumento"], PDO::PARAM_STR);
             $stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
             $stmt->bindParam(":fechaExpedicion", $datos["fechaExpedicion"], PDO::PARAM_STR);
-            $stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);*/
-            $stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_INT);
+            $stmt->bindParam(":direccion", $datos["direccion"], PDO::PARAM_STR);
+            $stmt->bindParam(":celular", $datos["celular"], PDO::PARAM_INT);*/
 
             if($stmt->execute()){
 
-                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id DESC LIMIT 1");
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id_gameguardado DESC LIMIT 1");
                 $stmt->execute();
                 return $stmt->fetchALL(PDO::FETCH_CLASS);
                 $stmt->close();

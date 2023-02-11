@@ -10,6 +10,7 @@ import {
     TouchableHighlight
 } from 'react-native';
 import Menu from '../../components/Menu';
+import CardPack from '../../components/CardPack';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -504,94 +505,37 @@ const Monedero = ({ navigation }) => {
         );
     };
 
-    function cardPack() {
-        return (
-            <View style={{ flexDirection: 'row', paddingBottom: 100 }}>
-                <TouchableOpacity>
-                    <View style={{
-                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
-                    }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>1250</Text>
-                            <Image source={images.coindeft} />
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h3, color: COLORS.white }}>D-Coins</Text>
-                        </View>
-                        {LineDivider()}
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>$4,99</Text>
 
-                        <View style={{ position: 'absolute', bottom: -25 }}>
-                            <LinearGradient
-                                colors={['#FEA800', '#FEA800']}
-                                start={[1, 1]}
-                                style={styles.buttonPack}>
-                                <Text>Comprar</Text>
-                            </LinearGradient>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={{
-                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
-                    }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>1250</Text>
-                            <Image source={images.coindeft} />
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h3, color: COLORS.white }}>D-Coins</Text>
-                        </View>
-                        {LineDivider()}
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>$19,99</Text>
-
-                        <View style={{ position: 'absolute', bottom: -25 }}>
-                            <LinearGradient
-                                colors={['#FEA800', '#FEA800']}
-                                start={[1, 1]}
-                                style={styles.buttonPack}>
-                                <Text>Comprar</Text>
-                            </LinearGradient>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={{
-                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
-                    }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h2, color: COLORS.white }}>1250</Text>
-                            <Image source={images.coindeft} />
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h3, color: COLORS.white }}>D-Coins</Text>
-                        </View>
-                        {LineDivider()}
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>$49,99</Text>
-
-                        <View style={{ position: 'absolute', bottom: -25 }}>
-                            <LinearGradient
-                                colors={['#FEA800', '#FEA800']}
-                                start={[1, 1]}
-                                style={styles.buttonPack}>
-                                <Text>Comprar</Text>
-                            </LinearGradient>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            </View>
-        )
+    const Packs = {
+        "simple": {
+            price: 1250,
+            name: 'D-Coins',
+            priceFinal: '$4,99',
+            link: 'google.com',
+        },
+        "medio": {
+            price: 1250,
+            name: 'D-Coins',
+            priceFinal: '$19,99',
+            link: 'google.com',
+        },
+        "pro": {
+            price: 1250,
+            name: 'D-Coins',
+            priceFinal: '$49,99',
+            link: 'google.com',
+        }
     }
+    
+
+
     return (
         <>
             <FullLoading visible={visible} text={'Cerrando sesión'} />
             <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.theme }}>
 
                 <Menu back />
-                <ScrollView showsVerticalScrollIndicator={false} style={{  marginHorizontal: SIZES.padding }}>
+                <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: SIZES.padding }}>
                     <View style={{ alignItems: 'center' }}>
                         <Image source={images.logologin} />
                     </View>
@@ -627,7 +571,12 @@ const Monedero = ({ navigation }) => {
                             </LinearGradient>
 
                             <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 20 }}>¡Consigue tu pack y compite!</Text>
-                            {cardPack()}
+                            
+                            <View style={{ flexDirection: 'row', paddingBottom: 100 }}>
+                            {Object.entries(Packs).map(([key, value]) => (
+                                <CardPack data={value} key={key} />
+                            ))}
+                            </View>
 
                             {/*renderCategoryData()*/}
                         </View>
