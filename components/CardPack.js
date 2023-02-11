@@ -4,17 +4,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SIZES, icons, images } from '../constants';
 
 const CardPack = (item, index) => {
-    const [backgroundColor, setBackgroundColor] = useState(['#0C0E19', '#0C0E19']);
     const [itemSelect, setItemSelect] = useState(0);
 
-    const handlePress = () => {
-        if(itemSelect === index){     
-            setBackgroundColor(['#fff', '#FEA800'])
-            //setBackgroundColor(backgroundColor === ['#0C0E19', '#0C0E19'] ? ['#FFF', '#FEA800'] : ['#FFF', '#FEA800']);
-        }else {
-            setBackgroundColor(['#0C0E19', '#0C0E19'])
-        }
-    };
 
     const LineDivider = () => {
         return (
@@ -33,13 +24,7 @@ const CardPack = (item, index) => {
 
     
     return (
-        <TouchableOpacity onPress={() => {
-            itemSelect === index ?
-            setBackgroundColor(['#fff', '#FEA800']):
-            setBackgroundColor(['#FEA800', '#FEA800'])
-            //handlePress;
-            //setItemSelect(index);
-           }}  >
+        <TouchableOpacity onPress={() => item.setSelectedId(item.id === item.selectedId ? null : item.id)}   >
             {/*<TouchableOpacity onPress={handlePress} style={styles.button}>
         <View />
       </TouchableOpacity>*/}
@@ -48,7 +33,7 @@ const CardPack = (item, index) => {
             <Text>Comprar</Text>
             <View>
                 <LinearGradient
-                    colors={backgroundColor}
+                    colors={item.id === item.selectedId ? [COLORS.background, COLORS.background] : [COLORS.background, COLORS.background]}
                     start={[1, 1]}
                     style={{
                 margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,

@@ -9,7 +9,8 @@ import {
   Alert,
   Linking,
   Modal,
-  Pressable
+  Pressable,
+  FlatList
 } from "react-native";
 import { Button, Card } from "galio-framework";
 import Menu from '../../components/Menu';
@@ -45,6 +46,9 @@ const LineDivider = () => {
 const HazPremium = ({ navigation }) => {
 
   navigation.setOptions({ tabBarVisible: false })
+
+
+  const [selectedId, setSelectedId] = React.useState(null);
 
   const openURI = async () => {
     const url = "https://www.paypal.com/paypalme/joalpm/5USD";
@@ -94,14 +98,14 @@ const HazPremium = ({ navigation }) => {
   }
 
   const createTwoButtonAlert = () =>
-  Alert.alert('Estas seguro que quieres ', 'mensaje de ayuda', [
-    {
-      text: 'Cancelar',
-      onPress: () => console.log('Cancel Pressed'),
-      style: 'cancel',
-    },
-    {text: 'Aceptar', onPress: () => console.log('OK Pressed')},
-  ]);
+    Alert.alert('Estas seguro que quieres ', 'mensaje de ayuda', [
+      {
+        text: 'Cancelar',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      { text: 'Aceptar', onPress: () => console.log('OK Pressed') },
+    ]);
 
 
 
@@ -182,18 +186,74 @@ const HazPremium = ({ navigation }) => {
 
   const LineDivider = () => {
     return (
-        <View style={{ width: 50, paddingVertical: 5 }}>
-            <View
-                style={{
-                    flex: 1,
-                    borderTopColor: COLORS.primary,
-                    borderTopWidth: 1,
-                }}
-            ></View>
-        </View>
+      <View style={{ width: 50, paddingVertical: 5 }}>
+        <View
+          style={{
+            flex: 1,
+            borderTopColor: COLORS.primary,
+            borderTopWidth: 1,
+          }}
+        ></View>
+      </View>
     );
-};
+  };
 
+  const PlanCard = ({ item, index }) => {
+    return (
+      <View key={index} style={{ width: '50%' }}>
+
+        <TouchableOpacity style={{ width: '100%', paddingVertical: 20 }} onPress={() => setSelectedId(item?.id === selectedId ? null : item?.id)} >
+
+
+          <LinearGradient
+
+            colors={item.id === selectedId ? ['#000', '#FEA800'] : ['#0C0E19', '#0C0E19']}
+            start={[2, 0.5]}
+
+            style={{
+              margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
+              paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
+            }}>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ ...FONTS.h2, color: item.id === selectedId ? COLORS.white : COLORS.primary }}>{item?.duracion}</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ ...FONTS.h1, color: item.id === selectedId ? COLORS.white : COLORS.primary }}>{item?.precio}</Text>
+            </View>
+            <Text style={{ color: item.id === selectedId ? COLORS.white : COLORS.primary, fontSize: SIZES.h4 / 1.4 }}>{item?.mensaje}</Text>
+
+            {item?.recomendado && <View style={{ position: 'absolute', top: -25 }}>
+              <LinearGradient
+                colors={['#FEA800', '#FEA800']}
+                start={[1, 1]}
+                style={styles.buttonPack}>
+                <Text>RECOMENDADO</Text>
+              </LinearGradient>
+            </View>}
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+
+
+  let data = [
+    {
+      'id': 0,
+      'duracion': '1 MES',
+      'precio': '5,99',
+      'mensaje': 'MES DE PRUEBA'
+    },
+    {
+      'id': 1,
+      'duracion': '6 MES',
+      'precio': '23,94',
+      'mensaje': '$3,99 / MES - AHORRO 33%',
+      'recomendado': true
+    }
+  ]
   return (
     <>
       <FullLoading visible={visible} text={"Cargando"} />
@@ -223,7 +283,7 @@ const HazPremium = ({ navigation }) => {
 
         <Menu back />
         {/* Body Section */}
-        <ScrollView showsVerticalScrollIndicator={false} style={{ marginHorizontal: SIZES.padding }}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: SIZES.padding, backgroundColor: COLORS.background }}>
           <View style={{ alignItems: 'center' }}>
             <Image source={images.logologin} />
           </View>
@@ -234,57 +294,32 @@ const HazPremium = ({ navigation }) => {
           </View>
 
           <Text style={{ ...FONTS.h2, color: COLORS.white, marginVertical: 20 }}>Elige tu plan</Text>
-          <View>
-            <View style={{ flexDirection: 'row', paddingBottom: 100 }}>
-            
-            <TouchableOpacity style={{width: '50%'}}>
-                    <View style={{
-                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25,
-                        
-                    }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h2, color: COLORS.primary }}>1 MES</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h1, color: COLORS.primary }}>$5,00</Text>
-                        </View>
-                        <Text style={{ color: COLORS.primary, fontSize: SIZES.h4/1.4 }}>MES DE PRUEBA</Text>
+          <View style={{paddingBottom: 200}}>
+            <View style={{ flexDirection: 'row' }}>
 
-                        {/*<View style={{ position: 'absolute', bottom: -25 }}>
-                            <LinearGradient
-                                colors={['#FEA800', '#FEA800']}
-                                start={[1, 1]}
-                                style={styles.buttonPack}>
-                                <Text>Comprar</Text>
-                            </LinearGradient>
-                        </View>*/}
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '50%'}} onPress={() => () => setModalVisible(!modalVisible)}>
-                    <View style={{
-                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25
-                    }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h2, color: COLORS.primary }}>6 MESES</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={{ ...FONTS.h1, color: COLORS.primary }}>$23,94</Text>
-                        </View>
-                        <Text style={{ color: COLORS.primary, fontSize: SIZES.h4/1.4 }}>$3,99 / MES - Ahorra 33%</Text>
+              <FlatList
+                numColumns={2}
+                data={data}
+                renderItem={({ item }) => <PlanCard item={item} />}
+                keyExtractor={(item, index) => index}
+                showsVerticalScrollIndicator={false}
+              />
 
-                        <View style={{ position: 'absolute', top: -25 }}>
-                            <LinearGradient
-                                colors={['#FEA800', '#FEA800']}
-                                start={[1, 1]}
-                                style={styles.buttonPack}>
-                                <Text>RECOMENDADO</Text>
-                            </LinearGradient>
-                        </View>
-                    </View>
-                </TouchableOpacity>
             </View>
+            <LinearGradient
+              // Background Linear Gradient
+              colors={['#000', '#FEA800']}
+              start={[2, 0.5]}
+              style={{ borderRadius: 10, padding: 10, marginVertical: 30 }}
+            >
+              <TouchableOpacity  >
+                <View style={{ alignItems: 'center' }}>
+
+                  <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'QUIERO SER PREMIUM'}</Text>
+                </View>
+              </TouchableOpacity>
+
+            </LinearGradient>
 
             {/*renderCategoryData()*/}
           </View>
