@@ -151,7 +151,7 @@ const Profile = ({ navigation }) => {
         <FlatList
           data={games}
           renderItem={juegos}
-          keyExtractor={(item, index) => item.key}
+          keyExtractor={(item, index) => index}
           showsVerticalScrollIndicator={false}
         />
 

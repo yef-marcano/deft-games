@@ -85,15 +85,15 @@ const Home = ({navigation}) => {
     
         const renderItem = ({ item }) => {
             return (    
-                <View style={{ marginVertical: SIZES.base, }}>
+                <View style={{ marginVertical: SIZES.base, width: SIZES.width/1.3, marginRight: 20 }}>
                     <TouchableOpacity
                         style={{ flex: 1, flexDirection: 'row' }}
                     >
                         {/* Book Cover */}
                         <Image
                             source={item.bookCover}
-                            resizeMode="cover"
-                            style={{ width: 350, height: 100, borderRadius: 15}}
+                            resizeMode='cover'
+                            style={{ width: '100%', height: 120, borderRadius: 15}}
                         />
     
                         <View style={{ flex: 1, marginLeft: SIZES.radius, height: '100%', justifyContent: 'center', }}>
@@ -105,13 +105,14 @@ const Home = ({navigation}) => {
         }
     
         return (
-            <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
+            <View style={{ flex: 1, justifyContent: 'center', marginTop: 20 }}>
                 <Text style={{ ...FONTS.h2, color: COLORS.white }}>Torneos Destacados</Text>
-                <View style={{ flexDirection: 'row', height: 100}}>
+                <View style={{  height: 150, width: SIZES.width}}>
                 
                 <FlatList
                     data={games}
                     renderItem={renderItem}
+                    horizontal
                     keyExtractor={item => `${item.id}`}
                     showsVerticalScrollIndicator={false}
                 />
@@ -409,14 +410,13 @@ return (
             <FontAwesome5 name="piggy-bank" size={24} color="black" />
         } />*/}
         {/* Header Section */}
-        <View style={{ height: 120 }}>
-            {/*renderHeader(profile)*/}
-            {renderButtonSection()}
-        </View>
 
         {/* Body Section */}
         <ScrollView style={{ marginTop: SIZES.radius , marginHorizontal: SIZES.padding}}>
             {/* Books Section */}
+            <View> 
+            {renderButtonSection()}
+            </View>
             <View>
                 {renderMyBookSection(games)}
             </View>
