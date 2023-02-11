@@ -116,7 +116,7 @@ const Profile = ({ navigation }) => {
           start={[1, 0.7]}
           style={{ borderRadius: 20, padding: 10, paddingHorizontal: 20 }}
         >
-          <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }} >
+          <View style={{ flex: 1, flexDirection: 'row' }} >
             {<View>
               <Image
                 source={{ uri: t?.img }}
@@ -135,7 +135,7 @@ const Profile = ({ navigation }) => {
             <View style={{ color: '#fff', justifyContent: 'flex-end', flex: 3 }} onPress={() => console.log("Bookmark")}>
               <Text style={{ color: '#fff', fontSize: 12 }}>70% VICTORIAS</Text>
             </View>
-          </TouchableOpacity>
+          </View>
 
         </LinearGradient>
       </View>

@@ -28,14 +28,15 @@ const Tabs = ({ navigation }) => {
             screenOptions={({ route }) => ({
                 headerShown: false,
                 tabBarIcon: ({ focused }) => {
-                    const tintColor = focused ? COLORS.white : COLORS.game;
+                    const tintColor = focused ? COLORS.game : COLORS.white;
+                    const opa = focused ? 1 : 0.5;
 
                     switch (route.name) {
                         case "Home":
                             return (
                                 <>
-                                    <Entypo name="game-controller" size={44} color={tintColor} />
-                                    <Text style={{color:tintColor}}>Competir</Text>
+                                    <Entypo name="game-controller" size={44} color={tintColor} style={{opacity: opa}} />
+                                    <Text style={{color:tintColor, opacity: opa}}>Competir</Text>
                                 </>
                             )
 
@@ -44,9 +45,10 @@ const Tabs = ({ navigation }) => {
                             return (
                                 <>
                                 <LinearGradient
-                                colors={['#FF2CDF', '#FF2CDF', '#00DBDE']}
-                                start={[1.8, 0.7]}
+                                colors={['rgba(44, 243, 207, 1)', 'rgba(260, 21, 251, 1)']}
+                                start={[-0.1, 0]}
                                 style={{
+                                    top:0,
                                     borderRadius: 10,
                                     marginTop: -70,
                                     padding: 20,
@@ -55,8 +57,16 @@ const Tabs = ({ navigation }) => {
                                     ]
                                       }
                                 }>
-                                <View>
-                                    <Entypo name="plus" size={44} color={COLORS.theme} />
+                                <View style={{
+                                    alignItems:'center',
+                                    width: 70,
+                                    height:70,
+                                    transform: [
+                                        { rotate: '-45deg' }
+                                    ]}}>
+                                    <Entypo name="plus" size={44} color={COLORS.theme} style={{opacity: opa}}  />
+                                    <Text style={{color:'#000'}}>Crear</Text>
+                                    <Text style={{color:'#000'}}>Partida</Text>
                                     {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> <Text> Your Text Here </Text> </LinearGradient>  */}
                                 </View>
                                 </LinearGradient>
@@ -66,8 +76,8 @@ const Tabs = ({ navigation }) => {
                         case "Profile":
                             return (
                                 <>
-                                    <Ionicons name="person-circle-outline" size={44} color={tintColor} />
-                                    <Text style={{color:tintColor}}>Perfil</Text>
+                                    <Ionicons name="person-circle-outline" size={44} color={tintColor} style={{opacityopacity: opa}} />
+                                    <Text style={{color:tintColor,opacity: opa}}>Perfil</Text>
                                 </>
                             )
                     }

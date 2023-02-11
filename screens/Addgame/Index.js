@@ -157,10 +157,10 @@ const Addgame = ({navigation}) => {
           disabled={currentStep === 0}
           style={[
             styles.button,
-            { backgroundColor: currentStep === 0 ? '#ddd' : '#0C0344' },
+            { backgroundColor: currentStep === 0 ? '#ddd' : '#fff' },
           ]}
         >
-          <Text style={styles.buttonText}>Anterior</Text>
+          <Text style={styles.buttonBack}>Anterior</Text>
         </TouchableOpacity>
         </View>  
   </View>
@@ -389,6 +389,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: '#fff',
+  },
+  buttonBack: {
+    fontSize: 18,
+    color: '#000',
   },
 });
 
