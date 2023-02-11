@@ -221,7 +221,7 @@ function renderMyBookSection(juegos) {
                 })}
             >
                 {/* Book Cover */}
-                <View style={{ flexDirection: 'row', height: 100, backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10, height: 150}}>
+                <View style={{ flexDirection: 'column', height: 100, backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10, height: 150}}>
                 <Image
                     source={{uri:item.img}}
                     resizeMode="cover"
@@ -231,6 +231,9 @@ function renderMyBookSection(juegos) {
                         borderRadius: 20
                     }}
                 />
+                    <View>
+                        <Text style={{color:COLORS.white}}> {item.name}</Text>
+                    </View>
                     </View>
                 
 
