@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home, Profile, Monedero, CrearPartida, Addgame, Board, HazPremium,InvitarAmigo,Ayuda,Sala, ChatScreen } from "../screens/";
-import { icons, COLORS } from "../constants";
+import { icons, COLORS, FONTS } from "../constants";
 import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -66,10 +66,10 @@ const Tabs = ({ navigation }) => {
                                     transform: [
                                         { rotate: '-45deg' }
                                     ]}}>
-                                    <View style={{marginTop: -10,alignItems:'center'}}>
+                                    <View style={{marginTop: -12, alignItems:'center'}}>
                                     <Entypo name="plus" size={44} color={COLORS.theme} style={{opacity: opa}}  />
-                                    <Text style={{color:'#000'}}>Crear</Text>
-                                    <Text style={{color:'#000'}}>Partida</Text>
+                                    <Text style={{ ...FONTS.h4, marginBottom: -5 }}>Crear</Text>
+                                    <Text style={{ ...FONTS.h4, color:'#000' }}>Partida</Text>
                                     </View>
                                     {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> <Text> Your Text Here </Text> </LinearGradient>  */}
                                 </View>

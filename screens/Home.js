@@ -105,7 +105,7 @@ const Home = ({navigation}) => {
         }
     
         return (
-            <View style={{ flex: 1, justifyContent: 'center', marginTop: 20 }}>
+            <View style={{ flex: 1, justifyContent: 'center', marginTop: 10 }}>
                 <Text style={{ ...FONTS.h2, color: COLORS.white }}>Torneos Destacados</Text>
                 <View style={{  height: 150, width: SIZES.width}}>
                 
@@ -120,89 +120,6 @@ const Home = ({navigation}) => {
             </View>
         )
     }
-    
-
-// FUNCION PENDIENTE POR ELIMINAR remplazada por la de arriba
-// function renderButtonSection() {
-//     return (
-//         <View style={{ flex: 1, justifyContent: 'center', padding: SIZES.padding }}>
-//             <View style={{ flexDirection: 'row', height: 70, backgroundColor: COLORS.secondary, borderRadius: SIZES.radius }}>
-//                 {/* Claim */}
-//                 <TouchableOpacity
-//                     style={{ flex: 1 }}
-//                 >
-//                     <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-//                         <Image
-//                             source={icons.claim_icon}
-//                             resizeMode="contain"
-//                             style={{
-//                                 width: 30,
-//                                 height: 30
-//                             }}
-//                         />
-//                         <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Reclamar</Text>
-//                     </View>
-//                 </TouchableOpacity>
-
-//                 {/* Divider */}
-//                 <LineDivider />
-
-//                 {/* Get Point 
-//                     <TouchableOpacity
-//                         style={{ flex: 1 }}
-//                         onPress={() => console.log("Get Point")}
-//                     >
-//                         <View
-//                             style={{
-//                                 flex: 1,
-//                                 flexDirection: 'row',
-//                                 alignItems: 'center',
-//                                 justifyContent: 'center'
-//                             }}
-//                         >
-//                             <Image
-//                                 source={icons.point_icon}
-//                                 resizeMode="contain"
-//                                 style={{
-//                                     width: 30,
-//                                     height: 30
-//                                 }}
-//                             />
-//                             <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Comprar BUSD</Text>
-//                         </View>
-//                     </TouchableOpacity>*/}
-
-//                 {/* Divider 
-//                     <LineDivider />*/}
-
-//                 {/* My Card */}
-//                 <TouchableOpacity
-//                     style={{ flex: 1 }}
-//                     onPress={() => console.log("My Card")}
-//                 >
-//                     <View
-//                         style={{
-//                             flex: 1,
-//                             flexDirection: 'row',
-//                             alignItems: 'center',
-//                             justifyContent: 'center'
-//                         }}
-//                     >
-//                         <Image
-//                             source={icons.card_icon}
-//                             resizeMode="contain"
-//                             style={{
-//                                 width: 30,
-//                                 height: 30
-//                             }}
-//                         />
-//                         <Text style={{ marginLeft: SIZES.base, ...FONTS.body3, color: COLORS.white }}>Mi perfil</Text>
-//                     </View>
-//                 </TouchableOpacity>
-//             </View>
-//         </View>
-//     )
-// }
 
 function renderMyBookSection(juegos) {
 
@@ -221,18 +138,18 @@ function renderMyBookSection(juegos) {
                 })}
             >
                 {/* Book Cover */}
-                <View style={{ flexDirection: 'column', height: 100, backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10, height: 150}}>
+                <View style={{ flexDirection: 'column', height: 100, backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 5, height: 160}}>
                 <Image
                     source={{uri:item.img}}
                     resizeMode="cover"
                     style={{
-                        width: 80,
-                        height: 120,
-                        borderRadius: 20
+                        width: 100,
+                        height: 130,
+                        borderRadius: 10
                     }}
                 />
                     <View>
-                        <Text style={{color:COLORS.white}}> {item.name}</Text>
+                        <Text style={{color:COLORS.white, }}> {item.name}</Text>
                     </View>
                     </View>
                 
@@ -378,7 +295,7 @@ function renderCategoryData() {
     return (
         <View style={{ flex: 1, marginTop: SIZES.radius }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ ...FONTS.h2, color: COLORS.white }}>Ultimos Ganadores</Text>
+                <Text style={{ ...FONTS.h2, color: COLORS.white }}>Últimos Ganadores</Text>
 
                 {/*<TouchableOpacity
                     onPress={() => console.log("See More")}
@@ -436,15 +353,6 @@ return (
         </ScrollView>
     </SafeAreaView>
 )
-
-
-
-
-
-
-
-
-
 
 }
 

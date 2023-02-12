@@ -112,8 +112,8 @@ const Profile = ({ navigation }) => {
       <View  key={index} style={{ marginVertical: SIZES.base }}>
         <LinearGradient
           // Background Linear Gradient
-          colors={['#31323B', '#fff']}
-          start={[1, 0.7]}
+          colors={['#31323B', '#fff', '#31323B']}
+          start={[-1, -10]}
           style={{ borderRadius: 20, padding: 10, paddingHorizontal: 20 }}
         >
           <View style={{ flex: 1, flexDirection: 'row' }} >
@@ -121,19 +121,19 @@ const Profile = ({ navigation }) => {
               <Image
                 source={{ uri: t?.img }}
                 resizeMode="cover"
-                style={{ width: 80, height: 80, borderRadius: 10 }}
+                style={{ width: 80, height: 80, borderRadius: 10, marginHorizontal: -10 }}
               />
             </View>}
 
-            <View style={{ flex: 5, marginLeft: SIZES.radius, height: '100%', justifyContent: 'center', }}>
+            <View style={{ flex: 5, marginLeft: SIZES.padding, height: '100%', justifyContent: 'center'}}>
               <View>
-                <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{t?.name}</Text>
+                <Text style={{ ...FONTS.h3, color: COLORS.white }}>{t?.name}</Text>
                 <Text style={{ fontSize: SIZES.body4 / 1.1, color: COLORS.white }}>{item?.partidas_ganadas + ' Partidas ganadas'}</Text>
                 <Text style={{ fontSize: SIZES.body4 / 1.1, color: COLORS.white }}>{item?.torneos_ganados + ' Torneos ganados'}</Text>
               </View>
             </View>
-            <View style={{ color: '#fff', justifyContent: 'flex-end', flex: 3 }} onPress={() => console.log("Bookmark")}>
-              <Text style={{ color: '#fff', fontSize: 12 }}>70% VICTORIAS</Text>
+            <View style={{ ...FONTS.h4, color: COLORS.game, justifyContent: 'flex-end', flex: 3 }} onPress={() => console.log("Bookmark")}>
+              <Text style={{ ...FONTS.h8, color: COLORS.game}}>70% VICTORIAS</Text>
             </View>
           </View>
 

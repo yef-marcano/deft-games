@@ -256,7 +256,7 @@ const CrearPartida = ({ navigation }) => {
           <TouchableOpacity onPress={() => crearPartida()} >
             <View style={{ alignItems: 'center' }}>
 
-              <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'CREAR PARTIDA'}</Text>
+              <Text style={{ fontSize: SIZES.h1, color: COLORS.white }}>{'CREAR PARTIDA'}</Text>
             </View>
           </TouchableOpacity>
 
