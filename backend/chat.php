@@ -23,7 +23,8 @@ switch ($method) {
 }
 
 function getMessages($conn) {
-    $result = $conn->query("SELECT * FROM messages ORDER BY id DESC");
+    $id_game = $_GET['id_game'];
+    $result = $conn->query("SELECT * FROM messages WHERE id_sala = $id_game ORDER BY id DESC");
     $data = array();
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;
@@ -34,8 +35,9 @@ function getMessages($conn) {
 function sendMessage($conn) {
     $data = json_decode(file_get_contents("php://input"), true);
     $sender = $data['sender'];
+    $id_sala = $data['id_sala'];
     $message = $conn->real_escape_string($data['message']);
-    $sql = "INSERT INTO messages (sender, message) VALUES ('$sender', '$message')";
+    $sql = "INSERT INTO messages (sender, message, id_sala) VALUES ('$sender', '$message', '$id_sala')";
     if ($conn->query($sql) === TRUE) {
         echo json_encode(array("status" => 200, "message" => "Message sent successfully."));
     } else {

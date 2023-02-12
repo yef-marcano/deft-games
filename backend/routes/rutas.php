@@ -128,6 +128,27 @@ Esto es para las peticiones simples
                 }
             }
 
+            
+
+            /* crear salas*/
+            if (array_filter($arrayRutas)[1] == "salas") {
+                /*=============== 
+                    Tipo POST
+                    ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+                    // array vacio
+                    $datosenviados = array();
+                    // realizo un parse para obtener datos de file get content y pasarlos al array
+                    parse_str(file_get_contents('php://input'), $datosenviados);
+                    //print_r($datosenviados);
+                    //return
+                    $usuarios = new ControladorSalas();
+                    $usuarios->create($datosenviados);
+                }
+            }
+
 
 
             /* peticiones registro de usuarios*/

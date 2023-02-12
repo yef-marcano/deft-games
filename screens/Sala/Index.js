@@ -40,15 +40,32 @@ const LineDivider = () => {
   );
 };
 
-const Sala = ({ navigation }) => {
+const Sala = ({ route, navigation }) => {
+  navigation.setOptions({ tabBarVisible: false })
+  const { data } = route.params;
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
+  const [partida, setPartida] = React.useState(data);
 
 
   React.useEffect(() => {
-    usuario();
+    fetchData
   }, []);
+
+  async function fetchData(params) {
+    await usuario();
+    //await sala();
+  }
+  async function sala() {
+    //setVisible(true)
+    let data = await AsyncStorage.getItem("@partida");
+    const obj = JSON.parse(data);
+    console.log(obj)
+    setPartida(obj)
+    //navigation.navigate('Login')
+    //setVisible(false)
+  }
 
 
 
@@ -81,6 +98,7 @@ const Sala = ({ navigation }) => {
 
 
   function headerUser(params) {
+    console.log(partida)
     return (
       <>
         <ImageBackground source={images.bgprofile} resizeMode="cover" style={styles.image}>
@@ -92,7 +110,7 @@ const Sala = ({ navigation }) => {
               <Text style={{ color: COLORS.primary, fontSize: SIZES.body2 }}>{'Premio'}</Text>
               <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
 
-                <Text style={{ color: COLORS.white, fontSize: SIZES.body1 }}>{'9'}</Text>
+                <Text style={{ color: COLORS.white, fontSize: SIZES.body1 }}>{partida?.price}</Text>
                 <Image source={images.coindeft} style={{ height: 25, width: 30, }} />
 
               </View>
@@ -230,7 +248,7 @@ const Sala = ({ navigation }) => {
               start={[2, 0.5]}
               style={{ borderRadius: 10, padding: 10, marginVertical: 30 }}
             >
-              <TouchableOpacity onPress={() => navigation.navigate('Chat')} >
+              <TouchableOpacity onPress={() => navigation.navigate('Chat', {idsala: partida.id_sala})} >
                 <View style={{ alignItems: 'center' }}>
 
                   <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'CHATEA CON TU RIVAL'}</Text>

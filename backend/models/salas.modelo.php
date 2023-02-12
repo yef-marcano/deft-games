@@ -1,7 +1,7 @@
 <?php
 require_once "./config/connect.php";
 
-class ModelosJuegos{
+class ModelosSalas{
 
 
         static public function index($tabla,$dato){
@@ -116,12 +116,14 @@ class ModelosJuegos{
         static public function create($tabla,$datos){
             
 
-            $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(id_user, id_game, nombre_eneljuego)
-             VALUES (:id_user,:id_game,:nombre_eneljuego)");
+            $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(id_game, user1, price)
+             VALUES (:id_game,:user1,:price)");
             
-            $stmt->bindParam(":id_user", $datos["usuario"], PDO::PARAM_INT);
             $stmt->bindParam(":id_game", $datos["idgame"], PDO::PARAM_INT);
-            $stmt->bindParam(":nombre_eneljuego", $datos["nombrejuego"], PDO::PARAM_STR);/*
+            $stmt->bindParam(":user1", $datos["user1"], PDO::PARAM_INT);
+            $stmt->bindParam(":price", $datos["price"], PDO::PARAM_INT);
+            //$stmt->bindParam(":nombre_eneljuego", $datos["nombrejuego"], PDO::PARAM_STR);
+            /*
             $stmt->bindParam(":apellidos", $datos["apellidos"], PDO::PARAM_STR);
             $stmt->bindParam(":tipoDocumento", $datos["tipoDocumento"], PDO::PARAM_STR);
             $stmt->bindParam(":documento", $datos["documento"], PDO::PARAM_STR);
@@ -131,7 +133,7 @@ class ModelosJuegos{
 
             if($stmt->execute()){
 
-                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id_gameguardado DESC LIMIT 1");
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla ORDER BY id_sala DESC LIMIT 1");
                 $stmt->execute();
                 return $stmt->fetchALL(PDO::FETCH_CLASS);
                 $stmt->close();
