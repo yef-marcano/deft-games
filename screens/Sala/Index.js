@@ -230,7 +230,7 @@ const Sala = ({ navigation }) => {
               start={[2, 0.5]}
               style={{ borderRadius: 10, padding: 10, marginVertical: 30 }}
             >
-              <TouchableOpacity >
+              <TouchableOpacity onPress={() => navigation.navigate('Chat')} >
                 <View style={{ alignItems: 'center' }}>
 
                   <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'CHATEA CON TU RIVAL'}</Text>

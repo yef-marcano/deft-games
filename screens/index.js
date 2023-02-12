@@ -12,6 +12,9 @@ import CrearPartida from "./CrearPartida/Index"
 import Addgame from "./Addgame/Index"
 import Board from "./Board/Index"
 import Sala from "./Sala/Index"
+import ChatScreen from "./Chat"
+
+
 
 export {
     Home,
@@ -27,5 +30,6 @@ export {
     CrearPartida,
     Addgame,
     Board,
-    Sala
+    Sala,
+    ChatScreen
 };
