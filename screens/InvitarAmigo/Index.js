@@ -10,6 +10,7 @@ import {
     Share
 } from 'react-native';
 import { Button  } from 'galio-framework';
+import Menu from '../../components/Menu';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -83,8 +84,8 @@ const InvitarAmigo = ({ navigation }) => {
         <FullLoading visible={visible} text={'Cerrando sesión'} />
 
 
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black , paddingTop: 0}}>
-       
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background , paddingTop: 0}}>
+        <Menu back />
             <ScrollView style={{ marginTop: SIZES.radius }}>
                 {/* Categories Section */}
                 <View style={{ marginTop: SIZES.padding }}>

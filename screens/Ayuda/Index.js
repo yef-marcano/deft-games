@@ -173,11 +173,11 @@ const Ayuda = ({ navigation }) => {
         <>
         <FullLoading visible={visible} text={'Cerrando sesión'} />
 
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black , paddingTop: 0}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background , paddingTop: 0}}>
        
             {/* Body Section */}
             <ScrollView style={{ marginTop: SIZES.radius}}>
-                <View style={{ marginTop: SIZES.padding }}>
+                <View style={{ marginTop: SIZES.padding, paddingBottom: 100 }}>
                     <View>
                         {renderCategoryHeader()}
                     </View>
