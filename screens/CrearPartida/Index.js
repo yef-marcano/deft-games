@@ -253,7 +253,7 @@ const CrearPartida = ({ navigation }) => {
           start={[2, 0.5]}
           style={{ borderRadius: 10, padding: 10, marginVertical: 30 }}
         >
-          <TouchableOpacity  >
+          <TouchableOpacity onPress={() => crearPartida()} >
             <View style={{ alignItems: 'center' }}>
 
               <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'CREAR PARTIDA'}</Text>
@@ -324,7 +324,9 @@ const CrearPartida = ({ navigation }) => {
         </TouchableOpacity>
       </View>*/}
         <View style={{ alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('Ayuda')}>
           <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 10 }}>CONOCE LAS REGLAS</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Text style={{ ...FONTS.h2, color: COLORS.lightRed, marginVertical: 10 }}>CANCELAR CREACION</Text>
           </TouchableOpacity>
@@ -377,7 +379,15 @@ const CrearPartida = ({ navigation }) => {
     setUserdata(obj);
     console.log(userdata);
   }
+  
+  async function crearPartida(params) {
+    navigation.navigate('Sala')
+  }
 };
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {

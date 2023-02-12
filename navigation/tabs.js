@@ -6,7 +6,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile, Monedero, CrearPartida, Addgame, Board, HazPremium,InvitarAmigo,Ayuda } from "../screens/";
+import { Home, Profile, Monedero, CrearPartida, Addgame, Board, HazPremium,InvitarAmigo,Ayuda,Sala } from "../screens/";
 import { icons, COLORS } from "../constants";
 import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from "expo-linear-gradient";
@@ -149,7 +149,18 @@ const Tabs = ({ navigation }) => {
                 options={{
                     headerShown: false,
                     tabBarButton: () => null,
+              presentation: 'modal',
+              animationTypeForReplace: 'push',
+              animation:'slide_from_right'
                 
+                }}
+            />
+            <Tab.Screen
+                name="Sala"
+                component={Sala}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
                 }}
             />
         </Tab.Navigator>
