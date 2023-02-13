@@ -24,7 +24,7 @@ switch ($method) {
 
 function getMessages($conn) {
     $id_game = $_GET['id_game'];
-    $result = $conn->query("SELECT * FROM messages WHERE id_sala = $id_game ORDER BY id DESC");
+    $result = $conn->query("SELECT * FROM messages WHERE id_sala = $id_game ORDER BY id ASC");
     $data = array();
     while ($row = $result->fetch_assoc()) {
         $data[] = $row;

@@ -23,6 +23,25 @@ class ControladorSalas
             return;
 
     }
+    public function indexGame()
+    {
+
+
+        /*=============== 
+        Defino la tabla de la base de datos a usar pasandole el nombre al nodelo de index
+        ===============*/
+        $usuarios = ModelosSalas::indexGame("salas", null);
+
+
+            $json = array(
+                "status" => 200,
+                "total_registros" => count($usuarios),
+                "detalle" => $usuarios
+            );
+            echo json_encode($json, true);
+            return;
+
+    }
     
     public function JuegosGuardados($idjuegador)
     {

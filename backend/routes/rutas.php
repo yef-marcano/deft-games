@@ -148,6 +148,29 @@ Esto es para las peticiones simples
                     $usuarios->create($datosenviados);
                 }
             }
+            /* crear salas*/
+
+            if (array_filter($arrayRutas)[1] == "salasdisonibles") {
+                /*=============== 
+                    Tipo POST
+                    ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+
+
+                    $usuarios = new ControladorSalas();
+                    $usuarios->indexGame();
+                    // array vacio
+                    /*
+                    $datosenviados = array();
+                    // realizo un parse para obtener datos de file get content y pasarlos al array
+                    parse_str(file_get_contents('php://input'), $datosenviados);
+                    //print_r($datosenviados);
+                    //return
+                    $usuarios = new ControladorSalas();
+                    $usuarios->index($datosenviados);*/
+                }
+            }
+
 
 
 

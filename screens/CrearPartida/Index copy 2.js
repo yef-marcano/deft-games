@@ -23,7 +23,7 @@ const CrearPartida = ({ navigation }) => {
 
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
-
+c
   const [games, setGames] = React.useState([]);
 
   const [selectedId, setSelectedId] = useState(null);
@@ -406,7 +406,7 @@ const CrearPartida = ({ navigation }) => {
             console.log(jsonValue)
             AsyncStorage.setItem('partida', jsonValue)
             
-            navigation.navigate('Sala', {data: res.data.detalle[0]})
+            navigation.navigate('Sala', {data:res.data.detalle[0]})
             return
           } else {
             AlertBug(res.data.detalle)

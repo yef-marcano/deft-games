@@ -25,6 +25,29 @@ class ModelosSalas{
             }
 
         }
+
+        
+        static public function indexGame($tabla,$dato){
+            if($dato == null){
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla where estado = 0");
+                $stmt->execute();
+                return $stmt->fetchALL(PDO::FETCH_CLASS);
+                $stmt->close();
+                $stmt=null;
+
+            } else if(is_numeric($dato)) {
+
+                $stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE id_user =:id");
+                $stmt->bindParam(":id", $dato, PDO::PARAM_STR);
+                $stmt->execute();
+                return $stmt->fetchALL(PDO::FETCH_CLASS);
+                $stmt->close();
+                $stmt=null;
+
+
+            }
+
+        }
         
         static public function indexCompare($tabla,$dato){
             if($dato == null){

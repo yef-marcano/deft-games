@@ -133,7 +133,7 @@ function renderMyBookSection(juegos) {
                     //marginLeft: index == 0 ? SIZES.padding : 0,
                     marginRight: SIZES.radius
                 }}
-                onPress={() => navigation.navigate("BookDetail", {
+                onPress={() => navigation.navigate("Salas", {
                     book: item
                 })}
             >

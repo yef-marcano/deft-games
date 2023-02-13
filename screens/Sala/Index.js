@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { NavBar } from "galio-framework";
 import Menu from '../../components/Menu';
 import { mainApi } from "../../services";
+import { useIsFocused } from "@react-navigation/native";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -43,45 +44,95 @@ const LineDivider = () => {
 const Sala = ({ route, navigation }) => {
   navigation.setOptions({ tabBarVisible: false })
   const { data } = route.params;
+  console.log("@-------------> HOHOHOH")
+  console.log(data)
+
+  const isFocused = useIsFocused();
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
   const [expanded, setExpanded] = React.useState(false);
   const [partida, setPartida] = React.useState(data);
 
-
+  const [games, setGames] = React.useState([]);
+  const [allgames, setAllGames] = React.useState([]);
+  //console.log("sala")
   React.useEffect(() => {
-    fetchData
-  }, []);
+    if (isFocused == true) {
+    fetchData()
+  }
+  }, [isFocused]);
 
   async function fetchData(params) {
+   // console.log("fetg")
+    setPartida(data)
     await usuario();
+    await juegostodos();
+    await juegoslista();
     //await sala();
   }
+
+  async function juegostodos() {
+    //console.log("todos lso juegos")
+    try {
+      await mainApi('', 'juegos', 'GET')
+        .then(res => {
+         // console.log('todos los juegos');
+          if (res.data.status === 200) {
+            console.log(res.data)
+            setAllGames(res.data.detalle)
+            return
+          } else {
+            //console.log('error llamando a todos los juegos')
+            AlertBug(res.data.detalle)
+          }
+        })
+    } catch (error) {
+      console.log('-----> Error');
+      console.log(error);
+     }
+  }
+  
+  async function juegoslista() {
+    let user = await AsyncStorage.getItem("@user_data");
+    const obj = JSON.parse(user);
+    //console.log('Estaparta ------> juegosguardados/'+obj.id);
+    try {
+      await mainApi('', 'juegosguardados/'+obj.id, 'GET')
+        .then(res => {
+          //console.log(res.data.detalle);
+          if (res.data.status === 200) {
+            setGames(res.data.detalle)
+            return
+          } else {
+            console.log('error de juegos guardados')
+            AlertBug(res.data.detalle)
+          }
+        })
+    } catch (error) {
+      console.log('-----> Error');
+      console.log(error); }
+  }
+
+
   async function sala() {
     //setVisible(true)
     let data = await AsyncStorage.getItem("@partida");
     const obj = JSON.parse(data);
-    console.log(obj)
+    
+    //console.log(obj)
     setPartida(obj)
     //navigation.navigate('Login')
     //setVisible(false)
   }
 
 
-
-  async function logout() {
-    setVisible(true)
-    await AsyncStorage.removeItem('@user_data');
-    navigation.navigate('Login')
-    setVisible(false)
-  }
-
-
   async function usuario() {
+  //  console.log("usuario")
     let user = await AsyncStorage.getItem("@user_data");
     const obj = JSON.parse(user);
     setUserdata(obj);
-    console.log(userdata);
+   // console.log("console de user data")
+    //console.log(userdata);
   }
 
   const [selectedCategory, setSelectedCategory] = React.useState(1);
@@ -98,7 +149,10 @@ const Sala = ({ route, navigation }) => {
 
 
   function headerUser(params) {
-    console.log(partida)
+    //console.log('----> Partida')
+    //console.log(partida)
+
+
     return (
       <>
         <ImageBackground source={images.bgprofile} resizeMode="cover" style={styles.image}>
@@ -140,6 +194,29 @@ const Sala = ({ route, navigation }) => {
     )
   }
 
+    var t
+    allgames.forEach(element => {
+      if(element.id_game === partida?.id_game){
+        t = element
+      }
+    });
+    
+    console.log("juegos guarddos")
+    //console.log(partida)
+    var y
+    games.forEach(element => {
+      if(element.id_game === partida?.id_game){
+        y = element
+      }
+    });
+    //console.log(y)
+
+
+    var name 
+    console.log("nombre del contrario")
+    
+
+
 
   return (
     <>
@@ -153,7 +230,7 @@ const Sala = ({ route, navigation }) => {
             <View>{headerUser()}</View>
 
             <View style={{ marginHorizontal: SIZES.padding, alignItems: 'center', marginTop: 50 }} >
-              <Text style={{ fontSize: SIZES.body2, color: COLORS.white, justifyContent: 'center' }}>{'Nombre de juego'}</Text>
+              <Text style={{ fontSize: SIZES.body2, color: COLORS.white, justifyContent: 'center' }}>{t?.name}</Text>
             </View>
           </View>
 
@@ -166,7 +243,8 @@ const Sala = ({ route, navigation }) => {
             }}
           >
             {/* Book Cover */}
-            <View style={{ flexDirection: 'column', backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10 }}>
+            <View style={{ flexDirection: 'column', backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10,
+            width:'100%' }}>
               <Image
                 source={{ uri: 'http://clipart-library.com/images/ATbrxjpyc.jpg' }}
                 resizeMode="cover"
@@ -176,7 +254,7 @@ const Sala = ({ route, navigation }) => {
                 }}
               />
               <View  >
-                <Text style={{ color: COLORS.white}}> {'nombre usuario'}</Text>
+                <Text style={{ color: COLORS.white}}> {y?.nombre_eneljuego}</Text>
               </View>
             </View>
           </View>
@@ -190,7 +268,8 @@ const Sala = ({ route, navigation }) => {
             }}
           >
             {/* Book Cover */}
-            <View style={{flexDirection: 'column', backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10 }}>
+            <View style={{flexDirection: 'column', backgroundColor: COLORS.lightGray, borderRadius: SIZES.radius, padding: 10,
+            width:'100%' }}>
               <Image
                 source={{ uri: 'http://clipart-library.com/images/ATbrxjpyc.jpg' }}
                 resizeMode="cover"

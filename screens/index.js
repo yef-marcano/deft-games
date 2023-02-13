@@ -13,6 +13,7 @@ import Addgame from "./Addgame/Index"
 import Board from "./Board/Index"
 import Sala from "./Sala/Index"
 import ChatScreen from "./Chat"
+import Salas from "./Salas/Index"
 
 
 
@@ -31,5 +32,6 @@ export {
     Addgame,
     Board,
     Sala,
-    ChatScreen
+    ChatScreen,
+    Salas
 };

@@ -25,9 +25,22 @@ const ChatScreen = ({ route, navigation }) => {
         }, 1000);
         return () => clearInterval(intervalId);
     }, []);
+    
+    useEffect(() => {
+        call()
+    }, []);
+
+    async function call(params) {
+        let users = await AsyncStorage.getItem("@user_data")
+        const obj = JSON.parse(users);
+        console.log(obj)
+        setUserdata(obj);
+    }
 
     const sendMessage = async () => {
-        
+        if(text == ''){
+            return
+        }
         let user = await AsyncStorage.getItem("@user_data");
         const obj = JSON.parse(user);
         console.log(obj)
@@ -35,6 +48,29 @@ const ChatScreen = ({ route, navigation }) => {
         await axios.post('http://52.54.227.142/chat.php', { sender: obj.id, message: text, id_sala: idsala });
         setText('');
     };
+
+    function Mensajes(data) {
+    //console.log(data)
+     return(
+        <>
+        {data?.item.sender  == userdata?.id ? <View style={{
+            backgroundColor: data?.item.sender  == userdata?.id  ? '#dff7d7':'#fff', borderRadius:20, padding: 10, marginVertical: 5, 
+        alignSelf: data?.item.sender  == userdata?.id  ? 'flex-end':'flex-start'}}>
+                <View style={{}}>
+                <Text style={{ color: 'black' }}>{data.item.message}</Text>
+
+                </View>
+        </View>: <View style={{
+            backgroundColor: data?.item.sender  == userdata?.id  ? '#dff7d7':'#fff', borderRadius:20, padding: 10, marginVertical: 5, 
+        alignSelf: data?.item.sender  == userdata?.id  ? 'flex-end':'flex-start'}}>
+                <View style={{}}>
+                <Text style={{ color: 'black' }}>{data.item.message}</Text>
+
+                </View>
+        </View>}
+        </>
+     )   
+    }
 
     return (
         <View style={{backgroundColor: COLORS.theme,  paddingTop: SIZES.radius,
@@ -45,9 +81,7 @@ const ChatScreen = ({ route, navigation }) => {
                 data={messages}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => 
-                <View style={{backgroundColor: '#fff', borderRadius:20, padding: 10, marginVertical: 5}}>
-                <Text style={{ color: 'black' }}>{item.message}</Text>
-                </View>}
+                <Mensajes item={item}/>}
             />
             </View>
             <View style={{height: '20%'}}>
