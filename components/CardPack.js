@@ -26,7 +26,7 @@ const CardPack = (item, index) => {
       </TouchableOpacity>*/}
             {/*<View style={[styles.container, { backgroundColor }]}>*/}
 
-            <Text>Comprar</Text>
+            <Text style={{ ...FONTS.h3, color: COLORS.white, marginHorizontal: 8 }}>Comprar</Text>
             <View>
                 <LinearGradient
                     colors={item.id === item.selectedId ? [COLORS.background, COLORS.background] : [COLORS.background, COLORS.background]}
@@ -52,7 +52,7 @@ const CardPack = (item, index) => {
                             colors={['#FEA800', '#FEA800']}
                             start={[1, 1]}
                             style={styles.buttonPack}>
-                            <Text>Comprar</Text>
+                            <Text style={{ ...FONTS.h4, color: COLORS.theme}}>Comprar</Text>
                         </LinearGradient>
                     </View>
                 </LinearGradient>
