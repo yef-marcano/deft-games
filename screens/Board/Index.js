@@ -175,7 +175,7 @@ const Board = ({ navigation }) => {
             >
               <Text style={{ ...FONTS.h2, color: COLORS.white }}>
                 {" "}
-                Cerrar sesion
+                Cerrar sesión
               </Text>
             </TouchableOpacity>
           </View>
