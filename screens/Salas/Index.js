@@ -46,33 +46,29 @@ const Salas = ({ navigation }) => {
   const [salasdispo, setSalasdispo] = React.useState([]);
   const [allgames, setAllGames] = React.useState([]);
 
-  /*React.useEffect(() => {
-    usuario();
-    salasDisponibles();
-  }, []);*/
   React.useEffect(() => {
     if (isFocused == true) {
-    fetchData()
-  }
+      fetchData()
+    }
   }, [isFocused]);
 
 
   async function fetchData(params) {
     // console.log("fetg")
-     await usuario();
-     await juegostodos();
-     //await juegoslista();
-     await salasDisponibles();
-     //await sala();
-   }
- 
+    await usuario();
+    await juegostodos();
+    //await juegoslista();
+    await salasDisponibles();
+    //await sala();
+  }
+
 
   async function juegostodos() {
     //console.log("todos lso juegos")
     try {
       await mainApi('', 'juegos', 'GET')
         .then(res => {
-         // console.log('todos los juegos');
+          // console.log('todos los juegos');
           if (res.data.status === 200) {
             console.log(res.data)
             setAllGames(res.data.detalle)
@@ -85,10 +81,10 @@ const Salas = ({ navigation }) => {
     } catch (error) {
       console.log('-----> Error');
       console.log(error);
-     }
+    }
   }
 
-  
+
   async function salasDisponibles() {
     //let user = await AsyncStorage.getItem("@user_data");
     //const obj = JSON.parse(user);
@@ -96,7 +92,7 @@ const Salas = ({ navigation }) => {
     try {
       await mainApi('', 'salasdisonibles', 'GET')
         .then(res => {
-          
+
           //console.log(res.data.detalle);
           if (res.data.status === 200) {
             setSalasdispo(res.data.detalle)
@@ -108,7 +104,8 @@ const Salas = ({ navigation }) => {
         })
     } catch (error) {
       console.log('-----> Error');
-      console.log(error); }
+      console.log(error);
+    }
   }
 
 
@@ -149,7 +146,7 @@ const Salas = ({ navigation }) => {
             height: 120, flexDirection: 'row',
             marginHorizontal: SIZES.padding, marginTop: 20, marginBottom: 10, flex: 1.7
           }}>
-            <View style={{ justifyContent: 'center', padding: 10, flex: 1, alignItems:'center' }}>
+            <View style={{ justifyContent: 'center', padding: 10, flex: 1, alignItems: 'center' }}>
               <Text style={{ color: COLORS.white, fontSize: SIZES.body1 }}>{'Salas disponibles'}</Text>
               <Text style={{ color: COLORS.white, fontSize: SIZES.body3 }}>{'Partidas contra jugadores '}</Text>
             </View>
@@ -161,11 +158,11 @@ const Salas = ({ navigation }) => {
 
 
   function MiniCard({ data, ...rest }) {
-    
+
     var t
     allgames.forEach(e => {
       salasdispo.forEach(element => {
-        if(e.id_game === element?.id_game){
+        if (e.id_game === element?.id_game) {
           t = e
         }
       })
@@ -177,20 +174,22 @@ const Salas = ({ navigation }) => {
 
     return (
       <>
-        <TouchableOpacity onPress={() => irasala(data)} style={{paddingVertical: 20, flexDirection:'row',
-        borderBottomColor: '#23262D', borderBottomWidth: 1, alignItems:'center'}}>
+        <TouchableOpacity onPress={() => irasala(data)} style={{
+          paddingVertical: 20, flexDirection: 'row',
+          borderBottomColor: '#23262D', borderBottomWidth: 1, alignItems: 'center'
+        }}>
           {/*<Ionicons name={t?.img} size={34} color={data?.color} style={{marginEnd: 20}} />*/}
           <View>
-          <Image
-                source={{ uri: t?.img }}
-                resizeMode="cover"
-                style={{ width: 50, height: 50, borderRadius: 80, marginHorizontal: 10 }}
-              />
-            
+            <Image
+              source={{ uri: t?.img }}
+              resizeMode="cover"
+              style={{ width: 50, height: 50, borderRadius: 80, marginHorizontal: 10 }}
+            />
+
           </View>
           <View>
-          <Text style={{color: data?.colorFinal ? COLORS.primary : COLORS.white, fontSize: SIZES.body1}}>{t?.name}</Text>
-          <Text style={{color: data?.colorFinal ? COLORS.primary : COLORS.white, fontSize: SIZES.body1}}>{'Apuesta de ' + data?.price}</Text>
+            <Text style={{ color: data?.colorFinal ? COLORS.primary : COLORS.white, fontSize: SIZES.body1 }}>{t?.name}</Text>
+            <Text style={{ color: data?.colorFinal ? COLORS.primary : COLORS.white, fontSize: SIZES.body1 }}>{'Apuesta de ' + data?.price}</Text>
 
           </View>
         </TouchableOpacity>
@@ -243,7 +242,7 @@ const Salas = ({ navigation }) => {
 
 
           <View style={{ marginHorizontal: SIZES.padding, paddingBottom: 200 }}>
-         
+
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -255,8 +254,8 @@ const Salas = ({ navigation }) => {
     let jsonValue = JSON.stringify(params)
     //console.log(jsonValue)
     await AsyncStorage.setItem('partida', jsonValue)
-    
-    navigation.navigate('Sala', {data: params})
+
+    navigation.navigate('Sala', { data: params })
   }
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, Image,
+    Linking, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SIZES, icons, images } from '../constants';
 
@@ -20,12 +21,7 @@ const CardPack = (item, index) => {
     };
 
     return (
-        <TouchableOpacity onPress={() => item.setSelectedId(item.id === item.selectedId ? null : item.id)}   >
-            {/*<TouchableOpacity onPress={handlePress} style={styles.button}>
-        <View />
-      </TouchableOpacity>*/}
-            {/*<View style={[styles.container, { backgroundColor }]}>*/}
-
+        <TouchableOpacity style={{width: '33.3%'}} onPress={() => (item.setSelectedId(item.id === item.selectedId ? null : item.id, buy(item.data.price)))}   >
             <Text style={{ ...FONTS.h3, color: COLORS.white, marginHorizontal: 8 }}>Comprar</Text>
             <View>
                 <LinearGradient
@@ -59,6 +55,29 @@ const CardPack = (item, index) => {
             </View>
         </TouchableOpacity >
     );
+
+    async function openURI(direction) {
+        const url = direction;
+        const supported = await Linking.canOpenURL(url); //To check if URL is supported or not.
+        if (supported) {
+          await Linking.openURL(url); // It will open the URL on browser.
+        } else {
+          Alert.alert(`Don't know how to open this URL: ${url}`);
+        }
+    };
+
+    async function buy(item) {
+        console.log(item)
+        if (item == 500) {
+            openURI(`https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ARJN7F7N3HASN`)
+          } else if (item == 2000){
+            openURI(`https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R25ML7JM9JS4A`)
+          } else if(item == 5000) {
+            openURI(`https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VCUTKBZ2R5DXU`)
+          }
+    }
+    
+
 };
 
 const styles = StyleSheet.create({

@@ -70,6 +70,17 @@ Esto es para las peticiones simples
             }
 
 
+            /* peticiones de usuarios*/
+            if (array_filter($arrayRutas)[1] == "torneos") {
+                /*=============== 
+                    Tipo GET Consultar todos los usuarios registrados
+                    ===============*/
+                if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "GET") {
+
+                    $usuarios = new ControladorJuegos();
+                    $usuarios->indexTorenos();
+                }
+            }
 
 
             /* peticiones de un usuario*/

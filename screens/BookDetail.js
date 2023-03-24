@@ -1,15 +1,6 @@
 import React from "react";
-import {
-    View,
-    Text,
-    ImageBackground,
-    TouchableOpacity,
-    Image,
-    ScrollView,
-    Animated
-} from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Animated } from 'react-native';
 import { FONTS, COLORS, SIZES, icons } from "../constants";
-
 
 const BookDetail = ({ route, navigation }) => {
 
@@ -103,40 +94,6 @@ const BookDetail = ({ route, navigation }) => {
                         }}
                     />
                 </View>
-
-                {/* Book Name and Author */}
-                {/*<View style={{ flex: 1.8, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ ...FONTS.h2, color: book.navTintColor }}>{book.bookName}</Text>
-                    <Text style={{ ...FONTS.body3, color: book.navTintColor }}>{book.author}</Text>
-                </View>*/}
-
-                {/* Book Info */}
-                {/*<View
-                    style={{
-                        flexDirection: 'row',
-                        paddingVertical: 20,
-                        margin: SIZES.padding,
-                        borderRadius: SIZES.radius,
-                        backgroundColor: "rgba(0,0,0,0.3)"
-                    }}
-                >
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>{book.rating}</Text>
-                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>#</Text>
-                    </View>
-
-                    <LineDivider />
-                    <View style={{ flex: 1, paddingHorizontal: SIZES.radius, alignItems: 'center' }}>
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>{book.pageNo}</Text>
-                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>#</Text>
-                    </View>
-
-                    <LineDivider />
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <Text style={{ ...FONTS.h3, color: COLORS.white }}>{book.language}</Text>
-                        <Text style={{ ...FONTS.body4, color: COLORS.white }}>#</Text>
-                    </View>
-                </View>*/}
             </View>
         )
     }
@@ -166,8 +123,6 @@ const BookDetail = ({ route, navigation }) => {
                         }}
                     />
                 </View>
-
-                {/* Description */}
                 <ScrollView
                     contentContainerStyle={{ paddingLeft: SIZES.padding2 }}
                     showsVerticalScrollIndicator={false}
@@ -193,7 +148,6 @@ const BookDetail = ({ route, navigation }) => {
     function renderBottomButton() {
         return (
             <View style={{ flex: 1, flexDirection: 'row' }}>
-                {/* Bookmark */}
                 <TouchableOpacity
                     style={{
                         width: 60,
@@ -216,8 +170,6 @@ const BookDetail = ({ route, navigation }) => {
                         }}
                     />
                 </TouchableOpacity>
-
-                {/* Start Reading */}
                 <TouchableOpacity
                     style={{
                         flex: 1,
@@ -239,17 +191,12 @@ const BookDetail = ({ route, navigation }) => {
     if (book) {
         return (
             <View style={{ flex: 1, backgroundColor: COLORS.black }}>
-                {/* Book Cover Section */}
                 <View style={{ flex: 2 }}>
                     {renderBookInfoSection()}
                 </View>
-
-                {/* Description */}
                 <View style={{ flex: 2 }}>
                     {renderBookDescription()}
                 </View>
-
-                {/* Buttons */}
                 <View style={{ height: 70, marginBottom: 30 }}>
                     {renderBottomButton()}
                 </View>

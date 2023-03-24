@@ -16,6 +16,7 @@ import { Button, Card } from "galio-framework";
 import Menu from '../../components/Menu';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { AlertBug } from "../../helper/Alert";
 const url = "https://www.paypal.com/paypalme/joalpm/5USD";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -312,7 +313,7 @@ const HazPremium = ({ navigation }) => {
               start={[2, 0.5]}
               style={{ borderRadius: 10, padding: 10, marginVertical: 30 }}
             >
-              <TouchableOpacity  >
+              <TouchableOpacity  onPress={() => comprar()}>
                 <View style={{ alignItems: 'center' }}>
 
                   <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'QUIERO SER PREMIUM'}</Text>
@@ -332,6 +333,18 @@ const HazPremium = ({ navigation }) => {
 
     </>
   );
+
+  function comprar(params) {
+    if (selectedId === 0) {
+      //6 meses
+        openURI6()
+    } else if (selectedId === 1){
+      //1 mes
+      openURI24()
+    } else {
+      AlertBug('Selecciona un monto')
+    }
+  }
 };
 
 export default HazPremium;

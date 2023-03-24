@@ -4,10 +4,51 @@ import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NavBar } from 'galio-framework';
 import { COLORS, FONTS, SIZES, icons, images } from "../constants";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from "@react-navigation/native";
+
+import { AlertBug } from "../helper/Alert";
+import { mainApi } from "../services";
+
 
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 export default function Menu({ back, ...props }) {
+
+
   const navigation = useNavigation();
+ 
+  const isFocused = useIsFocused();
+  
+  const [saldo, setSaldo] = React.useState(0);
+ 
+  React.useEffect(() => {
+    if (isFocused == true) {
+    usuario()
+    }
+  }, [isFocused])
+
+
+async function usuario() {
+  let user = await AsyncStorage.getItem('@user_data');
+  const obj = JSON.parse(user);
+  try {
+    await mainApi('', 'saldo/'+obj.id, 'GET')
+      .then(res => {
+       // console.log('todos los juegos');
+        if (res.data.status === 200) {
+          console.log(res.data.detalle[0].saldo)
+          setSaldo(res.data.detalle[0].saldo)
+          return
+        } else {
+          //console.log('error llamando a todos los juegos')
+          AlertBug(res.data.detalle)
+        }
+      })
+  } catch (error) {
+    console.log('-----> Error');
+    console.log(error);
+   }
+}
   return (
     <View style={{ backgroundColor: COLORS.background }}>
       <View style={headerStyles.container}>
@@ -32,7 +73,7 @@ export default function Menu({ back, ...props }) {
             <TouchableOpacity style={{
               borderRadius: 5, padding: 5, marginHorizontal: 10
             }}>
-              <Text style={{ fontSize: SIZES.body2, color: COLORS.white }}> 20</Text>
+              <Text style={{ fontSize: SIZES.body2, color: COLORS.white }}>{saldo}</Text>
             </TouchableOpacity>
             <Image source={images.coindeft} style={headerStyles.iconb} />
             <TouchableOpacity onPress={() => navigation.navigate('Monedero')}>

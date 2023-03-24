@@ -24,6 +24,26 @@ class ControladorJuegos
 
     }
     
+    public function indexTorenos()
+    {
+
+
+        /*=============== 
+        Defino la tabla de la base de datos a usar pasandole el nombre al nodelo de index
+        ===============*/
+        $usuarios = ModelosJuegos::index("torneos", null);
+
+
+            $json = array(
+                "status" => 200,
+                "total_registros" => count($usuarios),
+                "detalle" => $usuarios
+            );
+            echo json_encode($json, true);
+            return;
+
+    }
+    
     public function JuegosGuardados($idjuegador)
     {
 

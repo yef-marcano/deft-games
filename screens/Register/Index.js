@@ -4,19 +4,13 @@ import {
     View,
     Text,
     TouchableOpacity,
-    Image,
     ScrollView,
     ImageBackground,
     TextInput,
-    Alert,
 } from 'react-native';
-/*import axios from "axios";
-import qs from "qs";
-*/
 import { mainApi } from "../../services";
 import FullLoading from 'react-native-full-loading'
 import { AlertBug, AlertSuccess } from "../../helper/Alert";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -26,13 +20,6 @@ import {
     styles
 } from './styles';
 
-const LineDivider = () => {
-    return (
-        <View style={{ width: 1, paddingVertical: 18 }}>
-            <View style={{ flex: 1, borderLeftColor: COLORS.lightGray, borderLeftWidth: 1 }}></View>
-        </View>
-    )
-}
 const Register = ({ navigation }) => {
     navigation.setOptions({
         headerTransparent: true,
@@ -116,7 +103,6 @@ const Register = ({ navigation }) => {
                             colors={['#0014FF', '#8020EF', '#FF2CDF']}
                             start={[1, 0.7]}
                             style={styles.button}>
-                            {/* <Text style={styles.text}>Iniciar sesión</Text> */}
                             <Text style={styles.text}>Registrarme</Text>
                         </LinearGradient>
                     </TouchableOpacity>
@@ -125,20 +111,6 @@ const Register = ({ navigation }) => {
                         <Text style={styles.text}> Ya estoy registrado</Text>
                     </TouchableOpacity>
                 </View>
-
-                {/*<View style={{ alignItems: 'center', margin: 20 }}>
-
-                    <TouchableOpacity onPress={() => registro()} style={{ backgroundColor: COLORS.primary, width: 200, borderRadius: 10, alignItems: 'center', padding: 10 }}>
-                        <Text style={{ color: COLORS.white }}>Registrarme</Text>
-                    </TouchableOpacity>
-
-                    <View style={{ marginTop: 20 }}>
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ backgroundColor: COLORS.white, width: 200, borderRadius: 10, alignItems: 'center', padding: 10 }}>
-                            <Text>Volver</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>*/}
-
             </View>
         )
     }
@@ -166,11 +138,8 @@ const Register = ({ navigation }) => {
         <>
             <FullLoading visible={visible} />
             <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.black, width: '100%', height: '100%' }}>
-                {/* Header Section */}
                 <ImageBackground source={images.bglogin} resizeMode="cover" style={styles.image}>
                     <ScrollView style={{ paddingHorizontal: SIZES.padding }} >
-                        {/*renderHeader(profile)*/}
-                        {/*Header()*/}
                         {renderForm()}
                         {Footer()}
                     </ScrollView>
