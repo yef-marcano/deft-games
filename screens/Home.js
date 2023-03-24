@@ -170,13 +170,11 @@ const Home = ({ navigation }) => {
 
   function renderMyBookSection(juegos) {
     const renderItem = ({ item, index }) => {
-      //console.log(item);
       return (
         <TouchableOpacity
           key={index}
           style={{
             flex: 1,
-            //marginLeft: index == 0 ? SIZES.padding : 0,
             marginRight: SIZES.radius,
           }}
           onPress={() =>
@@ -185,7 +183,6 @@ const Home = ({ navigation }) => {
             })
           }
         >
-          {/* Book Cover */}
           <View
             style={{
               flexDirection: "column",
@@ -321,12 +318,6 @@ const Home = ({ navigation }) => {
           <Text style={{ ...FONTS.h2, color: COLORS.white }}>
             Últimos Ganadores
           </Text>
-
-          {/*<TouchableOpacity
-                    onPress={() => console.log("See More")}
-                >
-                    <Text style={{ ...FONTS.body3, color: COLORS.lightGray, alignSelf: 'flex-start', textDecorationLine: 'underline' }}>Ver más</Text>
-                </TouchableOpacity>*/}
         </View>
         <SafeAreaView style={{ flex: 1 }}>
           <FlatList

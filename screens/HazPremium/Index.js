@@ -131,40 +131,14 @@ const HazPremium = ({ navigation }) => {
   }
 
   function renderCategoryHeader() {
-
-
     return (
       <View style={{ flex: 1 }}>
-        {/*<Text style={{ color: COLORS.white, fontSize: SIZES.h1 }}>
-          ¡Ventajas de ser premium!
-        </Text>*/}
         <View style={{ marginBottom: 20 }}></View>
         <TextNumber number={'1'} text={'Torneos exclusivos para usuarios premium.'} />
         <TextNumber number={'2'} text={'Batallas PVP con recompensas en D-Coins.'} />
         <TextNumber number={'3'} text={'Descuentos en los juegos y productos a Deft Games.'} />
         <TextNumber number={'4'} text={'Libre de publicidad.'} />
         <TextNumber number={'5'} text={'Soporte prioritario 24/7.'} />
-
-        {/*<TouchableOpacity>
-          <Text
-            style={{ color: COLORS.white, fontSize: SIZES.font, marginTop: 30 }}
-          >
-            1 mes: $5,99
-          </Text>
-        </TouchableOpacity>
-        <Button color="success" onPress={() => openURI6()}>
-          Comprar
-        </Button>
-        <TouchableOpacity>
-          <Text
-            style={{ color: COLORS.white, fontSize: SIZES.font, marginTop: 30 }}
-          >
-            6 meses: $3,99 = $23,94
-          </Text>
-        </TouchableOpacity>
-        <Button color="success" onPress={() => openURI24()}>
-          Comprar
-        </Button>*/}
       </View>
     );
   }
@@ -281,23 +255,18 @@ const HazPremium = ({ navigation }) => {
       <SafeAreaView
         style={{ flex: 1, backgroundColor: COLORS.black, paddingTop: 0 }}
       >
-
         <Menu back />
-        {/* Body Section */}
         <ScrollView showsVerticalScrollIndicator={false} style={{ paddingHorizontal: SIZES.padding, backgroundColor: COLORS.background }}>
           <View style={{ alignItems: 'center' }}>
             <Image source={images.logologin} />
           </View>
-
           <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 20 }}>¡Beneficios de ser Premium!</Text>
           <View>
             <View>{renderCategoryHeader()}</View>
           </View>
-
           <Text style={{ ...FONTS.h2, color: COLORS.white, marginVertical: 20 }}>Elige tu plan</Text>
           <View style={{paddingBottom: 200}}>
             <View style={{ flexDirection: 'row' }}>
-
               <FlatList
                 numColumns={2}
                 data={data}
@@ -308,38 +277,26 @@ const HazPremium = ({ navigation }) => {
 
             </View>
             <LinearGradient
-              // Background Linear Gradient
               colors={['#000', '#FEA800']}
               start={[2, 0.5]}
               style={{ borderRadius: 10, padding: 10, marginVertical: 30 }}
             >
               <TouchableOpacity  onPress={() => comprar()}>
                 <View style={{ alignItems: 'center' }}>
-
                   <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'QUIERO SER PREMIUM'}</Text>
                 </View>
               </TouchableOpacity>
-
             </LinearGradient>
-
-            {/*renderCategoryData()*/}
           </View>
         </ScrollView>
-
       </SafeAreaView>
-
-
-
-
     </>
   );
 
   function comprar(params) {
     if (selectedId === 0) {
-      //6 meses
         openURI6()
     } else if (selectedId === 1){
-      //1 mes
       openURI24()
     } else {
       AlertBug('Selecciona un monto')

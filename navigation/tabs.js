@@ -1,9 +1,7 @@
 import React from "react";
 import {
-    Image,
     View,
-    Text,
-    TouchableOpacity
+    Text
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home, Profile, Monedero, CrearPartida, Addgame, Board, HazPremium,InvitarAmigo,Ayuda,Sala, ChatScreen, Salas } from "../screens/";
@@ -71,7 +69,6 @@ const Tabs = ({ navigation }) => {
                                     <Text style={{ ...FONTS.h4, marginBottom: -5 }}>Crear</Text>
                                     <Text style={{ ...FONTS.h4, color:'#000' }}>Partida</Text>
                                     </View>
-                                    {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> <Text> Your Text Here </Text> </LinearGradient>  */}
                                 </View>
                                 </LinearGradient>
                                 </>

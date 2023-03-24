@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Text, Image,
-    Linking, Alert} from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Text, Image, Linking, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, SIZES, icons, images } from '../constants';
 
@@ -21,17 +20,17 @@ const CardPack = (item, index) => {
     };
 
     return (
-        <TouchableOpacity style={{width: '33.3%'}} onPress={() => (item.setSelectedId(item.id === item.selectedId ? null : item.id, buy(item.data.price)))}   >
+        <TouchableOpacity style={{ width: '33.3%' }} onPress={() => (item.setSelectedId(item.id === item.selectedId ? null : item.id, buy(item.data.price)))}   >
             <Text style={{ ...FONTS.h3, color: COLORS.white, marginHorizontal: 8 }}>Comprar</Text>
             <View>
                 <LinearGradient
                     colors={item.id === item.selectedId ? [COLORS.background, COLORS.background] : [COLORS.background, COLORS.background]}
                     start={[1, 1]}
                     style={{
-                margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
-                paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25,
-               
-            }}>
+                        margin: 5, borderWidth: 1, borderColor: COLORS.primary, borderRadius: 10,
+                        paddingHorizontal: 10, alignItems: 'center', paddingVertical: 25,
+
+                    }}>
 
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ ...FONTS.h2, color: COLORS.white }}>{item.data.price}</Text>
@@ -48,7 +47,7 @@ const CardPack = (item, index) => {
                             colors={['#FEA800', '#FEA800']}
                             start={[1, 1]}
                             style={styles.buttonPack}>
-                            <Text style={{ ...FONTS.h4, color: COLORS.theme}}>Comprar</Text>
+                            <Text style={{ ...FONTS.h4, color: COLORS.theme }}>Comprar</Text>
                         </LinearGradient>
                     </View>
                 </LinearGradient>
@@ -60,9 +59,9 @@ const CardPack = (item, index) => {
         const url = direction;
         const supported = await Linking.canOpenURL(url); //To check if URL is supported or not.
         if (supported) {
-          await Linking.openURL(url); // It will open the URL on browser.
+            await Linking.openURL(url); // It will open the URL on browser.
         } else {
-          Alert.alert(`Don't know how to open this URL: ${url}`);
+            Alert.alert(`Don't know how to open this URL: ${url}`);
         }
     };
 
@@ -70,13 +69,13 @@ const CardPack = (item, index) => {
         console.log(item)
         if (item == 500) {
             openURI(`https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ARJN7F7N3HASN`)
-          } else if (item == 2000){
+        } else if (item == 2000) {
             openURI(`https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R25ML7JM9JS4A`)
-          } else if(item == 5000) {
+        } else if (item == 5000) {
             openURI(`https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VCUTKBZ2R5DXU`)
-          }
+        }
     }
-    
+
 
 };
 

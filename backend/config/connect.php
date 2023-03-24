@@ -2,7 +2,6 @@
 
 class Conexion{
     static public function conectar(){
-
         $host = 'localhost';
         $db   = 'deft-game';
         $user = 'root';

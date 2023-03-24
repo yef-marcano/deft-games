@@ -1,19 +1,18 @@
 import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
 
-
 export function AlertBug(body) {
 
-    const alertBug = Dialog.show({
-      type: ALERT_TYPE.DANGER,
-      title: 'Error!',
-      textBody: body,
-      autoClose: true,
-      button: 'CERRAR',
-      onPressButton: () => { 
-        Dialog.hide()
-      }
-    })
-    return (alertBug)
+  const alertBug = Dialog.show({
+    type: ALERT_TYPE.DANGER,
+    title: 'Error!',
+    textBody: body,
+    autoClose: true,
+    button: 'CERRAR',
+    onPressButton: () => {
+      Dialog.hide()
+    }
+  })
+  return (alertBug)
 }
 
 export function AlertWarring(body) {
@@ -30,16 +29,16 @@ export function AlertWarring(body) {
 export function AlertSuccess(body, location, navigation) {
 
   const alertSuccess = Dialog.show({
-      type: ALERT_TYPE.SUCCESS,
-      title: 'Exitoso',
-      textBody: body,
-      button: 'CERRAR',
-      onPressButton: () => { 
-        location == null ? '' : navigation.navigate(location)
-        Dialog.hide()
-      }
-    })
-    return (alertSuccess)
+    type: ALERT_TYPE.SUCCESS,
+    title: 'Exitoso',
+    textBody: body,
+    button: 'CERRAR',
+    onPressButton: () => {
+      location == null ? '' : navigation.navigate(location)
+      Dialog.hide()
+    }
+  })
+  return (alertSuccess)
 }
 
 
@@ -72,9 +71,9 @@ export function AlertSimpleSuccess(body) {
     title: 'Exitoso',
     textBody: body,
     button: 'CERRAR',
-    onPressButton: () => { 
+    onPressButton: () => {
       Dialog.hide();
     }
   })
-    return (alertSimpleSuccess)
+  return (alertSimpleSuccess)
 }

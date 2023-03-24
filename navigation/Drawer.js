@@ -23,13 +23,10 @@ export const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props, user) {
   async function logout() {
-    //setVisible(true)
     await AsyncStorage.removeItem("@user_data");
     props.navigation.navigate("Login");
-    //setVisible(false)
   }
 
-  //console.log(props);
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.lightGray3 }}>
       <DrawerContentScrollView {...props}>
@@ -73,7 +70,6 @@ function CustomDrawerContent(props, user) {
   );
 }
 function Menu({ navigation }) {
-  //console.log(navigation);
   return (
     <View style={{ marginLeft: 15, flexDirection: "row" }}>
       <TouchableOpacity
@@ -101,10 +97,6 @@ function Menu({ navigation }) {
   );
 }
 function CancelButton(props) {
-  /*
-  const [coins, SetCoins] = React.useState(props.saldoData)
-  console.log('coins');
-  console.log(props.saldoData.saldo);*/
   return (
     <View style={{ marginRight: 15, flexDirection: "row" }}>
       <TouchableOpacity
@@ -142,13 +134,11 @@ function CancelButton(props) {
         style={{
           backgroundColor: COLORS.white,
           height: 40,
-          //paddingLefta: 5,
           paddingRight: SIZES.radius,
           borderRadius: 20,
           marginLeft: 20,
         }}
         onPress={() => {
-        //  console.log('hola')
           props.navigate.navigation("Monedero");
         }}
       >
@@ -188,7 +178,6 @@ export default function DrawerNavigator({ navigation }) {
     let user = await AsyncStorage.getItem("@user_data");
     const obj = JSON.parse(user);
     setUserdata(obj);
-    //console.log(userdata);
   }
 
   async function saldo() {
@@ -199,11 +188,8 @@ export default function DrawerNavigator({ navigation }) {
       console.log("saldo por id -- saldo/" + objuser.id);
 
       await mainApi("", "saldo/" + objuser.id, "GET").then((res) => {
-        //      setVisible(false);
-        // console.log(res.data);
         if (res.data.status === 200) {
           console.log(res.data.detalle);
-          //console.log(res.data.detalle);
           setsaldoData(res.data.detalle[0]);
           return;
         } else {
@@ -211,10 +197,6 @@ export default function DrawerNavigator({ navigation }) {
         }
       });
     } catch (error) {}
-    //let user = await AsyncStorage.getItem('@user_data');
-    //const obj = JSON.parse(user);
-    //setUserdata(obj)
-    //console.log(userdata);
   }
 
   return (

@@ -19,7 +19,6 @@ export const mainApi = async (data, endpoint, type) => {
   let requestOptions = {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
   };
-  console.log("llegue main");
   let petition;
   switch (type) {
     case "POST":
@@ -85,10 +84,8 @@ export const processResponse = async (response) => {
 export const getPaymentMethods = async () => {
   try {
     return await mainApi(null, "/payment", "GET").then((res) => {
-      console.log({ resGetPaymentMethods: res.data.methods });
       return res.data;
     });
   } catch (error) {
-    console.log({ getPaymentMethods: error });
   }
 };

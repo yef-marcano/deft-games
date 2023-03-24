@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, ScrollView } from 'react-native';
-
 import { COLORS, FONTS, SIZES, icons, images } from "../../constants";
-
 import { LinearGradient } from 'expo-linear-gradient';
-
 import { mainApi } from "../../services";
-
 import { useIsFocused } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Menu from '../../components/Menu';
 
 const steps = ['Selecciona el juego', 'Tipo de partida', '¿Nivelado?', '¿Cuanto quieres ganar?'];
-
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-import Menu from '../../components/Menu';
 
 const CrearPartida = ({ navigation }) => {
   const isFocused = useIsFocused();
@@ -301,32 +294,6 @@ const CrearPartida = ({ navigation }) => {
 
           </View>
         ))}
-        {/*<View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            setCurrentStep(currentStep - 1);
-          }}
-          disabled={currentStep === 0}
-          style={[
-            styles.button,
-            { backgroundColor: currentStep === 0 ? '#ddd' : '#007aff' },
-          ]}
-        >
-          <Text style={styles.buttonText}>Anterior</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setCurrentStep(currentStep + 1);
-          }}
-          disabled={currentStep === steps.length - 1}
-          style={[
-            styles.button,
-            { backgroundColor: currentStep === steps.length - 1 ? '#ddd' : '#7C24BA' },
-          ]}
-        >
-          <Text style={styles.buttonText}>Siguiente</Text>
-        </TouchableOpacity>
-      </View>*/}
         <View style={{ alignItems: 'center' }}>
         <TouchableOpacity onPress={() => navigation.navigate('Ayuda')}>
           <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 10 }}>CONOCE LAS REGLAS</Text>
@@ -334,7 +301,6 @@ const CrearPartida = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Text style={{ ...FONTS.h2, color: COLORS.lightRed, marginVertical: 10 }}>CANCELAR CREACION</Text>
           </TouchableOpacity>
-
         </View>
         </View>
       </ScrollView>
@@ -347,16 +313,9 @@ const CrearPartida = ({ navigation }) => {
 
   async function juegoslista() {
     try {
-      //setVisible(true);
-      console.log("HOALALALAL");
-      //let datos = { correo: usuario, password: password, }
       await mainApi('', 'juegos', 'GET')
         .then(res => {
-          console.log(res.data);
-          //      setVisible(false);
-          // console.log(res.data);
           if (res.data.status === 200) {
-            //console.log(res.data.detalle);
             setGames(res.data.detalle)
             return
           } else {
@@ -377,7 +336,6 @@ const CrearPartida = ({ navigation }) => {
     setCurrentStep(currentStep + 1);
   }
 
-
   async function usuario() {
     let user = await AsyncStorage.getItem("@user_data");
     const obj = JSON.parse(user);
@@ -385,40 +343,28 @@ const CrearPartida = ({ navigation }) => {
     console.log(userdata);
   }
   
-  
   async function crearPartida() {
     try {
-      //setVisible(true);
-      console.log("crear")
       let user = await AsyncStorage.getItem("@user_data");
       const obj = JSON.parse(user);
-      console.log(obj)
       let id = obj.id
       let datos = { idusuario: id, idgame: idgame, price: price }
       await mainApi(datos, 'salas', 'POST')
         .then(res => {
           //  setVisible(false);
-          console.log(res.data);
           if (res.data.status === 200) {
-            //console.log(res.data.detalle[0].id);
             let jsonValue = JSON.stringify(res.data.detalle[0])
             console.log(jsonValue)
             AsyncStorage.setItem('partida', jsonValue)
-            
             navigation.navigate('Sala', {data:res.data.detalle[0]})
             return
           } else {
             AlertBug(res.data.detalle)
-            console.log(res.data.detalle);
           }
         })
     } catch (error) { }
   }
 };
-
-
-
-
 
 const styles = StyleSheet.create({
   container: {

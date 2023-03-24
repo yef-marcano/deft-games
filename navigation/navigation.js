@@ -20,45 +20,35 @@ const Stack = createStackNavigator();
 
 const Appnavigator = () => {
     const [loaded] = useFonts({
-            "Roboto-Black" : require('../assets/fonts/Roboto-Black.ttf'),
-            "Roboto-Bold" : require('../assets/fonts/Roboto-Bold.ttf'),
-            "Roboto-Regular" : require('../assets/fonts/Roboto-Regular.ttf'),
-        })
+        "Roboto-Black": require('../assets/fonts/Roboto-Black.ttf'),
+        "Roboto-Bold": require('../assets/fonts/Roboto-Bold.ttf'),
+        "Roboto-Regular": require('../assets/fonts/Roboto-Regular.ttf'),
+    })
 
-    if(!loaded){
+    if (!loaded) {
         return null;
     }
     return (
         <Root>
             <NavigationContainer theme={theme}>
-            <Stack.Navigator
-                initialRouteName={'Splash'}
-                
-            >
-                {/* Tabs */}
-                <Stack.Screen name="Splash" component={SplashScreen}  options={{ headerShown: false }} />
-                {/* Tabs */}
-                <Stack.Screen name="Home" component={Tabs}  options={{ headerShown: false }} />
-
-                {/* Screens */}
-                <Stack.Screen name="BookDetail" component={BookDetail} options={{ headerShown: false }} />
-
-                {/* Login */}
-                <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-                
-                {/* Register */}
-                <Stack.Screen name="Register" component={Register}
-                options={{ title: 'Registro',
-                headerStyle: {
-                    backgroundColor: '#fff0',
-                }, 
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                    fontWeight: 'bold',
-                },}}  />
-                
-
-            </Stack.Navigator>
+                <Stack.Navigator initialRouteName={'Splash'} >
+                    {/* Tabs */}
+                    <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="Home" component={Tabs} options={{ headerShown: false }} />
+                    <Stack.Screen name="BookDetail" component={BookDetail} options={{ headerShown: false }} />
+                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                    <Stack.Screen name="Register" component={Register}
+                        options={{
+                            title: 'Registro',
+                            headerStyle: {
+                                backgroundColor: '#fff0',
+                            },
+                            headerTintColor: '#fff',
+                            headerTitleStyle: {
+                                fontWeight: 'bold',
+                            },
+                        }} />
+                </Stack.Navigator>
             </NavigationContainer>
         </Root>
     )

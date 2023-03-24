@@ -10,45 +10,37 @@ import { useIsFocused } from "@react-navigation/native";
 import { AlertBug } from "../helper/Alert";
 import { mainApi } from "../services";
 
-
 const STATUS_BAR_HEIGHT = StatusBar.currentHeight || 24;
 export default function Menu({ back, ...props }) {
 
-
   const navigation = useNavigation();
- 
   const isFocused = useIsFocused();
-  
   const [saldo, setSaldo] = React.useState(0);
- 
+
   React.useEffect(() => {
     if (isFocused == true) {
-    usuario()
+      usuario()
     }
   }, [isFocused])
 
 
-async function usuario() {
-  let user = await AsyncStorage.getItem('@user_data');
-  const obj = JSON.parse(user);
-  try {
-    await mainApi('', 'saldo/'+obj.id, 'GET')
-      .then(res => {
-       // console.log('todos los juegos');
-        if (res.data.status === 200) {
-          console.log(res.data.detalle[0].saldo)
-          setSaldo(res.data.detalle[0].saldo)
-          return
-        } else {
-          //console.log('error llamando a todos los juegos')
-          AlertBug(res.data.detalle)
-        }
-      })
-  } catch (error) {
-    console.log('-----> Error');
-    console.log(error);
-   }
-}
+  async function usuario() {
+    let user = await AsyncStorage.getItem('@user_data');
+    const obj = JSON.parse(user);
+    try {
+      await mainApi('', 'saldo/' + obj.id, 'GET')
+        .then(res => {
+          if (res.data.status === 200) {
+            setSaldo(res.data.detalle[0].saldo)
+            return
+          } else {
+            AlertBug(res.data.detalle)
+          }
+        })
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <View style={{ backgroundColor: COLORS.background }}>
       <View style={headerStyles.container}>

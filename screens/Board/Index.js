@@ -109,10 +109,12 @@ const Board = ({ navigation }) => {
   function MiniCard({ data, ...rest }) {
     return (
       <>
-        <TouchableOpacity onPress={() => navigation.navigate(data?.navigate)} style={{paddingVertical: 20, flexDirection:'row',
-        borderBottomColor: '#23262D', borderBottomWidth: 1}}>
-          <Ionicons name={data?.icon} size={34} color={data?.color} style={{marginEnd: 20}} />
-          <Text style={{color: data?.colorFinal ? COLORS.primary : COLORS.white, fontSize: SIZES.body1}}>{data?.title}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate(data?.navigate)} style={{
+          paddingVertical: 20, flexDirection: 'row',
+          borderBottomColor: '#23262D', borderBottomWidth: 1
+        }}>
+          <Ionicons name={data?.icon} size={34} color={data?.color} style={{ marginEnd: 20 }} />
+          <Text style={{ color: data?.colorFinal ? COLORS.primary : COLORS.white, fontSize: SIZES.body1 }}>{data?.title}</Text>
         </TouchableOpacity>
       </>
     )
