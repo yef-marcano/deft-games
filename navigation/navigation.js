@@ -32,16 +32,13 @@ const Appnavigator = () => {
         <Root>
             <NavigationContainer theme={theme}>
             <Stack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
                 initialRouteName={'Splash'}
                 
             >
                 {/* Tabs */}
-                <Stack.Screen name="Splash" component={SplashScreen} />
+                <Stack.Screen name="Splash" component={SplashScreen}  options={{ headerShown: false }} />
                 {/* Tabs */}
-                <Stack.Screen name="Home" component={DrawerNavigator} />
+                <Stack.Screen name="Home" component={Tabs}  options={{ headerShown: false }} />
 
                 {/* Screens */}
                 <Stack.Screen name="BookDetail" component={BookDetail} options={{ headerShown: false }} />
@@ -50,7 +47,15 @@ const Appnavigator = () => {
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                 
                 {/* Register */}
-                <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
+                <Stack.Screen name="Register" component={Register}
+                options={{ title: 'Registro',
+                headerStyle: {
+                    backgroundColor: '#fff0',
+                }, 
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    fontWeight: 'bold',
+                },}}  />
                 
 
             </Stack.Navigator>

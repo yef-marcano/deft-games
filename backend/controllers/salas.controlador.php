@@ -1,7 +1,7 @@
 <?php
 
 
-class ControladorJuegos
+class ControladorSalas
 {
 
     public function index()
@@ -11,7 +11,7 @@ class ControladorJuegos
         /*=============== 
         Defino la tabla de la base de datos a usar pasandole el nombre al nodelo de index
         ===============*/
-        $usuarios = ModelosJuegos::index("games", null);
+        $usuarios = ModelosJuegos::index("salas", null);
 
 
             $json = array(
@@ -23,15 +23,14 @@ class ControladorJuegos
             return;
 
     }
-    
-    public function indexTorenos()
+    public function indexGame()
     {
 
 
         /*=============== 
         Defino la tabla de la base de datos a usar pasandole el nombre al nodelo de index
         ===============*/
-        $usuarios = ModelosJuegos::index("torneos", null);
+        $usuarios = ModelosSalas::indexGame("salas", null);
 
 
             $json = array(
@@ -142,7 +141,7 @@ class ControladorJuegos
         }*/
 
 
-        foreach ($datos as $key => $value) {
+        /*foreach ($datos as $key => $value) {
             if (!isset($value)) {
                 $json = array(
                     "status" => 404,
@@ -151,7 +150,7 @@ class ControladorJuegos
                 echo json_encode($json, true);
                 return;
             }
-        }
+        }*/
 
 
 
@@ -162,10 +161,12 @@ class ControladorJuegos
         //print_r($datos);
 
         $data = array(
-            "usuario" => $datos["usuario"],
+            "user1" => $datos["idusuario"],
             "idgame" => $datos["idgame"],
-            "nombrejuego" => $datos["nombrejuego"]
+            "price" => $datos["price"]
         );
+        //print_r($data);
+        //return
 
         //echo $data;
         //echo "llego";
@@ -174,11 +175,21 @@ class ControladorJuegos
 
 
 
-        $usuarios = ModelosJuegos::indexCompare("jugador_game_guardados", $data["idgame"]);
+        $juego_guardado = ModelosSalas::create("salas", $data);
+
+        $json = array(
+            "status" => 200,
+            "usuario" => "Juego agregado con exito",
+            "detalle" => $juego_guardado
+        );
+
+        echo json_encode($json, true);
+        /*
+        $usuarios = ModelosSalas::indexCompare("jugador_game_guardados", $data["idgame"]);
 
         if (count($usuarios) === 0) {
 
-            $juego_guardado = ModelosJuegos::create("jugador_game_guardados", $data);
+            $juego_guardado = ModelosSalas::create("jugador_game_guardados", $data);
 
             $json = array(
                 "status" => 200,
@@ -198,7 +209,7 @@ class ControladorJuegos
 
             echo json_encode($json, true);
             return;
-        }
+        }*/
     }
 
 

@@ -1,12 +1,15 @@
 import React from "react";
 import {
     Image,
-    View
+    View,
+    Text,
+    TouchableOpacity
 } from 'react-native';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home, Profile, Monedero,CrearPartida,Addgame } from "../screens/";
-import { icons, COLORS } from "../constants";
-import { Feather, Entypo, MaterialCommunityIcons, Ionicons  } from '@expo/vector-icons';
+import { Home, Profile, Monedero, CrearPartida, Addgame, Board, HazPremium,InvitarAmigo,Ayuda,Sala, ChatScreen, Salas } from "../screens/";
+import { icons, COLORS, FONTS } from "../constants";
+import { Feather, Entypo, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from "expo-linear-gradient";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,48 +20,70 @@ const tabOptions = {
         backgroundColor: COLORS.black
     }
 }
-
-const Tabs = ({navigation}) => {
+const Tabs = ({ navigation }) => {
     return (
         <Tab.Navigator
             tabBarOptions={tabOptions}
+
             screenOptions={({ route }) => ({
+                headerShown: false,
                 tabBarIcon: ({ focused }) => {
-                    const tintColor = focused ? COLORS.white : COLORS.gray;
+                    const tintColor = focused ? COLORS.game : COLORS.white;
+                    const opa = focused ? 1 : 0.5;
 
                     switch (route.name) {
                         case "Home":
                             return (
-                                
-                                <MaterialCommunityIcons name="axe-battle" size={44} color={tintColor} />    
+                                <>
+                                    <Entypo name="game-controller" size={44} color={tintColor} style={{opacity: opa}} />
+                                    <Text style={{color:tintColor, opacity: opa}}>Competir</Text>
+                                </>
                             )
 
 
                         case "Notification":
                             return (
+                                <>
+                                <LinearGradient
+                                colors={['rgba(44, 243, 207, 1)', 'rgba(260, 21, 251, 1)']}
+                                start={[-0.1, 0]}
+                                style={{
+                                    top:0,
+                                    borderRadius: 10,
+                                    marginTop: -70,
+                                    paddingHorizontal: 0,
+                                    transform: [
+                                        { rotate: '45deg' }
+                                    ]
+                                      }
+                                }>
                                 <View style={{
-                                        backgroundColor: COLORS.primary,
-                                        borderRadius: 100,
-                                        marginTop: -40,
-                                        padding: 20
-                                }}>
-                                <Entypo name="plus" size={44} color={tintColor} />
+                                    
+                                    width: 70,
+                                    height:70,
+                                    marginVertical:10,
+                                    marginHorizontal:10,
+                                    transform: [
+                                        { rotate: '-45deg' }
+                                    ]}}>
+                                    <View style={{marginTop: -12, alignItems:'center'}}>
+                                    <Entypo name="plus" size={44} color={COLORS.theme} style={{opacity: opa}}  />
+                                    <Text style={{ ...FONTS.h4, marginBottom: -5 }}>Crear</Text>
+                                    <Text style={{ ...FONTS.h4, color:'#000' }}>Partida</Text>
+                                    </View>
+                                    {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}> <Text> Your Text Here </Text> </LinearGradient>  */}
                                 </View>
+                                </LinearGradient>
+                                </>
                             )
 
                         case "Profile":
                             return (
-                                <Ionicons name="person-circle-outline" size={44} color={tintColor} />
+                                <>
+                                    <Ionicons name="person-circle-outline" size={44} color={tintColor} style={{opacityopacity: opa}} />
+                                    <Text style={{color:tintColor,opacity: opa}}>Perfil</Text>
+                                </>
                             )
-                                {/*<Image
-                                    source={icons.menu_icon}
-                                    resizeMode="contain"
-                                    style={{
-                                        tintColor: tintColor,
-                                        width: 25,
-                                        height: 25
-                                    }}
-                                />*/}
                     }
                 }
             })}
@@ -75,13 +100,83 @@ const Tabs = ({navigation}) => {
                 name="Profile"
                 component={Profile}
             />
+            <Tab.Screen
+                name="Monedero"
+                component={Monedero}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="Salas"
+                component={Salas}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
+            />
 
             <Tab.Screen
                 name="Agregarjuego"
                 component={Addgame}
                 options={{
-                headerShown: false,
-                tabBarButton: () => null,
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="Board"
+                component={Board}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="HazPremium"
+                component={HazPremium}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                
+                }}
+            />
+            <Tab.Screen
+                name="InvitaAmigo"
+                component={InvitarAmigo}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                
+                }}
+            />
+            <Tab.Screen
+                name="Ayuda"
+                component={Ayuda}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+              presentation: 'modal',
+              animationTypeForReplace: 'push',
+              animation:'slide_from_right'
+                
+                }}
+            />
+            <Tab.Screen
+                name="Sala"
+                component={Sala}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
+                }}
+            />
+            <Tab.Screen
+                name="Chat"
+                component={ChatScreen}
+                options={{
+                    headerShown: false,
+                    tabBarButton: () => null,
                 }}
             />
         </Tab.Navigator>

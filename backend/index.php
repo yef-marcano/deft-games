@@ -10,12 +10,14 @@ require_once "controllers/clientes.controlador.php";
 require_once "controllers/cotizaciones.controlador.php";
 require_once "controllers/usuarios.controlador.php";
 require_once "controllers/juegos.controlador.php";
+require_once "controllers/salas.controlador.php";
 
 require_once "models/clientes.modelo.php";
 require_once "models/cursos.modelo.php";
 require_once "models/cotizaciones.modelo.php";
 require_once "models/usuarios.modelo.php";
 require_once "models/juegos.modelo.php";
+require_once "models/salas.modelo.php";
 
 $rutas= new ControladorRutas();
 

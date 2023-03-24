@@ -9,6 +9,13 @@ export const logosplash = require("../assets/images/logosplash.png");
 export const titlelogo = require("../assets/images/titlelogo.png");
 export const bgheaderlogin = require("../assets/background/bgheaderlogin.png");
 export const logologin = require("../assets/images/logologin.png");
+export const bglogin = require("../assets/background/loginbg.png");
+export const iconmenu = require("../assets/icons/iconmenu.png");
+export const cartera = require("../assets/icons/cartera.png");
+export const coindeft = require("../assets/icons/coindeft.png");
+export const arrowback = require("../assets/icons/arrowback.png");
+export const bgprofile = require("../assets/background/bgprofile.png");
+
 
 
 export default {
@@ -21,5 +28,11 @@ export default {
     logosplash,
     titlelogo,
     bgheaderlogin,
-    logologin
+    logologin,
+    bglogin,
+    iconmenu,
+    cartera,
+    coindeft,
+    arrowback,
+    bgprofile
 }

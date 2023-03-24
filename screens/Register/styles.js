@@ -14,4 +14,23 @@ export const styles = StyleSheet.create({
       color: COLORS.white,
       
     },
+    button: {
+      width: 200,
+      borderRadius: 10,
+      alignItems: "center",
+      padding: 10,
+    },
+    
+    image: {
+      flex: 1,
+      width:'100%'
+    },
+    text:{
+      color: '#fff',
+      fontSize: SIZES.body3
+    },
+    title:{
+      color: '#fff',
+      fontSize: SIZES.body1
+    },
   });

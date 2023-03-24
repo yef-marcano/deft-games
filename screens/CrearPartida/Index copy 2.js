@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, ScrollView }
 import { COLORS, FONTS, SIZES, icons, images } from "../../constants";
 
 import { LinearGradient } from 'expo-linear-gradient';
+import { AlertBug } from "../../helper/Alert";
 
 import { mainApi } from "../../services";
 
@@ -13,22 +14,22 @@ const steps = ['Selecciona el juego', 'Tipo de partida', '¿Nivelado?', '¿Cuant
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 import Menu from '../../components/Menu';
 
 const CrearPartida = ({ navigation }) => {
   const isFocused = useIsFocused();
+  navigation.setOptions({ tabBarVisible: false })
   const [currentStep, setCurrentStep] = useState(0);
 
   const [userdata, setUserdata] = React.useState({});
   const [visible, setVisible] = React.useState(false);
-
+c
   const [games, setGames] = React.useState([]);
 
   const [selectedId, setSelectedId] = useState(null);
   const [idgame, setIdgame] = useState(0);
   const [price, setPrice] = useState(0);
-
+  
   let data = [
     {
       'id': 0,
@@ -72,6 +73,7 @@ const CrearPartida = ({ navigation }) => {
   React.useEffect(() => {
     if (isFocused == true) {
       setCurrentStep(0)
+      setSelectedId(null)
       // setUsuarioName('')
     }
   }, [isFocused]);
@@ -118,8 +120,8 @@ const CrearPartida = ({ navigation }) => {
           start={[2, 0.5]}
           style={{ borderRadius: 20, padding: 10, paddingHorizontal: 10, width: '100%' }}
         >
-          <TouchableOpacity onPress={() => {setSelectedId(item.id === selectedId ? null : item.id), setPrice(item?.price)}}  style={{ flex: 1, flexDirection: 'column' }}  >
-            <View style={{ alignItems: 'center', justifyContent:'center', flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity onPress={() => {setSelectedId(item.id === selectedId ? null : item.id), setPrice(item?.price)}} style={{ flex: 1, flexDirection: 'column' }}  >
+            <View style={{ alignItems: 'center', justifyContent: 'center', flexDirection: 'row', alignItems: 'center' }}>
 
               <Text style={{ fontSize: SIZES.h1, color: COLORS.white }}>{item?.price}</Text>
               <Image source={images.coindeft} />
@@ -241,15 +243,15 @@ const CrearPartida = ({ navigation }) => {
   }
   const Ganar = () => {
     return (
-      <View style={{  marginBottom: 20 }}>
-        <View style={{flexDirection: 'row'}}>
-        <FlatList
-          numColumns={3}
-          data={data}
-          renderItem={ganarCard}
-          keyExtractor={(item, index) => item.key}
-          showsVerticalScrollIndicator={false}
-        />
+      <View style={{ marginBottom: 20 }}>
+        <View style={{ flexDirection: 'row' }}>
+          <FlatList
+            numColumns={3}
+            data={data}
+            renderItem={ganarCard}
+            keyExtractor={(item, index) => item.key}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
         <LinearGradient
           // Background Linear Gradient
@@ -260,7 +262,7 @@ const CrearPartida = ({ navigation }) => {
           <TouchableOpacity onPress={() => crearPartida()} >
             <View style={{ alignItems: 'center' }}>
 
-              <Text style={{ fontSize: SIZES.h1, color: COLORS.white }}>{'CREAR PARTIDA'}</Text>
+              <Text style={{ fontSize: SIZES.h3, color: COLORS.white }}>{'CREAR PARTIDA'}</Text>
             </View>
           </TouchableOpacity>
 
@@ -277,31 +279,31 @@ const CrearPartida = ({ navigation }) => {
       <ScrollView style={styles.container}>
 
         <Text style={{ ...FONTS.h2, color: COLORS.white, marginVertical: 20 }}>Creación de partida</Text>
-        <View style={{paddingBottom: 200}}>
-        {steps.map((step, index) => (
-          <View key={step}>
-            <View style={styles.stepContainer}>
-              <View
-                style={[
-                  styles.stepNumberContainer,
-                  { backgroundColor: index === currentStep ? '#7C24BA' : '#ddd' },
-                ]}
-              >
-                <Text style={styles.stepNumberText}>{index + 1}</Text>
+        <View style={{ paddingBottom: 200 }}>
+          {steps.map((step, index) => (
+            <View key={step}>
+              <View style={styles.stepContainer}>
+                <View
+                  style={[
+                    styles.stepNumberContainer,
+                    { backgroundColor: index === currentStep ? '#7C24BA' : '#ddd' },
+                  ]}
+                >
+                  <Text style={styles.stepNumberText}>{index + 1}</Text>
+
+                </View>
+                <Text style={styles.stepText}>{step}</Text>
 
               </View>
-              <Text style={styles.stepText}>{step}</Text>
+              {(currentStep === 0 && index === currentStep) ? <Juegos /> : ''}
+              {(currentStep === 1 && index === currentStep) ? <Modo /> : ''}
+              {(currentStep === 2 && index === currentStep) ? <Nivelado /> : ''}
+              {(currentStep === 3 && index === currentStep) ? <Ganar /> : ''}
+
 
             </View>
-            {(currentStep === 0 && index === currentStep) ? <Juegos /> : ''}
-            {(currentStep === 1 && index === currentStep) ? <Modo /> : ''}
-            {(currentStep === 2 && index === currentStep) ? <Nivelado /> : ''}
-            {(currentStep === 3 && index === currentStep) ? <Ganar /> : ''}
-
-
-          </View>
-        ))}
-        {/*<View style={styles.buttonContainer}>
+          ))}
+          {/*<View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() => {
             setCurrentStep(currentStep - 1);
@@ -327,15 +329,15 @@ const CrearPartida = ({ navigation }) => {
           <Text style={styles.buttonText}>Siguiente</Text>
         </TouchableOpacity>
       </View>*/}
-        <View style={{ alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => navigation.navigate('Ayuda')}>
-          <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 10 }}>CONOCE LAS REGLAS</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Text style={{ ...FONTS.h2, color: COLORS.lightRed, marginVertical: 10 }}>CANCELAR CREACION</Text>
-          </TouchableOpacity>
+          <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('Ayuda')}>
+              <Text style={{ ...FONTS.h2, color: COLORS.primary, marginVertical: 10 }}>CONOCE LAS REGLAS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+              <Text style={{ ...FONTS.h2, color: COLORS.lightRed, marginVertical: 10 }}>CANCELAR CREACION</Text>
+            </TouchableOpacity>
 
-        </View>
+          </View>
         </View>
       </ScrollView>
 
@@ -384,8 +386,7 @@ const CrearPartida = ({ navigation }) => {
     setUserdata(obj);
     console.log(userdata);
   }
-  
-  
+
   async function crearPartida() {
     try {
       //setVisible(true);
@@ -414,6 +415,7 @@ const CrearPartida = ({ navigation }) => {
         })
     } catch (error) { }
   }
+
 };
 
 
@@ -426,7 +428,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
     paddingHorizontal: SIZES.padding,
     paddingVertical: SIZES.padding,
-    
+
   },
   stepContainer: {
     flexDirection: 'row',
