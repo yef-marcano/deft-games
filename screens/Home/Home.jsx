@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { SafeAreaView, View, Text, TouchableOpacity, Image, ScrollView, FlatList, LogBox, ImageBackground, } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AlertBug } from "../helper/Alert";
+import { AlertBug } from "../../helper/Alert";
 import { Feather, FontAwesome5 } from "@expo/vector-icons";
-import { mainApi } from "../services";
-import Menu from "../components/Menu";
-
+import { mainApi } from "../../services";
+import Menu from "../../components/Menu";
 import { LinearGradient } from "expo-linear-gradient";
 import { DrawerActions } from "@react-navigation/native";
 
-import { COLORS, FONTS, SIZES, icons, images, dummyData } from "../constants";
+import { styles } from "./styles";
+
+import { COLORS, FONTS, SIZES, icons, images, dummyData } from "../../constants";
 const Home = ({ navigation }) => {
   const [profile, setProfile] = React.useState(dummyData.profileData);
   const [myBooks, setMyBooks] = React.useState(dummyData.myBooksData);
@@ -73,8 +74,6 @@ const Home = ({ navigation }) => {
     }
 
     const renderItem = ({ item }) => {
-      console.log("test");
-      console.log(item);
       return (
         <View
           style={{
@@ -332,12 +331,12 @@ const Home = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.background, paddingTop: 0 }}>
+    <SafeAreaView style={styles.container}>
       <Menu navigation />
-      <ScrollView style={{ marginTop: SIZES.radius, marginHorizontal: SIZES.padding }}>
+      <ScrollView style={styles.scrollView}>
         <View>{renderButtonSection()}</View>
         <View>{renderMyBookSection(games)}</View>
-        <View style={{ marginTop: SIZES.padding }}>
+        <View style={styles.categoryContainer}>
           <View>{renderCategoryData()}</View>
         </View>
       </ScrollView>

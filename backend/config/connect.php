@@ -4,8 +4,8 @@ class Conexion{
     static public function conectar(){
         $host = 'localhost';
         $db   = 'deft-game';
-        $user = 'root';
-        $pass = '"#%56+1yyuRRt12345';
+        $user = '';
+        $pass = '';
         $port = "3306";
         $charset = 'utf8mb4';
         

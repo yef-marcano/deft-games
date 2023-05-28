@@ -272,26 +272,6 @@ class ControladorJuegos
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function recovery($datos)
     {
 

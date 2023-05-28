@@ -1,13 +1,5 @@
 import React from "react";
-import {
-    SafeAreaView,
-    View,
-    Text,
-    TouchableOpacity,
-    ScrollView,
-    ImageBackground,
-    TextInput,
-} from 'react-native';
+import { SafeAreaView, View, Text, TouchableOpacity, ScrollView, ImageBackground, TextInput, } from 'react-native';
 import { mainApi } from "../../services";
 import FullLoading from 'react-native-full-loading'
 import { AlertBug, AlertSuccess } from "../../helper/Alert";
@@ -16,48 +8,29 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
 
-import {
-    styles
-} from './styles';
+import { styles } from './styles';
 
 const Register = ({ navigation }) => {
     navigation.setOptions({
         headerTransparent: true,
-      });
+    });
     const profileData = {
         name: 'Username',
         point: 200
     }
 
     const [profile, setProfile] = React.useState(profileData);
-
     const [correo, setCorreo] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [nombre, setNombre] = React.useState("");
     const [apellido, setApellido] = React.useState("");
     const [celular, setCelular] = React.useState("");
     const [visible, setVisible] = React.useState(false);
-
-
     const [number, onChangeNumber] = React.useState(null);
 
-
-    function Header() {
-        return (
-            <View style={{
-                height: SIZES.height / 5, justifyContent: 'center', alignItems: 'center',
-                borderTopWidth: 1
-            }}>
-                <View style={{ borderBottomColor: '#DFA1ED', flex: 2, flexDirection: 'row', alignContent:'center' }}>
-                    <View><Text style={styles.title}> <FontAwesome5 style={{ margin: 10 }} name="instagram" size={34} color="white" /> </Text></View>
-                    <View><Text style={styles.title}> Crear cuenta</Text></View>
-                </View>
-            </View>
-        );
-    };
     function renderForm() {
         return (
-            <View style={{ justifyContent: 'flex-end', height: SIZES.height/1.3 }}>
+            <View style={{ justifyContent: 'flex-end', height: SIZES.height / 1.3 }}>
                 <TextInput
                     style={styles.input}
                     onChangeText={setCorreo}
@@ -119,7 +92,7 @@ const Register = ({ navigation }) => {
         return (
             <View style={{
                 height: SIZES.height / 4, justifyContent: 'center', alignItems: 'center', borderTopColor: '#DFA1ED',
-                borderTopWidth: 1, 
+                borderTopWidth: 1,
             }}>
                 <View style={{ borderBottomColor: '#DFA1ED' }}>
                     <Text style={styles.text}> Síguenos</Text>
